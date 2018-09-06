@@ -318,77 +318,84 @@ locations.push({
 })
 
 locations.push({
-	id: 10,
+	id: 9,
+	name: "smith",
+	label: "Smith",
+	img: 'icons/smith.png',
+})
+
+locations.push({
+	id: 11,
 	name: "earth",
 	label: "Earth",
 	img: 'icons/vampire.png',
 })
 
 locations.push({
-	id: 11,
+	id: 12,
 	name: "sarda",
 	label: "Sarda",
 	img: 'icons/sarda.png',
 })
 
 locations.push({
-	id: 12,
+	id: 13,
 	name: "sage",
 	label: "Sage",
 	img: 'icons/sage.png',
 })
 
 locations.push({
-	id: 13,
+	id: 14,
 	name: "volcano",
 	label: "Volcano",
 	img: 'icons/redD.png',
 })
 
 locations.push({
-	id: 14,
+	id: 15,
 	name: "iceCave",
 	label: "Ice",
 	img: 'icons/eye.png',
 })
 
 locations.push({
-	id: 15,
+	id: 16,
 	name: "ordeals",
 	label: "Ordeals",
 	img: 'icons/zombieD.png',
 })
 
 locations.push({
-	id: 16,
+	id: 17,
 	name: "shopItem",
 	label: "Shop",
 	img: 'icons/shop.png',
 })
 
 locations.push({
-	id: 17,
+	id: 18,
 	name: "shrine",
 	label: "Shrine",
 	img: 'icons/mermaid.png',
 })
 
 locations.push({
-	id: 18,
+	id: 19,
 	name: "robot",
 	label: "Robot",
 	img: 'icons/robot.png',
 })
 
 locations.push({
-	id: 19,
+	id: 20,
 	name: "lefein",
 	label: "Lefein",
 	img: 'icons/lupa.png',
 })
 
 locations.push({
-	id: 20,
+	id: 21,
 	name: "sky",
 	label: "Sky",
 	img: 'icons/sky.png',
