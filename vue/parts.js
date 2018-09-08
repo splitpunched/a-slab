@@ -12,6 +12,7 @@ Vue.component('Item', {
 	`,
 	methods: {
 		track: function() {
+			if (this.obj.locked) { return; }
 			if (!this.status.tracked) {
 				this.$emit('track-item', this.obj.name)
 				return
@@ -27,6 +28,7 @@ Vue.component('Item', {
 			}
 		},
 		undo: function() {
+			if (this.obj.locked) { return; }
 			if (this.status.tracked && this.obj.prev) {
 				this.$emit('undo-item', this.obj.name)
 				this.$emit('goto-prev-item', { name: this.obj.name, prev: this.obj.prev })
@@ -48,4 +50,10 @@ Vue.component('Item', {
 			return this.obj.img;
 		}
 	}
+})
+
+Vue.component('Divider', {
+	template: `<div class="divider">
+	</div>
+	`
 })

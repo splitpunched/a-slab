@@ -1,9 +1,9 @@
 body {
-	margin: 0px!important;
+	background-color: #a0d8f8;
 }
 
 #app{
-	background-color: none;
+	background-color: #0830E0;
 	width: 360px;
 }
 
@@ -13,8 +13,8 @@ body {
 	flex-direction: row;
 }
 
-#orbArea {
-	width: 98px;
+#orb-area {
+	width: 100px;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -23,16 +23,16 @@ body {
 }
 
 #scaleArea {
-	width: calc(100% - 98px);
+	width: 260px;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
 	flex-wrap: wrap;
+	flex: 1 1 auto;
 }
 
 #scaling {
-	margin-left: 4px;
 	font-family: 'Press Start 2P', cursive;
 	font-size: 24px;
 	color: white;
@@ -40,7 +40,6 @@ body {
 }
 
 #counting {
-	margin-left: 4px;
 	font-family: 'Press Start 2P', cursive;
 	font-size: 16px;
 	color: white;
@@ -131,4 +130,26 @@ body {
   padding: 2px;
   margin: 4px 2px;
   background-color: #0830E0;
+}
+
+.divider {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 95%;
+	margin-left: 2.5%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background: #fff;
+	height: 1px;
+	box-shadow: 1px 1px #e7dfe7,
+              -1px -1px #e7dfe7,
+              1px -1px #e7dfe7,
+              -1px 1px #e7dfe7,
+              0 -2px #9c9a9c,
+              -2px 0 #7b757b,
+              0 2px #424542;
+-webkit-border-radius: 10%;
+  -moz-border-radius: 10%;
+  border-radius: 10%;
 }

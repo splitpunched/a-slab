@@ -45,6 +45,8 @@ items.push({
 	label: "Bridge",
 	img: 'icons/bridge.png',
 	keyItem: true,
+	linked: false,
+	locked: false,
 })
 
 items.push({
@@ -53,6 +55,7 @@ items.push({
 	label: "Lute",
 	img: 'icons/lute.png',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -61,6 +64,7 @@ items.push({
 	label: "Ship",
 	img: 'icons/ship.png',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -70,6 +74,7 @@ items.push({
 	img: 'icons/crown.png',
 	next: 'crystal',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -80,6 +85,7 @@ items.push({
 	prev: 'crown',
 	next: 'herb',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -90,6 +96,7 @@ items.push({
 	prev: 'crystal',
 	next: 'key',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -99,6 +106,7 @@ items.push({
 	img: 'icons/key.png',
 	prev: 'herb',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -108,6 +116,7 @@ items.push({
 	img: 'icons/tnt.png',
 	next: 'canal',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -117,6 +126,7 @@ items.push({
 	img: 'icons/canal.png',
 	prev: 'tnt',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -127,6 +137,7 @@ items.push({
 	consumable: true,
 	keyItem: true,
 	usedImg: 'icons/titan.png',
+	linked: false,
 })
 
 items.push({
@@ -135,6 +146,7 @@ items.push({
 	label: "Rod",
 	img: 'icons/rod.png',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -143,6 +155,7 @@ items.push({
 	label: "Canoe",
 	img: 'icons/canoe.png',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -152,6 +165,7 @@ items.push({
 	img: 'icons/floater.png',
 	next: 'airship',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -161,6 +175,7 @@ items.push({
 	img: 'icons/airship.png',
 	prev: 'floater',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -171,6 +186,7 @@ items.push({
 	usedImg: 'icons/class.png',
 	consumable: true,
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -182,6 +198,7 @@ items.push({
 	consumable: true,
 	next: 'oxyale',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -191,6 +208,7 @@ items.push({
 	img: 'icons/oxyale.png',
 	prev: 'bottle',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -202,6 +220,7 @@ items.push({
 	usedImg: 'icons/slab-unne.png',
 	next: 'chime',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -210,6 +229,7 @@ items.push({
 	label: "Cube",
 	img: 'icons/cube.png',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -219,6 +239,7 @@ items.push({
 	img: 'icons/chime.png',
 	prev: 'slab',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
@@ -228,14 +249,16 @@ items.push({
 	img: 'icons/adamant.png',
 	next: 'xcalbur',
 	keyItem: true,
+	linked: false,
 })
 
 items.push({
-	id: 20,
+	id: 21,
 	name: "xcalbur",
 	label: "Excal",
 	img: 'icons/xcalbur.png',
 	prev: 'adamant',
+	linked: false,
 })
 
 for (i = 0; i < items.length; i++) {
@@ -318,7 +341,7 @@ locations.push({
 })
 
 locations.push({
-	id: 9,
+	id: 10,
 	name: "smith",
 	label: "Smith",
 	img: 'icons/smith.png',

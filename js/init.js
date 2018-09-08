@@ -7,4 +7,8 @@ var locationList = locations.filter(function(place) {
 	return nope.indexOf(place.name) == -1
 })
 
-tracker.bridge.tracked = true;
+function initialize(flags) {
+	tracker.bridge.tracked = true;
+	logic.shuffleNPCItems()
+	logic.earlyBridge()
+}

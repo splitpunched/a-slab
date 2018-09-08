@@ -1,7 +1,9 @@
 <head>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="js/ff1.js"></script>
-	<script src="js/display.js"></script>
+	<script src="js/manager.js"></script>
+	<script src="js/flags.js"></script>
+	<script src="js/init.js"></script>
 	<script src="vue/parts.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
@@ -14,6 +16,8 @@
 </body>
 
 <script>
+initialize(flags)
+
 var vm = new Vue({ 
 	el: '#vue-app',
 	data: {
@@ -23,11 +27,12 @@ var vm = new Vue({
 		tracker: tracker,
 		itemList: itemList,
 		locationList: locationList,
+		flags: flags,
 	},
 	template: `
-		<div id="app" >
-			<div id="orbTracker" class="panel">
-				<div id="orbArea">
+		<div id="app" class="panel">
+			<div id="orbTracker">
+				<div id="orb-area">
 					<Item
 						class="item"
 						v-for="orb in orbs" 
@@ -45,7 +50,8 @@ var vm = new Vue({
 					<span id="counting">{{keyItemDisplay}}</span>
 				</div>
 			</div>
-			<div id="itemTracker" class="panel">
+			<Divider />
+			<div id="itemTracker">
 				<Item 
 					class="item"
 					v-for="item in itemList" 
@@ -60,7 +66,8 @@ var vm = new Vue({
 					v-on:goto-prev-item="gotoPrevItem"
 				/>
 			</div>
-			<div id="locationTracker" class="panel">
+			<Divider />
+			<div id="locationTracker">
 				<Item
 					class="item"
 					v-for="place in locationList" 
@@ -87,7 +94,7 @@ var vm = new Vue({
 		scaleFactor: function() {
 			var starting = 2.4;
 			return (starting * (1 + (this.keyItemCount * .05))).toFixed(2)
-		}
+		},
 	},
 	methods: {
 		trackItem: function(name) {
