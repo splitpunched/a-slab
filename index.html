@@ -1,7 +1,6 @@
 <head>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="js/ff1.js"></script>
-	<script src="js/manager.js"></script>
 	<script src="js/flags.js"></script>
 	<script src="js/init.js"></script>
 	<script src="vue/parts.js"></script>
@@ -31,95 +30,14 @@ var vm = new Vue({
 	},
 	template: `
 		<div id="app" class="panel">
-			<div id="orbTracker">
-				<div id="orb-area">
-					<Item
-						class="item"
-						v-for="orb in orbs" 
-						:obj="orb" 
-						:key="orb.id" 
-						:status="tracker[orb.name]" 
-						v-on:track-item="trackItem"
-						v-on:undo-item="undoItem"
-						v-on:deliver-item="deliverItem"
-						v-on:undeliver-item="undeliverItem"
-					/>
-				</div>
-				<div id="scaleArea">
-					<span id="scaling">{{scaleFactor}}x</span>
-					<span id="counting">{{keyItemDisplay}}</span>
-				</div>
-			</div>
-			<Divider />
-			<div id="itemTracker">
-				<Item 
-					class="item"
-					v-for="item in itemList" 
-					:obj="item" 
-					:key="item.id" 
-					:status="tracker[item.name]" 
-					v-on:track-item="trackItem"
-					v-on:undo-item="undoItem"
-					v-on:deliver-item="deliverItem"
-					v-on:undeliver-item="undeliverItem"
-					v-on:goto-next-item="gotoNextItem"
-					v-on:goto-prev-item="gotoPrevItem"
-				/>
-			</div>
-			<Divider />
-			<div id="locationTracker">
-				<Item
-					class="item"
-					v-for="place in locationList" 
-					:obj="place" 
-					:key="place.id" 
-					:status="tracker[place.name]" 
-					v-on:track-item="trackItem"
-					v-on:undo-item="undoItem"
-					v-on:deliver-item="deliverItem"
-					v-on:undeliver-item="undeliverItem"
-				/>
-			</div>
+			<Info-Section :orbs="orbs" :flags="flags" :tracker="tracker" :items="items" />
+      <div class="divider" />
+			<Key-Item-Section :items="items" :flags="flags" :tracker="tracker" :itemList="itemList" />
+			<div class="divider" />
+      <Location-Section :locations="locations" :flags="flags" :tracker="tracker" :locationList="locationList" />
 		</div>
 	`,
 	computed: {
-		keyItemCount: function() {
-			var keyItems = items.filter(function(item) { return item.keyItem && tracker[item.name].tracked })
-			return keyItems.length;
-		},
-		keyItemDisplay: function() {
-			if (this.keyItemCount == 1) { return `${this.keyItemCount} key item` }
-			else return `${this.keyItemCount} key items`
-		},
-		scaleFactor: function() {
-			var starting = 2.4;
-			return (starting * (1 + (this.keyItemCount * .05))).toFixed(2)
-		},
-	},
-	methods: {
-		trackItem: function(name) {
-			tracker[name].tracked = true;
-		},
-		deliverItem: function(name) {
-			tracker[name].delivered = true;
-		},
-		gotoNextItem: function(data) {
-			var myNum = itemList.indexOf(itemList.filter(function(item) { return item.name == data.name })[0])
-			var nextNum = items.indexOf(items.filter(function(item) { return item.name == data.next })[0])
-			itemList.splice(myNum, 1, items[nextNum])
-		},
-		undoItem: function(name) {
-			tracker[name].tracked = false;
-		},
-		undeliverItem: function(name) {
-			tracker[name].delivered = false;
-		},
-		// Still in progress!!!
-		gotoPrevItem: function(data) {
-			var myNum = itemList.indexOf(itemList.filter(function(item) { return item.name == data.name })[0])
-			var prevNum = items.indexOf(items.filter(function(item) { return item.name == data.prev })[0])
-			itemList.splice(myNum, 1, items[prevNum])
-		},
 	},
 })
 </script>
