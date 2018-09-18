@@ -1,7 +1,6 @@
 function initialize(flags) {
-	tracker.bridge.tracked = true;
-	logic.shuffleNPCItems()
-	logic.earlyBridge()
+	flagLogic.shuffleNPCItems()
+	flagLogic.earlyBridge()
 }
 
 var itemList = function() {
