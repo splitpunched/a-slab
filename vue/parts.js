@@ -1,211 +1,233 @@
-// Info section
-// Contains information for scaling and orb count
-Vue.component('Info-Section', {
-	props: [ 'orbs', 'flags', 'tracker', 'items' ],
-	template: `			
+Vue.component('Tracker', {
+	props: [ 'orbs', 'items', 'locations', 'flags' ],
+	template: `
+	<div id="tracker-app" class="panel">
+		<GameStateInfo :orbs="orbs" :flags="flags" :items="items" :locations="locations" />
+		<ItemInfo :items="items" :flags="flags" />
+		<LocationInfo :locations="locations" :flags="flags" />
+	</div>
+	`,
+})
+
+Vue.component('GameStateInfo', {
+	props: [ 'orbs', 'flags', 'items', 'locations' ],
+	data: function() { return {
+		test: "test",
+	}},
+	computed: {
+		keyItemCount: function() {
+			var vm = this;
+			return Object.keys(this.items).filter(function(item) {
+				return (vm.items[item].tracked || vm.items[item].locked)
+			}).length
+		}
+	},
+	template: `
 	<div id="orbTracker">
 		<div id="orb-area">
-			<Orb class="item" v-for="orb in orbs"  :orb="orb" :key="orb.name" :status="tracker[orb.name]" />
+			<Orb class="item" v-for="orb in orbs"  :orb="orb" :key="orb.name" />
 		</div>
 		<div id="scaleArea">
-			<span id="scaling">{{scale}}x</span>
-			<span id="counting">{{keyItemDisplay}}</span>
+			{{keyItemCount}}
 		</div>
 	</div>
 	`,
+})
+
+Vue.component('Orb', {
+	props: [ 'orb' ],
+	template: `
+	<div class="noselect" @click="" @contextmenu.prevent="">
+		<div class="iconContainer">
+			<img class="icon" :src="orb.img" :class="{ dim: !this.orb.tracked }">
+		</div>
+		<div class="itemLabel">
+			{{orb.name}}
+		</div>
+	</div>
+	`,
+})
+
+Vue.component('ItemInfo', {
+	props: [ 'items', 'flags' ],
 	computed: {
-		keyItemDisplay: function() {
-			if (this.keyItemCount == 1) { return `${this.keyItemCount} key item` }
-			else return `${this.keyItemCount} key items`
+		displayList: function() {
+			var vm = this, arr = []
+			var list = Object.keys(vm.items).filter(function(item) {
+				return vm.items[item].display == true
+			})
+			for (i = 0; i < list.length; i++) {
+				arr.push(vm.items[list[i]])
+			}
+			return arr
+		}
+	},
+	template: `
+	<div id="itemTracker">
+		<Item class="item" v-for="item in displayList" :item="item" :key="item.name" />
+	</div>
+	`,
+})
+
+Vue.component('Item', {
+	props: [ 'item' ],
+	computed: {
+		haveItem: function() {
+			if (this.item.tracked || this.item.locked) { return true }
+			else { return false }
 		},
-		keyItemCount: function() {
-			keyItems = Object.keys(items).filter(function(key) { return items[key].keyItem && tracker[items[key].name].tracked })
-			return keyItems.length;
-		},
-		scale: function() { return (this.flags.expMultiplier * (1 + (this.keyItemCount * .05))).toFixed(2) },
 	},
 	methods: {
-		trackOrb: function(name) { tracker[name].tracked = true; },
-		undoOrb: function(name) { tracker[name].tracked = false; },
+		triggerItem: function() {
+			var self = this.item
+			if (this.haveItem) { 
+				console.log(`${self.name} is already tracked.`)
+				console.log(`Is this item consumable? ${Boolean(self.consumable)}`)
+				if (self.consumable) {
+					console.log(`${self.name} is consumable. Let's use it.`)
+				}
+			}
+			else { 
+				console.log(`You're trying to track ${this.item.name}.`)
+			}
+		},
 	},
-	mounted: function() {
-		this.$root.$on('track-orb', this.trackOrb)
-		this.$root.$on('undo-orb', this.undoOrb)
-	}
+	template: `
+	<div class="noselect" @click="triggerItem" @contextmenu.prevent="">
+		<div class="iconContainer">
+			<img class="icon" :src="item.img" :class="{ dim: !this.haveItem, dark: !this.item.accessible }">
+		</div>
+		<div class="itemLabel">
+			{{item.name}}
+		</div>
+	</div>
+	`,
+})
+
+//
+
+Vue.component('LocationInfo', {
+	props: [ 'locations', 'flags' ],
+	computed: {
+		displayList: function() {
+			var vm = this, arr = []
+			var list = Object.keys(vm.locations).filter(function(loc) {
+				return vm.locations[loc].display == true
+			})
+			for (i = 0; i < list.length; i++) {
+				arr.push(vm.locations[list[i]])
+			}
+			return arr
+		}
+	},
+	template: `
+	<div id="locationTracker">
+        <Location class="item" v-for="location in displayList" :location="location" :key="location.name" />
+    </div>
+	`,
+})
+
+Vue.component('Location', {
+	props: [ 'location' ],
+	template: `
+	<div class="noselect" @click="" @contextmenu.prevent="">
+		<div class="iconContainer">
+			<img class="icon" :src="location.img" :class="{ dim: !this.location.tracked, dark: !this.location.accessible }">
+		</div>
+		<div class="itemLabel">
+			{{location.name}}
+		</div>
+	</div>
+	`,
+})
+
+// Info section
+// Contains information for scaling and orb count
+/*
+Vue.component('Info-Section', {
+	props: [ 'orbs', 'tracker', 'items', 'locations' ],
+	template: `			
+	<div id="orbTracker">
+		<div id="orb-area">
+			<Orb class="item" v-for="orb in orbs"  :orb="orb" :key="orb.name" :status="tracker.orbs[orb.name]" />
+		</div>
+		<div id="scaleArea">
+		</div>
+	</div>
+	`,
 })
 
 Vue.component('Orb', {
 	props: [ 'orb', 'status' ],
 	template: `
-	<div class="noselect" @click="track" @contextmenu.prevent="undo">
+	<div class="noselect" @click="" @contextmenu.prevent="">
 		<div class="iconContainer">
-			<img class="icon" :src="orb.img" :class="{ dim: !status.tracked }">
+			<img class="icon" :src="orb.img" :class="{ dim: !this.status.tracked }">
 		</div>
 		<div class="itemLabel">
 			{{orb.label}}
 		</div>
 	</div>
 	`,
-	methods: {
-		track: function() { if (!this.status.tracked) { this.$root.$emit('track-orb', this.orb.name) } },
-		undo: function() { if (this.status.tracked) { this.$root.$emit('undo-orb', this.orb.name) } }
-	},
-	computed: {
-	},
 })
 
-// Key item section - contains key items/quest items/etc.
-// Should probably include something so that this can contain other incentives that aren't typically
-// 'key items', such as Masamune, etc. 
 
 Vue.component('Key-Item-Section', {
-	props: [ 'items', 'flags', 'itemList', 'tracker' ],
+	props: [ 'items', 'itemDisplay', 'tracker' ],
 	template: `
 	<div id="itemTracker">
-		<Item class="item" v-for="item in itemList" :item="item" :key="item.name" :status="tracker[item.name]" />
+		<Item class="item" v-for="item in itemList" :item="item" :key="item.name" :status="tracker.items[item.name]" />
 	</div>
 	`,
-	methods: {
-        trackItem: function (name) {
-            tracker[name].tracked = true;
-            if (items[name].linked) { this.$root.$emit('track-linked-location', items[name].linked) }
-        },
-        deliverItem: function (name) { tracker[name].delivered = true; },
-
-        trackLinkedItem: function (name) {
-            if (tracker[items[name].prev].tracked && !tracker[name].tracked) { this.$root.$emit('goto-next-item', { name: items[name].prev, next: name }) }
-            tracker[name].tracked = true;
-        },
-		
-		// There has to be a better way to code this than what I'm doing now...
-		gotoNextItem: function(data) {
-			var myNum = itemList.indexOf(itemList.filter(function(item) { return item.name == data.name })[0])
-			itemList.splice(myNum, 1, items[data.next])
-			this.$root.$emit('track-item', data.next)
+  computed: {
+		itemList: function() { 
+			var arr = [];
+			for (i = 0; i < this.itemDisplay.length; i++) {
+				arr.push(this.items[this.itemDisplay[i]])
+			}
+			return arr;
 		},
-        undoItem: function (name) {
-            tracker[name].tracked = false
-            if (items[name].linked) { this.$root.$emit('undo-linked-location', items[name].linked) }
-        },
-        returnItem: function(name) { tracker[name].delivered = false },
-        // arghhh
-        gotoPrevItem: function(data) {
-          this.$root.$emit('undo-item', data.name)
-          var myNum = itemList.indexOf(itemList.filter(function(item) { return item.name == data.name })[0])
-          itemList.splice(myNum, 1, items[data.prev])
-        },
-	},
-	mounted: function() {
-        this.$root.$on('track-item', this.trackItem)
-        this.$root.$on('track-linked-item', this.trackLinkedItem)
-	    this.$root.$on('deliver-item', this.deliverItem)
-	    this.$root.$on('goto-next-item', this.gotoNextItem)
-        this.$root.$on('goto-prev-item', this.gotoPrevItem)
-        this.$root.$on('undo-item', this.undoItem)
-        this.$root.$on('return-item', this.returnItem)
 	},
 })
 
 Vue.component('Item', {
 	props: [ 'item', 'status' ],
 	template: `
-	<div class="noselect" @click="track" @contextmenu.prevent="undo">
+	<div class="noselect" @click="" @contextmenu.prevent="">
 		<div class="iconContainer">
-			<img class="icon" :src="image" :class="{ dim: !status.tracked }">
+			<img class="icon" :src="item.img" :class="{ dim: !this.status.tracked }">
 		</div>
 		<div class="itemLabel">
 			{{item.label}}
 		</div>
 	</div>
 	`,
-	methods: {
-		track: function() {
-			// If this item is locked (i.e. free bridge/airship) you shouldn't be able to touch it - it's enabled by default.
-			if (this.item.locked) { return; }
-			
-			// If the item isn't tracked, track it.
-			if (!this.status.tracked) {
-				this.$root.$emit('track-item', this.item.name)
-				return
-			}
-			
-			// If this item _is_ tracked but is something that can be consumed, use it.
-			if (this.isDeliverable) {
-				this.$root.$emit('deliver-item', this.item.name)
-				return
-			}
-			
-			// If this item _is_ tracked and there is another item that is to be delivered. This can apply even if the item has been delivered.
-			// Being delivered takes priority over next item.
-			if (this.nextItemReady) {
-				this.$root.$emit('goto-next-item', { name: this.item.name, next: this.item.next })
-				return
-			}
-		},
-		undo: function() {
-			// If this item is locked (i.e. free bridge/airship) you shouldn't be able to touch it - it's enabled by default.
-			if (this.item.locked) { return; }
-			
-			// Go back in an item chain.
-			if (this.prevItemExists) {
-				this.$root.$emit('goto-prev-item', { name: this.item.name, prev: this.item.prev })
-				return
-			}
-			
-			// Un-deliver an item.
-			if (this.wasDelivered) {
-				this.$root.$emit('return-item', this.item.name)
-				return
-			}
-			
-			if (this.status.tracked) {
-				this.$root.$emit('undo-item', this.item.name)
-			}
-		}
-	},
-	computed: {
-		image: function() {
-			if (this.status.delivered && this.item.consumable && this.item.usedImg) { return this.item.usedImg }
-			else return this.item.img
-		},
-		isDeliverable: function() { return (this.status.tracked && this.item.consumable && !this.status.delivered) },
-		wasDelivered: function() { return (this.status.tracked && this.item.consumable && this.status.delivered) },
-		nextItemReady: function() { return (this.status.tracked && this.item.next) },
-		prevItemExists: function() { return (this.status.tracked && this.item.prev) },
-	}
 })
 
 Vue.component('Location-Section', {
-    props: [ 'locations', 'flags', 'locationList', 'tracker' ],
+    props: [ 'locations', 'locationDisplay', 'tracker' ],
     template: `
     <div id="locationTracker">
-        <Location class="item" v-for="place in locationList" :place="place" :key="place.name" :status="tracker[place.name]" />
+        <Location class="item" v-for="place in locationList" :place="place" :key="place.name" :status="tracker.locations[place.name]" />
     </div>
     `,
-    methods: {
-        trackLocation: function (name) {
-            tracker[name].tracked = true;
-            var linked = Object.keys(items).filter(function (key) { return items[key].linked == name })
-            if (linked.length > 0) { this.$root.$emit('track-linked-item', linked[0]) }
-        },
-        trackLinkedLocation: function (name) { tracker[name].tracked = true; },
-        undoLocation: function (name) { tracker[name].tracked = false },
-        undoLinkedLocation: function (name) { tracker[name].tracked = false },
-    },
-    mounted: function() {
-        this.$root.$on('track-location', this.trackLocation)
-        this.$root.$on('track-linked-location', this.trackLinkedLocation)
-        this.$root.$on('undo-location', this.undoLocation)
-        this.$root.$on('undo-linked-location', this.undoLinkedLocation)
-    },
+	computed: {
+		locationList: function() { 
+			var arr = [];
+			for (i = 0; i < this.locationDisplay.length; i++) {
+				arr.push(this.locations[this.locationDisplay[i]])
+			}
+			return arr;
+		},
+	},
 })
 
 Vue.component('Location', {
 	props: [ 'place', 'status' ],
 	template: `
-	<div class="noselect" @click="track" @contextmenu.prevent="undo">
+	<div class="noselect" @click="" @contextmenu.prevent="">
 		<div class="iconContainer">
-			<img class="icon" :src="place.img" :class="{ dim: !status.tracked }">
+			<img class="icon" :src="place.img" :class="{ dim: !this.status.tracked }">
 		</div>
 		<div class="itemLabel">
 			{{place.label}}
@@ -213,15 +235,8 @@ Vue.component('Location', {
 	</div>
 	`,
 	methods: {
-		track: function() {
-			if (this.place.locked) { return; }
-			if (!this.status.tracked) { this.$root.$emit('track-location', this.place.name) }
-		},
-		undo: function() {
-			if (this.place.locked) { return; }
-			if (this.status.tracked) { this.$root.$emit('undo-location', this.place.name) }
-		}
 	},
 	computed: {
 	}
 })
+*/

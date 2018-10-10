@@ -2,9 +2,23 @@ body {
 	background-color: #a0d8f8;
 }
 
-#app{
+#tracker-app {
 	background-color: #0830E0;
 	width: 360px;
+}
+
+#options {
+	margin-top: 6px;
+	width: 360px;
+	display: flex;
+}
+
+#options select, #options button {
+	margin: 1px;
+}
+
+#options select {
+	flex: 1 1 auto;
 }
 
 #orbTracker {
@@ -30,6 +44,9 @@ body {
 	align-items: center;
 	flex-wrap: wrap;
 	flex: 1 1 auto;
+	font-family: 'Press Start 2P', cursive;
+	color: white;
+	text-shadow: 2px 2px #000000, 1px 1px #000000;
 }
 
 #scaling {
@@ -98,6 +115,11 @@ body {
 
 .icon.dim {
 	filter: grayscale(100%) brightness(90%);
+	opacity: 0.75;
+}
+
+.icon.dark {
+	filter: grayscale(100%) brightness(10%);
 	opacity: 0.75;
 }
 
