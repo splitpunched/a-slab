@@ -42,7 +42,7 @@ Vue.component('Orb', {
 			<img class="icon" :src="orb.img" :class="{ dim: !this.orb.tracked }">
 		</div>
 		<div class="itemLabel">
-			{{orb.name}}
+			{{orb.label}}
 		</div>
 	</div>
 	`,
@@ -62,6 +62,26 @@ Vue.component('ItemInfo', {
 			return arr
 		}
 	},
+	methods: {
+		trackItem: function(item) {
+			this.$root.itemData[item.name].tracked = true
+		},
+		useItem: function(item) {
+			this.$root.itemData[item.name].used = true
+		},
+		detrackItem: function(item) {
+			this.$root.itemData[item.name].tracked = false
+		},
+		unuseItem: function(item) {
+			this.$root.itemData[item.name].used = false
+		},
+	},
+	mounted: function() {
+		this.$root.$on('track-item', this.trackItem);
+		this.$root.$on('use-item', this.useItem);
+		this.$root.$on('detrack-item', this.detrackItem);
+		this.$root.$on('unuse-item', this.unuseItem);
+	},
 	template: `
 	<div id="itemTracker">
 		<Item class="item" v-for="item in displayList" :item="item" :key="item.name" />
@@ -76,29 +96,84 @@ Vue.component('Item', {
 			if (this.item.tracked || this.item.locked) { return true }
 			else { return false }
 		},
+		canGetNext: function() {
+			var self = this.item
+			if (!self.tracked) { return false }
+			if (!self.next && !self.consumable) { return false }
+			if (self.tracked && self.consumable && !self.used) { return self.accessible }
+			if (self.next) { return this.$root.items[self.next].accessible }
+		},
+		noAccess: function() {
+			if (!this.item.tracked && !this.item.accessible) { return true }
+			else { return false }
+		}
 	},
 	methods: {
 		triggerItem: function() {
 			var self = this.item
-			if (this.haveItem) { 
-				console.log(`${self.name} is already tracked.`)
-				console.log(`Is this item consumable? ${Boolean(self.consumable)}`)
-				if (self.consumable) {
-					console.log(`${self.name} is consumable. Let's use it.`)
-				}
+			if (!this.item.accessible) { 
+				return 
+			}
+			if (!this.haveItem) { 
+				this.$root.$emit('track-item', self)
+				return;
 			}
 			else { 
-				console.log(`You're trying to track ${this.item.name}.`)
+				if (self.consumable && !self.used) {
+					this.triggerItemUse()
+					return
+				}
+				if (self.next) {
+					var nextItem = this.$root.items[self.next]
+					if (this.$root.items[self.next].accessible) {
+						this.$root.$emit('track-item', nextItem)
+						if (nextItem.linked) {
+							var linkedLocation = this.$root.locations[nextItem.linked]
+							this.$root.$emit('track-location', linkedLocation)
+						}
+						return;
+					} else {
+						console.log(`${self.next} can't be accessed yet.`)
+					}
+				}
 			}
 		},
+		triggerItemUse: function() {
+			var self = this.item
+			this.$root.$emit('use-item', self)
+		},
+		cancelItem: function() {
+			var self = this.item
+			if (!this.haveItem) { 
+				return;
+			}
+			if (self.consumable && self.used) {
+				this.$root.$emit('unuse-item', self)
+				return
+			}
+			else {
+				this.$root.$emit('detrack-item', self)
+				if (self.linked) {  
+					var linked = this.$root.locations[self.linked]
+					this.$root.$emit('detrack-location', linked)
+				}
+			}
+		}
 	},
 	template: `
-	<div class="noselect" @click="triggerItem" @contextmenu.prevent="">
+	<div class="noselect" @click="triggerItem" @contextmenu.prevent="cancelItem">
 		<div class="iconContainer">
-			<img class="icon" :src="item.img" :class="{ dim: !this.haveItem, dark: !this.item.accessible }">
+			<img class="icon" :src="item.img" :class="{ dim: !this.haveItem, dark: noAccess }">
+			<div class="iconOverlay">
+				<img class="overlay" src="icons/status/arrow.png" v-if="canGetNext">
+				<img class="overlay" src="icons/status/locked.png" v-if="item.locked">
+			</div>
 		</div>
 		<div class="itemLabel">
-			{{item.name}}
+			<div class="labelContainer">
+				<a>{{item.label}}</a>
+				<div class="strike" v-if="item.used"/>
+			</div>
 		</div>
 	</div>
 	`,
@@ -120,6 +195,18 @@ Vue.component('LocationInfo', {
 			return arr
 		}
 	},
+	methods: {
+		trackLocation: function(location) {
+			this.$root.locationData[location.name].tracked = true
+		},
+		detrackLocation: function(location) {
+			this.$root.locationData[location.name].tracked = false
+		},
+	},
+	mounted: function() {
+		this.$root.$on('track-location', this.trackLocation);
+		this.$root.$on('detrack-location', this.detrackLocation);
+	},
 	template: `
 	<div id="locationTracker">
         <Location class="item" v-for="location in displayList" :location="location" :key="location.name" />
@@ -130,15 +217,26 @@ Vue.component('LocationInfo', {
 Vue.component('Location', {
 	props: [ 'location' ],
 	template: `
-	<div class="noselect" @click="" @contextmenu.prevent="">
+	<div class="noselect" @click="triggerLocation" @contextmenu.prevent="cancelLocation">
 		<div class="iconContainer">
 			<img class="icon" :src="location.img" :class="{ dim: !this.location.tracked, dark: !this.location.accessible }">
 		</div>
 		<div class="itemLabel">
-			{{location.name}}
+			{{location.label}}
 		</div>
 	</div>
 	`,
+	methods: {
+		triggerLocation: function() {
+			var self = this.location
+			if (!self.accessible) { return }
+			this.$root.$emit('track-location', self)
+		},
+		cancelLocation: function() {
+			var self = this.location
+			this.$root.$emit('cancel-location', self)
+		}
+	},
 })
 
 // Info section

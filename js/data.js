@@ -4,7 +4,8 @@ var mix = {
 			var items = {}
 			items.bridge = {
 				id: 0,
-				name: "Bridge",
+				name: "bridge",
+				label: "Bridge",
 				img: 'icons/bridge.png',
 				keyItem: true,
 				incentive: false,
@@ -13,7 +14,8 @@ var mix = {
 			}
 			items.lute = {
 				id: 1,
-				name: "Lute",
+				name: "lute",
+				label: "Lute",
 				img: 'icons/lute.png',
 				keyItem: true,
 				tracked: false,
@@ -21,7 +23,8 @@ var mix = {
 			}
 			items.ship = {
 				id: 2,
-				name: "Ship",
+				name: "ship",
+				label: "Ship",
 				img: 'icons/ship.png',
 				keyItem: true,
 				tracked: false,
@@ -29,50 +32,56 @@ var mix = {
 			}
 			items.crown = {
 				id: 3,
-				name: "Crown",
+				name: "crown",
+				label: "Crown",
 				img: 'icons/crown.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.crystal = {
 				id: 3.1,
-				name: "Crystal",
+				name: "crystal",
+				label: "Crystal",
 				img: 'icons/crystal.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.herb = {
 				id: 3.2,
-				name: "Herb",
+				name: "herb",
+				label: "Herb",
 				img: 'icons/herb.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.key = {
 				id: 3.3,
-				name: "Key",
+				name: "key",
+				label: "Key",
 				img: 'icons/key.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.tnt = {
 				id: 4,
-				name: "TNT",
+				name: "tnt",
+				label: "TNT",
 				img: 'icons/tnt.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.canal = {
 				id: 4.1,
-				name: "Canal",
+				name: "canal",
+				label: "Canal",
 				img: 'icons/canal.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.ruby = {
 				id: 5,
-				name: "Ruby",
-				img: 'icons/ruby.png',
+				name: "ruby",
+				label: "Ruby",
 				keyItem: true,
 				consumable: true,
 				tracked: false,
@@ -81,7 +90,8 @@ var mix = {
 			},
 			items.rod = {
 				id: 6,
-				name: "Rod",
+				name: "rod",
+				label: "Rod",
 				img: 'icons/rod.png',
 				keyItem: true,
 				incentive: true,
@@ -90,7 +100,8 @@ var mix = {
 			}
 			items.canoe = {
 				id: 7,
-				name: "Canoe",
+				name: "canoe",
+				label: "Canoe",
 				img: 'icons/canoe.png',
 				keyItem: true,
 				incentive: true,
@@ -99,21 +110,24 @@ var mix = {
 			}
 			items.floater = {
 				id: 8,
-				name: "Floater",
+				name: "floater",
+				label: "Floater",
 				img: 'icons/floater.png',
 				keyItem: true,
 				tracked: false,
 			},
 			items.airship = {
 				id: 8.1,
-				name: "Airship",
+				name: "airship",
+				label: "Airship",
 				img: 'icons/airship.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.tail = {
 				id: 9,
-				name: "Tail",
+				name: "tail",
+				label: "Tail",
 				//img: 'icons/tail.png',
 				consumable: true,
 				keyItem: true,
@@ -123,7 +137,8 @@ var mix = {
 			}
 			items.bottle = {
 				id: 10,
-				name: "Bottle",
+				name: "bottle",
+				label: "Bottle",
 				//img: 'icons/bottle.png',
 				consumable: true,
 				keyItem: true,
@@ -132,7 +147,8 @@ var mix = {
 			}
 			items.oxyale = {
 				id: 10.1,
-				name: "Oxyale",
+				name: "oxyale",
+				label: "Oxyale",
 				img: 'icons/oxyale.png',
 				keyItem: true,
 				incentive: true,
@@ -140,7 +156,8 @@ var mix = {
 			}
 			items.slab = {
 				id: 11,
-				name: "Slab",
+				name: "slab",
+				label: "Slab",
 				//img: 'icons/slab.png',
 				consumable: true,
 				keyItem: true,
@@ -149,7 +166,8 @@ var mix = {
 			}
 			items.chime = {
 				id: 11.1,
-				name: "Chime",
+				name: "chime",
+				label: "Chime",
 				img: 'icons/chime.png',
 				keyItem: true,
 				incentive: true,
@@ -157,7 +175,8 @@ var mix = {
 			}
 			items.cube = {
 				id: 12,
-				name: "Cube",
+				name: "cube",
+				label: "Cube",
 				img: 'icons/cube.png',
 				keyItem: true,
 				incentive: true,
@@ -166,14 +185,16 @@ var mix = {
 			}
 			items.adamant = {
 				id: 13,
-				name: "Adamant",
+				name: "adamant",
+				label: "Adamant",
 				img: 'icons/adamant.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.xcalbur = {
 				id: 13.1,
-				name: "Excal",
+				name: "xcalbur",
+				label: "Excal",
 				img: 'icons/xcalbur.png',
 				keyItem: false,
 				incentive: false,
@@ -185,8 +206,8 @@ var mix = {
 			var locations = {}
 			locations.garland = {
 				id: 0,
-				name: "Garland",
-				img: 'icons/garland.png',
+				name: "garland",
+				label: "Garland",
 				incentive: false,
 				accessible: true,
 				tracked: false,
@@ -194,138 +215,159 @@ var mix = {
 			}
 			locations.king = {
 				id: 1,
-				name: "King",
+				name: "king",
+				label: "King",
 				img: 'icons/king.png',
 				accessible: true,
 				tracked: false,
 			}
 			locations.sara = {
 				id: 2,
-				name: "Sara",
+				name: "sara",
+				label: "Sara",
 				img: 'icons/sara.png',
 				tracked: false,
 			}
 			locations.bikke = {
 				id: 3,
-				name: "Bikke",
+				name: "bikke",
+				label: "Bikke",
 				img: 'icons/bikke.png',
 				tracked: false,
 			}
 			locations.marsh = {
 				id: 4,
-				name: "Marsh",
+				name: "marsh",
+				label: "Marsh",
 				img: 'icons/marsh.png',
 				tracked: false,
 			}
 			locations.marshLocked = {
 				id: 5,
-				name: "Marsh",
+				name: "marshLocked",
+				label: "Marsh",
 				img: 'icons/marshLocked.png',
 				tracked: false,
 			}
 			locations.astos = {
 				id: 6,
-				name: "Astos",
+				name: "astos",
+				label: "Astos",
 				img: 'icons/astos.png',
 				tracked: false,
 			}
 			locations.matoya = {
 				id: 7,
-				name: "Matoya",
+				name: "matoya",
+				label: "Matoya",
 				img: 'icons/matoya.png',
 				tracked: false,
 			}
 			locations.prince = {
 				id: 8,
-				name: "Prince",
+				name: "prince",
+				label: "Prince",
 				img: 'icons/prince.png',
 				tracked: false,
 			}
 			locations.coneriaLocked = {
 				id: 9,
-				name: "Coneria",
+				name: "coneriaLocked",
+				label: "Coneria",
 				img: 'icons/coneriaLocked.png',
 				tracked: false,
 			}
 			locations.nerrick = {
 				id: 10,
-				name: "Nerrick",
+				name: "nerrick",
+				label: "Nerrick",
 				img: 'icons/nerrick.png',
 				tracked: false,
 			}
 			locations.smith = {
 				id: 11,
-				name: "Smith",
+				name: "smith",
+				label: "Smith",
 				img: 'icons/smith.png',
 				tracked: false,
-				type: 'fetch',
 			}
 			locations.earth = {
 				id: 12,
-				name: "Earth",
+				name: "earth",
+				label: "Earth",
 				img: 'icons/vampire.png',
 				tracked: false,
 				type: 'chest',
 			}
 			locations.sarda = {
 				id: 14,
-				name: "Sarda",
+				name: "sarda",
+				label: "Sarda",
 				img: 'icons/sarda.png',
 				tracked: false,
 				type: 'free',
 			}
 			locations.sage = {
 				id: 15,
-				name: "Sage",
+				name: "sage",
+				label: "Sage",
 				img: 'icons/sage.png',
 				tracked: false,
 			}
 			locations.volcano = {
 				id: 16,
-				name: "Volcano",
+				name: "volcano",
+				label: "Volcano",
 				img: 'icons/redD.png',
 				tracked: false,
 			}
 			locations.iceCave = {
 				id: 17,
-				name: "Ice",
+				name: "iceCave",
+				label: "Ice",
 				img: 'icons/eye.png',
 				tracked: false,
 			}
 			locations.ordeals = {
 				id: 18,
-				name: "Ordeals",
+				name: "ordeals",
+				label: "Ordeals",
 				img: 'icons/zombieD.png',
 				tracked: false,
 			}
 			locations.shopItem = {
 				id: 19,
-				name: "Shop",
+				name: "shopItem",
+				label: "Shop",
 				img: 'icons/shop.png',
 				display: true,
 				tracked: false,
 			}
 			locations.shrine = {
 				id: 20,
-				name: "Shrine",
+				name: "shrine",
+				label: "Shrine",
 				img: 'icons/mermaid.png',
 				tracked: false,
 			}
 			locations.waterfall = {
 				id: 21,
-				name: "Robot",
+				name: "waterfall",
+				label: "Robot",
 				img: 'icons/robot.png',
 				tracked: false,
 			}
 			locations.lefein = {
 				id: 22,
-				name: "Lefein",
+				name: "lefein",
+				label: "Lefein",
 				img: 'icons/lupa.png',
 				tracked: false,
 			}
 			locations.sky = {
 				id: 23,
-				name: "Sky",
+				name: "sky",
+				label: "Sky",
 				img: 'icons/sky.png',
 				tracked: false,
 			}
@@ -335,25 +377,25 @@ var mix = {
 			var orbs = {}
 			orbs.earth = { 
 				id: 0, 
-				name: "Earth", 
+				label: "Earth", 
 				img: 'icons/earthOrb.png', 
 				tracked: false,
 			}
 			orbs.fire = { 
 				id: 1, 
-				name: "Fire", 
+				label: "Fire", 
 				img: 'icons/fireOrb.png', 
 				tracked: false,
 			}
 			orbs.water = { 
 				id: 2, 
-				name: "Water", 
+				label: "Water", 
 				img: 'icons/waterOrb.png', 
 				tracked: false,
 			}
 			orbs.air = { 
 				id: 3, 
-				name: "Air", 
+				label: "Air", 
 				img: 'icons/airOrb.png', 
 				tracked: false,
 			}
@@ -782,7 +824,7 @@ var mix = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.locations.coneriaLocked.accessible }
+					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.mapAccess.dwarves }
 					else { return true }
 				}(),
 				display: function() {
@@ -792,7 +834,8 @@ var mix = {
 			}
 			items.ruby = {
 				img: function() {
-					return 'icons/titan.png'
+					if (!vm.itemData.ruby.used) { return 'icons/ruby.png' }
+					else { return 'icons/titan.png' }
 				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'earth' }
@@ -872,24 +915,31 @@ var mix = {
 			}
 			items.tail = {
 				img: function() {
-					return 'icons/tail.png'
+					if (!vm.itemData.tail.used) { return 'icons/tail.png' }
+					else { return 'icons/class.png' }
 				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'ordeals' }
 					else { return false }
 				}(),
 				accessible: function() {
-					if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.ordeals.accessible }
-					else { return true; }
+					if (!vm.itemData.tail.tracked) { 
+						if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.ordeals.accessible }
+						else { return true; }
+					}
+					else {
+						if (!vm.flags.entranceShuffle) { return vm.itemData.airship.tracked }
+						else { return true }
+					}
 				}(),
 			}
 			items.bottle = {
 				img: function() {
-					return 'icons/bottle.png'
-					// 'icons/class.png',
+					if (!vm.itemData.bottle.used) { return 'icons/bottle.png' }
+					else { return 'icons/bottle-empty.png' }
 				}(),
 				linked: function() {
-					if (!vm.flags.shuffleFetch) { return 'shopItem' }
+					if (!vm.flags.shuffleFetchItems) { return 'shopItem' }
 					else { return false }
 				}(),
 				incentive: function() {
@@ -917,7 +967,7 @@ var mix = {
 				}(),
 				accessible: function() {
 					if (vm.flags.entranceShuffle || vm.flags.townShuffle) { return true }
-					else { return vm.mapAccess.onrac }
+					else { return vm.itemData.airship.tracked }
 				}(),
 				display: function() {
 					if (vm.flags.shuffleFetchItems || vm.itemData.oxyale.tracked) { return true }
@@ -926,8 +976,8 @@ var mix = {
 			}
 			items.slab = {
 				img: function() {
-					return 'icons/slab.png'
-					// 'icons/slab-unne.png',
+					if (!vm.itemData.slab.used) { return 'icons/slab.png' }
+					else { return 'icons/slab-unne.png' }
 				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'shrine' }
@@ -942,9 +992,15 @@ var mix = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (vm.flags.shuffleTreasures) { return true }
-					if (!vm.itemData.oxyale.tracked) { return false }
-					else { return vm.mapAccess.onrac }
+					if (!vm.itemData.slab.tracked) {
+						if (vm.flags.shuffleTreasures) { return true }
+						if (!vm.itemData.oxyale.tracked) { return false }
+						else { return vm.mapAccess.onrac }
+					}
+					else {
+						if (vm.flags.townShuffle) { return true }
+						else { return vm.mapAccess.melmond }
+					}
 				}(),
 				usable: function() {
 					if (vm.flags.entranceShuffle || vm.flags.townShuffle) { return true }
@@ -1037,7 +1093,12 @@ var mix = {
 		},
 		locations: function() {
 			var vm = this, locations = {}
-			locations.garland = {}
+			locations.garland = {
+				img: function() {
+					if (!vm.locationData.garland.tracked) { return 'icons/garland.png' }
+					else { return 'icons/garland-2.png' }
+				}(),
+			}
 			locations.king = {
 				incentive: function() {
 					return vm.flags.incentiveFreeNPCs
@@ -1101,6 +1162,11 @@ var mix = {
 				incentive: function() {
 					return vm.flags.incentiveFetchNPCs
 				}(),
+				accessible: function() {
+					if (!vm.itemData.crown.tracked) { return false }
+					if (!vm.flags.entranceShuffle) { return vm.mapAccess.elfland }
+					return true;
+				}(),
 				display: function() {
 					if (vm.flags.incentiveFetchNPCs || !vm.flags.shuffleNPCFetchItems) { return true }
 					else { return false }
@@ -1110,6 +1176,11 @@ var mix = {
 				incentive: function() {
 					return vm.flags.incentiveFetchNPCs
 				}(),
+				accessible: function() {
+					if (!vm.itemData.crystal.tracked) { return false }
+					if (!vm.flags.entranceShuffle) { return vm.mapAccess.pravoka }
+					return true;
+				}(),
 				display: function() {
 					if (vm.flags.incentiveFetchNPCs || !vm.flags.shuffleNPCFetchItems) { return true }
 					else { return false }
@@ -1118,6 +1189,11 @@ var mix = {
 			locations.prince = {
 				incentive: function() {
 					return vm.flags.incentiveFetchNPCs
+				}(),
+				accessible: function() {
+					if (!vm.itemData.herb.tracked) { return false }
+					if (!vm.flags.entranceShuffle) { return vm.mapAccess.elfland }
+					return true;
 				}(),
 				display: function() {
 					if (vm.flags.incentiveFetchNPCs || !vm.flags.shuffleNPCFetchItems) { return true }
@@ -1178,7 +1254,7 @@ var mix = {
 			}
 			locations.sarda = {
 				accessible: function() {
-					if (vm.flags.earlySarda && !vm.locationData.earth.tracked) { return false }
+					if (!vm.flags.earlySarda && !vm.locationData.earth.tracked) { return false }
 					if (vm.flags.entranceShuffle) { return true }
 					if ((vm.itemData.ship.tracked && vm.itemData.canal.tracked && vm.itemData.ruby.tracked) || vm.itemData.airship.tracked) { return true }
 					else { return false }
@@ -1193,7 +1269,7 @@ var mix = {
 			}
 			locations.sage = {
 				accessible: function() {
-					if (vm.flags.earlySage && !vm.orbs.earth.tracked) { return false }
+					if (!vm.flags.earlySage && !vm.orbs.earth.tracked) { return false }
 					if (vm.flags.entranceShuffle) { return true }
 					return vm.mapAccess.crescent
 				}(),
@@ -1279,6 +1355,10 @@ var mix = {
 			locations.lefein = {
 				incentive: function() {
 					return vm.flags.incentiveFetchNPCs
+				}(),
+				accessible: function() {
+					if (!vm.itemData.slab.used) { return false }
+					else { return vm.itemData.airship.tracked }
 				}(),
 				display: function() {
 					if (vm.flags.incentiveFetchNPCs || !vm.flags.shuffleNPCFetchItems) { return true }
