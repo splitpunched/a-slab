@@ -1,6 +1,69 @@
-var orbs = {}
-
-orbs.earthOrb = { id: 0, name: "earthOrb", label: "Earth", img: 'icons/earthOrb.png', }
-orbs.fireOrb = { id: 1, name: "fireOrb", label: "Fire", img: 'icons/fireOrb.png', }
-orbs.waterOrb = { id: 2, name: "waterOrb", label: "Water", img: 'icons/waterOrb.png', }
-orbs.airOrb = { id: 3, name: "airOrb", label: "Air", img: 'icons/airOrb.png', }
+var orbInfo = {
+	data: function() { return {
+		orbData: function() {
+			var orbs = {}
+			orbs.earth = { 
+				id: 0, 
+				label: "Earth", 
+				img: 'icons/earthOrb.png', 
+				tracked: false,
+			}
+			orbs.fire = { 
+				id: 1, 
+				label: "Fire", 
+				img: 'icons/fireOrb.png', 
+				tracked: false,
+			}
+			orbs.water = { 
+				id: 2, 
+				label: "Water", 
+				img: 'icons/waterOrb.png', 
+				tracked: false,
+			}
+			orbs.air = { 
+				id: 3, 
+				label: "Air", 
+				img: 'icons/airOrb.png', 
+				tracked: false,
+			}
+			return orbs
+		}(),
+	}},
+	computed: {
+		orbs: function() {
+			var vm = this, orbs = {}
+			orbs.earth = {
+				accessible: function() {
+					if (vm.flags.entranceShuffle || vm.flags.floorShuffle) { return true }
+					if (!vm.itemData.rod.tracked) { return false }
+					return vm.mapAccess.melmond
+				}()
+			}
+			orbs.fire = {
+				accessible: function() {
+					if (vm.flags.entranceShuffle || vm.flags.floorShuffle) { return true }
+					return vm.mapAccess.volcano
+				}()
+			}
+			orbs.water = {
+				accessible: function() {
+					if (vm.flags.entranceShuffle || vm.flags.floorShuffle) { return true }
+					if (!vm.itemData.oxyale.tracked) { return false }
+					return vm.mapAccess.onrac
+				}()
+			}
+			orbs.air = {
+				accessible: function() {
+					if (vm.flags.entranceShuffle || vm.flags.floorShuffle) { return true }
+					if (!vm.itemData.chime.tracked) { return false }
+					return vm.mapAccess.mirage
+				}()
+			}
+			for (i = 0; i < Object.keys(vm.orbData).length; i++) {
+				var name = Object.keys(vm.orbData)[i]
+				orbs[name] = Object.assign(orbs[name], vm.orbData[name])
+			}
+			return orbs
+		}
+    }
+}

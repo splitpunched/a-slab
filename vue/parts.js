@@ -20,7 +20,15 @@ Vue.component('GameStateInfo', {
 			return Object.keys(this.items).filter(function(item) {
 				return (vm.items[item].tracked || vm.items[item].locked)
 			}).length
-		}
+		},
+		keyItemDisplay: function() {
+			var vm = this;
+			var keyText = function() {
+				if (vm.keyItemCount == 1) { return 'key item' }
+				else { return 'key items' }
+			}()
+			return `${this.keyItemCount} ${keyText}`
+		},
 	},
 	template: `
 	<div id="orbTracker">
@@ -28,7 +36,7 @@ Vue.component('GameStateInfo', {
 			<Orb class="item" v-for="orb in orbs"  :orb="orb" :key="orb.name" />
 		</div>
 		<div id="scaleArea">
-			{{keyItemCount}}
+			{{keyItemDisplay}}
 		</div>
 	</div>
 	`,
@@ -39,7 +47,7 @@ Vue.component('Orb', {
 	template: `
 	<div class="noselect" @click="" @contextmenu.prevent="">
 		<div class="iconContainer">
-			<img class="icon" :src="orb.img" :class="{ dim: !this.orb.tracked }">
+			<img class="icon" :src="orb.img" :class="{ dim: !this.orb.tracked, dark: !this.orb.accessible }">
 		</div>
 		<div class="itemLabel">
 			{{orb.label}}
@@ -166,7 +174,7 @@ Vue.component('Item', {
 			<img class="icon" :src="item.img" :class="{ dim: !this.haveItem, dark: noAccess }">
 			<div class="iconOverlay">
 				<img class="overlay" src="icons/status/arrow.png" v-if="canGetNext">
-				<img class="overlay" src="icons/status/locked.png" v-if="item.locked">
+				<img class="overlay" src="icons/status/flagLocked.png" v-if="item.locked">
 			</div>
 		</div>
 		<div class="itemLabel">
@@ -220,6 +228,9 @@ Vue.component('Location', {
 	<div class="noselect" @click="triggerLocation" @contextmenu.prevent="cancelLocation">
 		<div class="iconContainer">
 			<img class="icon" :src="location.img" :class="{ dim: !this.location.tracked, dark: !this.location.accessible }">
+			<div class="iconOverlay">
+				<!--<img class="overlay" src="icons/status/locked.png" v-if="noToggle">-->
+			</div>
 		</div>
 		<div class="itemLabel">
 			{{location.label}}
@@ -228,15 +239,44 @@ Vue.component('Location', {
 	`,
 	methods: {
 		triggerLocation: function() {
-			var self = this.location
+			var self = this.location, vm = this
 			if (!self.accessible) { return }
 			this.$root.$emit('track-location', self)
+			if (this.linkedItem) {
+				var linked = vm.$root.items[this.linkedItem]
+				vm.$root.$emit('track-item', linked)
+			}
 		},
 		cancelLocation: function() {
 			var self = this.location
-			this.$root.$emit('cancel-location', self)
+			if (!this.linkedItem) { 
+				this.$root.$emit('detrack-location', self)
+				return
+			}
+			if (!this.noToggle) {
+				var linked = this.$root.items[this.linkedItem]
+				this.$root.$emit('detrack-location', self)
+				this.$root.$emit('detrack-item', linked)
+				return
+			}
 		}
 	},
+	computed: {
+		linkedItem: function() {
+			var self = this.location, vm = this
+			var arr = Object.keys(this.$root.items).filter(function(item) { 
+				return vm.$root.items[item].linked == self.name 
+			})
+			if (arr.length == 0) { return false }
+			else { return arr[0] }
+		},
+		noToggle: function() {
+			if (!this.linkedItem) { return false }
+			var linked = this.$root.items[this.linkedItem]
+			if (!this.$root.itemData[linked.next]) { return false }
+			return this.$root.itemData[linked.next].tracked
+		}
+	}
 })
 
 // Info section

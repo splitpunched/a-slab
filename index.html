@@ -1,6 +1,10 @@
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<script src="js/data.js"></script>
+	<script src="js/items.js"></script>
+	<script src="js/locations.js"></script>
+	<script src="js/orbs.js"></script>
+	<script src="js/flags.js"></script>
+	<script src="js/logic.js"></script>
     <script src="vue/parts.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
@@ -15,42 +19,12 @@
 <script>
 var vm = new Vue({ 
 	el: '#vue-app',
-	mixins: [mix],
+	mixins: [logicInfo, itemInfo, locationInfo, orbInfo, flagInfo],
 	data: {
-		flagset: "HACfH0hFQBAAHJ!fPASoYAeAFeS",
-	},
-	mounted: function() {
-	},
-	computed: {
-		flags: function() { 
-			var flags = {}, encoded = this.flagset
-			for (i = 0; i < this.flagRules.length; i++) {
-				var flagChar = encoded.charAt(i)
-				var count = this.base64String.indexOf(flagChar)
-				var flagGroup = Object.keys(this.flagRules[i]).sort(function(a, b) { return b - a });
-				for (j = 0; j < flagGroup.length; j++) {
-					var bit = flagGroup[j], flag = this.flagRules[i][bit]
-					if (flag.type == 'bool') { 
-						if (bit > count) { flags[flag.name] = false }
-						else { 
-							count = (count - bit)
-							flags[flag.name] = true
-							}
-						}
-					else if (flag.type == 'int') {
-						flags[flag.name] = (count * flag.multiplier)
-					}
-				}
-			}
-			return flags;
-		},
+		flagset: "HACfH1hFBCAAHJ!fPASoYAeAFeS",
 	},
 	template: `
 		<Tracker :orbs="orbs" :flags="flags" :items="items" :locations="locations"/>
 	`,
 })
-
-function convertCase(string) {
-    return string.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
-};
 </script>

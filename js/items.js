@@ -1,123 +1,144 @@
-var itemMix = {
+var itemInfo = {
 	data: function() { return {
 		itemData: function() {
 			var items = {}
 			items.bridge = {
 				id: 0,
-				name: "Bridge",
+				name: "bridge",
+				label: "Bridge",
 				img: 'icons/bridge.png',
 				keyItem: true,
 				incentive: false,
 				tracked: false,
+				display: true,
 			}
 			items.lute = {
 				id: 1,
-				name: "Lute",
+				name: "lute",
+				label: "Lute",
 				img: 'icons/lute.png',
 				keyItem: true,
 				tracked: false,
+				display: true,
 			}
 			items.ship = {
 				id: 2,
-				name: "Ship",
+				name: "ship",
+				label: "Ship",
 				img: 'icons/ship.png',
 				keyItem: true,
 				tracked: false,
+				display: true,
 			}
 			items.crown = {
 				id: 3,
-				name: "Crown",
+				name: "crown",
+				label: "Crown",
 				img: 'icons/crown.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.crystal = {
 				id: 3.1,
-				name: "Crystal",
+				name: "crystal",
+				label: "Crystal",
 				img: 'icons/crystal.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.herb = {
 				id: 3.2,
-				name: "Herb",
+				name: "herb",
+				label: "Herb",
 				img: 'icons/herb.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.key = {
 				id: 3.3,
-				name: "Key",
+				name: "key",
+				label: "Key",
 				img: 'icons/key.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.tnt = {
 				id: 4,
-				name: "TNT",
+				name: "tnt",
+				label: "TNT",
 				img: 'icons/tnt.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.canal = {
 				id: 4.1,
-				name: "Canal",
+				name: "canal",
+				label: "Canal",
 				img: 'icons/canal.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.ruby = {
 				id: 5,
-				name: "Ruby",
-				img: 'icons/ruby.png',
+				name: "ruby",
+				label: "Ruby",
 				keyItem: true,
 				consumable: true,
 				tracked: false,
 				used: false,
+				display: true,
 			},
 			items.rod = {
 				id: 6,
-				name: "Rod",
+				name: "rod",
+				label: "Rod",
 				img: 'icons/rod.png',
 				keyItem: true,
 				incentive: true,
 				tracked: false,
+				display: true,
 			}
 			items.canoe = {
 				id: 7,
-				name: "Canoe",
+				name: "canoe",
+				label: "Canoe",
 				img: 'icons/canoe.png',
 				keyItem: true,
 				incentive: true,
 				tracked: false,
+				display: true,
 			}
 			items.floater = {
 				id: 8,
-				name: "Floater",
+				name: "floater",
+				label: "Floater",
 				img: 'icons/floater.png',
 				keyItem: true,
 				tracked: false,
 			},
 			items.airship = {
 				id: 8.1,
-				name: "Airship",
+				name: "airship",
+				label: "Airship",
 				img: 'icons/airship.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.tail = {
 				id: 9,
-				name: "Tail",
+				name: "tail",
+				label: "Tail",
 				//img: 'icons/tail.png',
 				consumable: true,
 				keyItem: true,
 				tracked: false,
 				used: false,
+				display: true,
 			}
 			items.bottle = {
 				id: 10,
-				name: "Bottle",
-				//img: 'icons/bottle.png',
+				name: "bottle",
+				label: "Bottle",
 				consumable: true,
 				keyItem: true,
 				tracked: false,
@@ -125,7 +146,8 @@ var itemMix = {
 			}
 			items.oxyale = {
 				id: 10.1,
-				name: "Oxyale",
+				name: "oxyale",
+				label: "Oxyale",
 				img: 'icons/oxyale.png',
 				keyItem: true,
 				incentive: true,
@@ -133,7 +155,8 @@ var itemMix = {
 			}
 			items.slab = {
 				id: 11,
-				name: "Slab",
+				name: "slab",
+				label: "Slab",
 				//img: 'icons/slab.png',
 				consumable: true,
 				keyItem: true,
@@ -142,7 +165,8 @@ var itemMix = {
 			}
 			items.chime = {
 				id: 11.1,
-				name: "Chime",
+				name: "chime",
+				label: "Chime",
 				img: 'icons/chime.png',
 				keyItem: true,
 				incentive: true,
@@ -150,21 +174,25 @@ var itemMix = {
 			}
 			items.cube = {
 				id: 12,
-				name: "Cube",
+				name: "cube",
+				label: "Cube",
 				img: 'icons/cube.png',
 				keyItem: true,
 				incentive: true,
 				tracked: false,
+				display: true,
 			}
 			items.adamant = {
 				id: 13,
-				name: "Adamant",
+				name: "adamant",
+				label: "Adamant",
 				img: 'icons/adamant.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.xcalbur = {
 				id: 13.1,
+				name: "xcalbur",
 				label: "Excal",
 				img: 'icons/xcalbur.png',
 				keyItem: false,
@@ -190,6 +218,10 @@ var itemMix = {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleNPCItems) { return vm.locations.king.accessible }
 					return true;
 				}(),
+				tracked: function() {
+					if (vm.flags.freeBridge) { return true }
+					else { return vm.itemData.bridge.tracked }
+				}(),
 			}
 			items.lute = {
 				linked: function() {
@@ -197,12 +229,14 @@ var itemMix = {
 					else { return false }
 				}(),
 				incentive: function() {
-					if (!vm.flags.shortTemple) { return true }
-					else { return false }
+					return !vm.flags.shortTemple
 				}(),
 				accessible: function() {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleNPCItems) { return vm.locations.sara.accessible }
-					return true;
+					return true
+				}(),
+				locked: function() {
+					return vm.flags.shortTemple
 				}(),
 			}
 			items.ship = {
@@ -223,7 +257,7 @@ var itemMix = {
 				linked: function() {
 					if (vm.flags.shuffleTreasures) { return 'marshLocked' }
 					else { return false }
-				},
+				}(),
 				incentive: function() {
 					if (!vm.flags.shuffleFetchItems || vm.flags.incentiveFetchItems) { return true }
 					else { return false }
@@ -234,7 +268,20 @@ var itemMix = {
 				}(),
 				accessible: function() {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.marshLocked.accessible }
-					else { return true; }
+					else { return true }
+				}(),
+				consumable: function() {
+					if (vm.flags.shuffleFetchItems) { return true }
+					else { return false }
+				}(),
+				usable: function() {
+					if (vm.flags.entranceShuffle) { return true }
+					else { return vm.mapAccess.elfland } 
+				}(),
+				display: function() {
+					if (vm.flags.shuffleFetchItems) { return true }
+					if (vm.itemData.crystal.tracked) { return false }
+					else { return true }
 				}(),
 			}
 			items.crystal = {
@@ -256,7 +303,20 @@ var itemMix = {
 				}(),
 				accessible: function() {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.locations.astos.accessible }
-					else { return true; }
+					else { return true }
+				}(),
+				consumable: function() {
+					if (vm.flags.shuffleFetchItems) { return true }
+					else { return false }
+				}(),
+				usable: function() {
+					if (vm.flags.entranceShuffle) { return true }
+					else { return vm.mapAccess.pravoka } 
+				}(),
+				display: function() {
+					if (vm.flags.shuffleFetchItems) { return true }
+					if (!vm.itemData.crystal.tracked || vm.itemData.herb.tracked) { return false }
+					else { return true }
 				}(),
 			}
 			items.herb = {
@@ -280,6 +340,19 @@ var itemMix = {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.locations.matoya.accessible }
 					else { return true; }
 				}(),
+				consumable: function() {
+					if (vm.flags.shuffleFetchItems) { return true }
+					else { return false }
+				}(),
+				usable: function() {
+					if (vm.flags.entranceShuffle) { return true }
+					else { return vm.mapAccess.elfland } 
+				}(),
+				display: function() {
+					if (vm.flags.shuffleFetchItems) { return true }
+					if (!vm.itemData.herb.tracked || vm.itemData.key.tracked) { return false }
+					else { return true }
+				}(),
 			}
 			items.key = {
 				linked: function() {
@@ -292,7 +365,11 @@ var itemMix = {
 				}(),
 				accessible: function() {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.locations.prince.accessible }
-					else { return true; }
+					else { return true }
+				}(),
+				display: function() {
+					if (vm.flags.shuffleFetchItems || vm.itemData.key.tracked) { return true }
+					else { return false }
 				}(),
 			}
 			items.tnt = {
@@ -311,7 +388,19 @@ var itemMix = {
 				}(),
 				accessible: function() {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.coneriaLocked.accessible }
-					else { return true; }
+					else { return true }
+				}(),
+				consumable: function() {
+					if (vm.flags.shuffleFetchItems) { return true }
+					else { return false }
+				}(),
+				usable: function() {
+					if (vm.flags.entranceShuffle) { return true }
+					else { return vm.mapAccess.dwarves } 
+				}(),
+				display: function() {
+					if (vm.flags.shuffleFetchItems || !vm.itemData.canal.tracked) { return true }
+					else { return false }
 				}(),
 			}
 			items.canal = {
@@ -328,13 +417,18 @@ var itemMix = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.locations.coneriaLocked.accessible }
-					else { return true; }
+					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.mapAccess.dwarves }
+					else { return true }
+				}(),
+				display: function() {
+					if (vm.flags.shuffleFetchItems || vm.itemData.canal.tracked) { return true }
+					else { return false }
 				}(),
 			}
 			items.ruby = {
 				img: function() {
-					return 'icons/titan.png'
+					if (!vm.itemData.ruby.used) { return 'icons/ruby.png' }
+					else { return 'icons/titan.png' }
 				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'earth' }
@@ -346,8 +440,12 @@ var itemMix = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.locations.earth.accessible }
+					if (!vm.flags.shuffleTreasures) { return vm.locations.earth.accessible }
 					else { return true; }
+				}(),
+				usable: function() {
+					if (vm.flags.entranceShuffle) { return true }
+					else { return vm.mapAccess.melmond } 
 				}(),
 			}
 			items.rod = {
@@ -387,6 +485,10 @@ var itemMix = {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.iceCave.accessible }
 					else { return true; }
 				}(),
+				display: function() {
+					if (vm.flags.freeAirship || !vm.itemData.airship.tracked) { return true }
+					else { return false }
+				}(),
 			}
 			items.airship = {
 				prev: function() {
@@ -396,28 +498,41 @@ var itemMix = {
 				accessible: function() {
 					return true;
 				}(),
+				locked: function() {
+					return vm.flags.freeAirship
+				}(),
+				display: function() {
+					if (vm.flags.freeAirship || vm.itemData.airship.tracked) { return true }
+					else { return false }
+				}(),
 			}
 			items.tail = {
 				img: function() {
-					return 'icons/tail.png'
-					// 'icons/class.png',
+					if (!vm.itemData.tail.used) { return 'icons/tail.png' }
+					else { return 'icons/class.png' }
 				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'ordeals' }
 					else { return false }
 				}(),
 				accessible: function() {
-					if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.ordeals.accessible }
-					else { return true; }
+					if (!vm.itemData.tail.tracked) { 
+						if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.ordeals.accessible }
+						else { return true; }
+					}
+					else {
+						if (!vm.flags.entranceShuffle) { return vm.itemData.airship.tracked }
+						else { return true }
+					}
 				}(),
 			}
 			items.bottle = {
 				img: function() {
-					return 'icons/bottle.png'
-					// 'icons/class.png',
+					if (!vm.itemData.bottle.used) { return 'icons/bottle.png' }
+					else { return 'icons/bottle-empty.png' }
 				}(),
 				linked: function() {
-					if (!vm.flags.shuffleFetch) { return 'shopItem' }
+					if (!vm.flags.shuffleNPCItems) { return 'shopItem' }
 					else { return false }
 				}(),
 				incentive: function() {
@@ -432,6 +547,11 @@ var itemMix = {
 					if (!vm.flags.shuffleShops && !vm.flags.shuffleNPCItems) { return vm.locations.shopItem.accessible }
 					else { return true }
 				}(),
+				usable: true,
+				display: function() {
+					if (vm.flags.shuffleFetchItems || !vm.itemData.oxyale.tracked) { return true }
+					else { return false }
+				}(),
 			}
 			items.oxyale = {
 				prev: function() {
@@ -439,13 +559,18 @@ var itemMix = {
 					else { return false }
 				}(),
 				accessible: function() {
-					return true;
+					if (vm.flags.entranceShuffle || vm.flags.townShuffle) { return true }
+					else { return vm.itemData.airship.tracked }
+				}(),
+				display: function() {
+					if (vm.flags.shuffleFetchItems || vm.itemData.oxyale.tracked) { return true }
+					else { return false }
 				}(),
 			}
 			items.slab = {
 				img: function() {
-					return 'icons/slab.png'
-					// 'icons/slab-unne.png',
+					if (!vm.itemData.slab.used) { return 'icons/slab.png' }
+					else { return 'icons/slab-unne.png' }
 				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'shrine' }
@@ -460,12 +585,28 @@ var itemMix = {
 					else { return false }
 				}(),
 				accessible: function() {
-					return true;
+					if (!vm.itemData.slab.tracked) {
+						if (vm.flags.shuffleTreasures) { return true }
+						if (!vm.itemData.oxyale.tracked) { return false }
+						else { return vm.mapAccess.onrac }
+					}
+					else {
+						if (vm.flags.townShuffle) { return true }
+						else { return vm.mapAccess.melmond }
+					}
+				}(),
+				usable: function() {
+					if (vm.flags.entranceShuffle || vm.flags.townShuffle) { return true }
+					else { return vm.mapAccess.melmond }
+				}(),
+				display: function() {
+					if (vm.flags.shuffleFetchItems || !vm.itemData.chime.tracked) { return true }
+					else { return false }
 				}(),
 			}
 			items.chime = {
 				linked: function() {
-					if (!vm.flags.shuffleTreasures) { return 'lefein' }
+					if (!vm.flags.shuffleFetchItems) { return 'lefein' }
 					else { return false }
 				}(),
 				prev: function() {
@@ -473,7 +614,13 @@ var itemMix = {
 					else { return false }
 				}(),
 				accessible: function() {
-					return true;
+					if (!vm.itemData.slab.used) { return false }
+					if (vm.flags.entranceShuffle || vm.flags.townShuffle) { return true }
+					else { return vm.itemData.airship.tracked }
+				}(),
+				display: function() {
+					if (vm.flags.shuffleFetchItems || vm.itemData.chime.tracked) { return true }
+					else { return false }
 				}(),
 			}
 			items.cube = {
@@ -482,7 +629,8 @@ var itemMix = {
 					else { return false }
 				}(),
 				accessible: function() {
-					return true;
+					if (vm.flags.entranceShuffle || vm.flags.shuffleNPCItems) { return true }
+					else { return vm.locations.waterfall.accessible }
 				}(),
 			}
 			items.adamant = {
@@ -495,7 +643,21 @@ var itemMix = {
 					else { return false }
 				}(),
 				accessible: function() {
-					return true;
+					if (vm.flags.entranceShuffle || vm.flags.shuffleTreasures) { return true }
+					if (!vm.itemData.chime.tracked) { return false }
+					else { return vm.mapAccess.mirage }
+				}(),
+				consumable: function() {
+					if (vm.flags.shuffleFetchItems) { return true }
+					else { return false; }
+				}(),
+				usable: function() {
+					if (vm.flags.entranceShuffle) { return true }
+					else { return vm.mapAccess.dwarves }
+				}(),
+				display: function() {
+					if (vm.flags.shuffleFetchItems || !vm.itemData.xcalbur.tracked) { return true }
+					else { return false }
 				}(),
 			}
 			items.xcalbur = {
@@ -508,15 +670,19 @@ var itemMix = {
 					else { return false }
 				}(),
 				accessible: function() {
-					return true;
+					if (vm.flags.shuffleFetchItems) { return true }
+					else { return vm.mapAccess.dwarves }
+				}(),
+				display: function() {
+					if (vm.flags.shuffleFetchItems || vm.itemData.xcalbur.tracked) { return true }
+					else { return false }
 				}(),
 			}
-			
-			for (i = 0; i > Object.keys(this.itemData); i++) {
-				var name = Object.keys(this.itemData)[i]
-				Object.assign(this.items[name], this.itemdata[name])
+			for (i = 0; i < Object.keys(vm.itemData).length; i++) {
+				var name = Object.keys(vm.itemData)[i]
+				items[name] = Object.assign({}, vm.itemData[name], items[name])
 			}
-			return items; 
-		}
-    }
+			return items
+		},
+	}
 }
