@@ -28,7 +28,10 @@ Vue.component('GameStateInfo', {
 				else { return 'key items' }
 			}()
 			return `${this.keyItemCount} ${keyText}`
-		},
+        },
+        expDisplay: function () {
+            var vm = this;
+        }
 	},
 	template: `
 	<div id="orbTracker">

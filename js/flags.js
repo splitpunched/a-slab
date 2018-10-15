@@ -174,11 +174,11 @@ var flagInfo = {
 				{
 					0: { name: 'progressiveScale', type: 'progScale' }
 				},
-			  // DUNGEON_ENCOUNTER_RATE = 22;
+			    // DUNGEON_ENCOUNTER_RATE = 25;
 				{ 
 					0: { name: 'dungeonEncounterRate', 'multiplier': 1, type: 'int' }
 				},
-			  // BOSS_SCALE_FACTOR = 26
+			    // BOSS_SCALE_FACTOR = 26
 				{ 
 					0: { name: 'bossScaleFactor', 'multiplier': 0.1, type: 'int' }
 				},
@@ -195,16 +195,29 @@ var flagInfo = {
 				var flagGroup = Object.keys(this.flagRules[i]).sort(function(a, b) { return b - a });
 				for (j = 0; j < flagGroup.length; j++) {
 					var bit = flagGroup[j], flag = this.flagRules[i][bit]
-					if (flag.type == 'bool') { 
-						if (bit > count) { flags[flag.name] = false }
-						else { 
-							count = (count - bit)
-							flags[flag.name] = true
-							}
-						}
-					else if (flag.type == 'int') {
-						flags[flag.name] = (count * flag.multiplier)
-					}
+                    if (flag.type == 'bool') {
+                        if (bit > count) { flags[flag.name] = false }
+                        else {
+                            count = (count - bit)
+                            flags[flag.name] = true
+                        }
+                    }
+                    else if (flag.type == 'int') {
+                        flags[flag.name] = (count * flag.multiplier)
+                    }
+                    else if (flag.type == 'progScale') {
+                        var arr = [
+                            false,
+                            { 'type': 'total', 'bonus': 1.5, 'count': 12 },
+                            { 'type': 'total', 'bonus': 1.5, 'count': 15 },
+                            { 'type': 'total', 'bonus': 2.0, 'count': 12 },
+                            { 'type': 'total', 'bonus': 2.0, 'count': 15 },
+                            { 'type': 'progressive', 'bonus': 0.05 },
+                            { 'type': 'progressive', 'bonus': 0.10 },
+                            { 'type': 'progressive', 'bonus': 0.20 }
+                            ]
+                        flags[flag.name] = arr[count]
+                    }
 				}
 			}
 			return flags;
