@@ -14,7 +14,7 @@ var itemList = function() {
 
 var locationList = function() {
   var arr = [];
-  var displayLocations = [ 'king', 'sara', 'bikke', 'astos', 'matoya', 'prince', 'marsh', 'marshLocked', 'nerrick', 'smith', 'sarda', 'sage', 'shopItem', 'waterfall', 'lefein' ]
+  var displayLocations = [ 'king', 'sara', 'bikke', 'astos', 'matoya', 'prince', 'nerrick', 'smith', 'sarda', 'sage', 'iceCave', 'ordeals', 'shopItem', 'waterfall', 'lefein' ]
   for (i = 0; i < displayLocations.length; i++) {
     arr.push(locations[displayLocations[i]])
   }
