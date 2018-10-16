@@ -30,7 +30,15 @@ Vue.component('GameStateInfo', {
 			return `${this.keyItemCount} ${keyText}`
         },
         expDisplay: function () {
-            var vm = this;
+            var vm = this, scale = vm.flags.progressiveScale, multiplier = vm.flags.expMultipler, flat = vm.flags.expBonus
+            if (scale.type == 'progressive') {
+                multiplier = (vm.flags.expMultiplier * (1 + (this.keyItemCount * scale.bonus)))
+                flat = (vm.flags.expBonus * (1 + (this.keyItemCount * scale.bonus)))
+            } else if (scale.type == 'total') {
+                // it's not progressive
+            }
+            if (flat == 0) { return `${multiplier.toFixed(2)}x` }
+            else { return `${multiplier.toFixed(3)}x + ${flat}` }
         }
 	},
 	template: `
@@ -39,6 +47,7 @@ Vue.component('GameStateInfo', {
 			<Orb class="item" v-for="orb in orbs"  :orb="orb" :key="orb.name" />
 		</div>
 		<div id="scaleArea">
+            {{expDisplay}}<br>
 			{{keyItemDisplay}}
 		</div>
 	</div>

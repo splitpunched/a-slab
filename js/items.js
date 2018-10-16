@@ -128,7 +128,6 @@ var itemInfo = {
 				id: 9,
 				name: "tail",
 				label: "Tail",
-				//img: 'icons/tail.png',
 				consumable: true,
 				keyItem: true,
 				tracked: false,
@@ -157,7 +156,6 @@ var itemInfo = {
 				id: 11,
 				name: "slab",
 				label: "Slab",
-				//img: 'icons/slab.png',
 				consumable: true,
 				keyItem: true,
 				tracked: false,
@@ -202,6 +200,9 @@ var itemInfo = {
 			return items
 		}(),
 	}},
+    methods: {
+
+    },
 	computed: {
 		items: function() {
 			var vm = this, items = {}
@@ -215,8 +216,8 @@ var itemInfo = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (!vm.flags.entranceShuffle && !vm.flags.shuffleNPCItems) { return vm.locations.king.accessible }
-					return true;
+                    if (!vm.flags.entranceShuffle && !vm.flags.shuffleNPCItems) { return vm.locations.king.accessible }
+                    else { return true }
 				}(),
 				tracked: function() {
 					if (vm.flags.freeBridge) { return true }
