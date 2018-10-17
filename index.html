@@ -1,11 +1,10 @@
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="js/orbs.js"></script>
-    <script src="js/items.js"></script>
-    <script src="js/locations.js"></script>
-    <script src="js/trackStuff.js"></script>
-    <script src="js/flags.js"></script>
-    <script src="js/init.js"></script>
+	<script src="js/items.js"></script>
+	<script src="js/locations.js"></script>
+	<script src="js/orbs.js"></script>
+	<script src="js/flags.js"></script>
+	<script src="js/logic.js"></script>
     <script src="vue/parts.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
@@ -18,29 +17,18 @@
 </body>
 
 <script>
-initialize(flags)
-
 var vm = new Vue({ 
 	el: '#vue-app',
+	mixins: [logicInfo, itemInfo, locationInfo, orbInfo, flagInfo],
 	data: {
-		orbs: orbs,
-		items: items,
-		locations: locations,
-		tracker: tracker,
-		itemList: itemList,
-		locationList: locationList,
-		flags: flags,
+		flagset: "HACfH0hFYAAAHJ!fPASoYAeAFeS",
+		flagtext: "HACfH0hFYAAAHJ!fPASoYAeAFeS",
 	},
 	template: `
-        <div id="app" class="panel">
-            <Info-Section :orbs="orbs" :flags="flags" :tracker="tracker" :items="items" />
-            <div class="divider" />
-            <Key-Item-Section :items="items" :flags="flags" :tracker="tracker" :itemList="itemList" />
-            <div class="divider" />
-            <Location-Section :locations="locations" :flags="flags" :tracker="tracker" :locationList="locationList" />
-        </div>
+	<div>
+		<Tracker :orbs="orbs" :flags="flags" :items="items" :locations="locations"/>
+		<Options :flagtext="flagtext" />
+	</div>
 	`,
-	computed: {
-	},
 })
 </script>

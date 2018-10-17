@@ -1,156 +1,131 @@
-var itemInfo = {
+var itemMix = {
 	data: function() { return {
 		itemData: function() {
 			var items = {}
 			items.bridge = {
 				id: 0,
-				name: "bridge",
-				label: "Bridge",
+				name: "Bridge",
 				img: 'icons/bridge.png',
 				keyItem: true,
 				incentive: false,
 				tracked: false,
-				display: true,
 			}
 			items.lute = {
 				id: 1,
-				name: "lute",
-				label: "Lute",
+				name: "Lute",
 				img: 'icons/lute.png',
 				keyItem: true,
 				tracked: false,
-				display: true,
 			}
 			items.ship = {
 				id: 2,
-				name: "ship",
-				label: "Ship",
+				name: "Ship",
 				img: 'icons/ship.png',
 				keyItem: true,
 				tracked: false,
-				display: true,
 			}
 			items.crown = {
 				id: 3,
-				name: "crown",
-				label: "Crown",
+				name: "Crown",
 				img: 'icons/crown.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.crystal = {
 				id: 3.1,
-				name: "crystal",
-				label: "Crystal",
+				name: "Crystal",
 				img: 'icons/crystal.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.herb = {
 				id: 3.2,
-				name: "herb",
-				label: "Herb",
+				name: "Herb",
 				img: 'icons/herb.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.key = {
 				id: 3.3,
-				name: "key",
-				label: "Key",
+				name: "Key",
 				img: 'icons/key.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.tnt = {
 				id: 4,
-				name: "tnt",
-				label: "TNT",
+				name: "TNT",
 				img: 'icons/tnt.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.canal = {
 				id: 4.1,
-				name: "canal",
-				label: "Canal",
+				name: "Canal",
 				img: 'icons/canal.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.ruby = {
 				id: 5,
-				name: "ruby",
-				label: "Ruby",
+				name: "Ruby",
+				img: 'icons/ruby.png',
 				keyItem: true,
 				consumable: true,
 				tracked: false,
 				used: false,
-				display: true,
 			},
 			items.rod = {
 				id: 6,
-				name: "rod",
-				label: "Rod",
+				name: "Rod",
 				img: 'icons/rod.png',
 				keyItem: true,
 				incentive: true,
 				tracked: false,
-				display: true,
 			}
 			items.canoe = {
 				id: 7,
-				name: "canoe",
-				label: "Canoe",
+				name: "Canoe",
 				img: 'icons/canoe.png',
 				keyItem: true,
 				incentive: true,
 				tracked: false,
-				display: true,
 			}
 			items.floater = {
 				id: 8,
-				name: "floater",
-				label: "Floater",
+				name: "Floater",
 				img: 'icons/floater.png',
 				keyItem: true,
 				tracked: false,
 			},
 			items.airship = {
 				id: 8.1,
-				name: "airship",
-				label: "Airship",
+				name: "Airship",
 				img: 'icons/airship.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.tail = {
 				id: 9,
-				name: "tail",
-				label: "Tail",
+				name: "Tail",
+				//img: 'icons/tail.png',
 				consumable: true,
 				keyItem: true,
 				tracked: false,
 				used: false,
-				display: true,
-				img: 'icons/tail.png',
-				usedImg: 'icons/class.png',
 			}
 			items.bottle = {
 				id: 10,
-				name: "bottle",
-				label: "Bottle",
+				name: "Bottle",
+				//img: 'icons/bottle.png',
 				consumable: true,
 				keyItem: true,
 				tracked: false,
 				used: false,
-				img: 'icons/bottle.png',
-				usedImg: 'icons/bottle-empty.png',
 			}
 			items.oxyale = {
 				id: 10.1,
-				name: "oxyale",
-				label: "Oxyale",
+				name: "Oxyale",
 				img: 'icons/oxyale.png',
 				keyItem: true,
 				incentive: true,
@@ -158,19 +133,16 @@ var itemInfo = {
 			}
 			items.slab = {
 				id: 11,
-				name: "slab",
-				label: "Slab",
+				name: "Slab",
+				//img: 'icons/slab.png',
 				consumable: true,
 				keyItem: true,
 				tracked: false,
 				used: false,
-				img: 'icons/slab.png',
-				usedImg: 'icons/slab-unne.png',
 			}
 			items.chime = {
 				id: 11.1,
-				name: "chime",
-				label: "Chime",
+				name: "Chime",
 				img: 'icons/chime.png',
 				keyItem: true,
 				incentive: true,
@@ -178,25 +150,21 @@ var itemInfo = {
 			}
 			items.cube = {
 				id: 12,
-				name: "cube",
-				label: "Cube",
+				name: "Cube",
 				img: 'icons/cube.png',
 				keyItem: true,
 				incentive: true,
 				tracked: false,
-				display: true,
 			}
 			items.adamant = {
 				id: 13,
-				name: "adamant",
-				label: "Adamant",
+				name: "Adamant",
 				img: 'icons/adamant.png',
 				keyItem: true,
 				tracked: false,
 			}
 			items.xcalbur = {
 				id: 13.1,
-				name: "xcalbur",
 				label: "Excal",
 				img: 'icons/xcalbur.png',
 				keyItem: false,
@@ -206,61 +174,59 @@ var itemInfo = {
 			return items
 		}(),
 	}},
-    methods: {
-		accessible_npcFreeItems: function(npc) {
-			if (npc == 'bikke' && this.flags.townShuffle) { return true }
-			if ((npc == 'king' || npc == 'sara') && this.flags.entranceShuffle) { return true }
-			if (!this.flags.shuffleNPCItems) { return this.locations[npc].accessible }
-			else { return true }
-		},
-		linked_npcFreeItems: function(npc) {
-			if (!this.flags.shuffleNPCItems) { return npc }
-			else { return false }
-		},
-		linked_shuffleTreasures: function(chest) {
-			if (!this.flags.shuffleTreasures) { return chest }
-			else { return false }
-		},
-    },
 	computed: {
 		items: function() {
 			var vm = this, items = {}
 			items.bridge = {
-				linked: function() { return vm.linked_npcFreeItems('king') }(),
-				locked: function() { return vm.flags.freeBridge }(),
-				accessible: function() { return vm.accessible_npcFreeItems('king') }(),
-				tracked: function() {
+				linked: function() {
+					if (!vm.flags.shuffleNPCItems) { return 'king' }
+					else { return false }
+				}(),
+				locked: function() {
 					if (vm.flags.freeBridge) { return true }
-					else { return vm.itemData.bridge.tracked }
+					else { return false }
+				}(),
+				accessible: function() {
+					if (!vm.flags.entranceShuffle && !vm.flags.shuffleNPCItems) { return vm.locations.king.accessible }
+					return true;
 				}(),
 			}
 			items.lute = {
-				linked: function() { 
-					return vm.linked_npcFreeItems('sara') 
+				linked: function() {
+					if (!vm.flags.shuffleNPCItems) { return 'sara' }
+					else { return false }
 				}(),
-				// Lute is always incentivized, unless the short temple flag is on,
-				// In which case
-				incentive: function() { return !vm.flags.shortTemple }(),
-				accessible: function() { return vm.accessible_npcFreeItems('sara') }(),
-				locked: function() { return vm.flags.shortTemple }(),
-				tracked: function() {
-					if (vm.flags.shortTemple) { return true }
-					else { return vm.itemData.lute.tracked }
+				incentive: function() {
+					if (!vm.flags.shortTemple) { return true }
+					else { return false }
+				}(),
+				accessible: function() {
+					if (!vm.flags.entranceShuffle && !vm.flags.shuffleNPCItems) { return vm.locations.sara.accessible }
+					return true;
 				}(),
 			}
 			items.ship = {
-				linked: function() { return vm.linked_npcFreeItems('bikke') }(),
-				incentive: function() {
-					if (!vm.flags.mapOpenProgression) { return true }
-					else { return vm.flags.incentiveFetchItems }
+				linked: function() {
+					if (!vm.flags.shuffleNPCItems) { return 'bikke' }
+					else { return false }
 				}(),
-				accessible: function() { return vm.accessible_npcFreeItems('bikke') }(),
+				incentive: function() {
+					if (!vm.flags.mapOpenProgression || vm.flags.incentiveFetchItems) { return true }
+					else { return false }
+				}(),
+				accessible: function() {
+					if (!vm.flags.townShuffle && !vm.flags.shuffleNPCItems) { return vm.locations.bikke.accessible }
+					else { return true }
+				}(),
 			}
 			items.crown = {
-				linked: function() { return vm.linked_shuffleTreasures('marshLocked') }(),
+				linked: function() {
+					if (vm.flags.shuffleTreasures) { return 'marshLocked' }
+					else { return false }
+				},
 				incentive: function() {
-					if (!vm.flags.shuffleFetchItems) { return true }
-					else { return vm.flags.incentiveFetchItems }
+					if (!vm.flags.shuffleFetchItems || vm.flags.incentiveFetchItems) { return true }
+					else { return false }
 				}(),
 				next: function() {
 					if (!vm.flags.shuffleFetchItems) { return 'crystal' }
@@ -268,20 +234,7 @@ var itemInfo = {
 				}(),
 				accessible: function() {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.marshLocked.accessible }
-					else { return true }
-				}(),
-				consumable: function() {
-					if (vm.flags.shuffleFetchItems) { return true }
-					else { return false }
-				}(),
-				usable: function() {
-					if (vm.flags.entranceShuffle) { return true }
-					else { return vm.mapAccess.elfland } 
-				}(),
-				display: function() {
-					if (vm.flags.shuffleFetchItems) { return true }
-					if (vm.itemData.crystal.tracked) { return false }
-					else { return true }
+					else { return true; }
 				}(),
 			}
 			items.crystal = {
@@ -303,20 +256,7 @@ var itemInfo = {
 				}(),
 				accessible: function() {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.locations.astos.accessible }
-					else { return true }
-				}(),
-				consumable: function() {
-					if (vm.flags.shuffleFetchItems) { return true }
-					else { return false }
-				}(),
-				usable: function() {
-					if (vm.flags.entranceShuffle) { return true }
-					else { return vm.mapAccess.pravoka } 
-				}(),
-				display: function() {
-					if (vm.flags.shuffleFetchItems) { return true }
-					if (!vm.itemData.crystal.tracked || vm.itemData.herb.tracked) { return false }
-					else { return true }
+					else { return true; }
 				}(),
 			}
 			items.herb = {
@@ -340,19 +280,6 @@ var itemInfo = {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.locations.matoya.accessible }
 					else { return true; }
 				}(),
-				consumable: function() {
-					if (vm.flags.shuffleFetchItems) { return true }
-					else { return false }
-				}(),
-				usable: function() {
-					if (vm.flags.entranceShuffle) { return true }
-					else { return vm.mapAccess.elfland } 
-				}(),
-				display: function() {
-					if (vm.flags.shuffleFetchItems) { return true }
-					if (!vm.itemData.herb.tracked || vm.itemData.key.tracked) { return false }
-					else { return true }
-				}(),
 			}
 			items.key = {
 				linked: function() {
@@ -365,11 +292,7 @@ var itemInfo = {
 				}(),
 				accessible: function() {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.locations.prince.accessible }
-					else { return true }
-				}(),
-				display: function() {
-					if (vm.flags.shuffleFetchItems || vm.itemData.key.tracked) { return true }
-					else { return false }
+					else { return true; }
 				}(),
 			}
 			items.tnt = {
@@ -388,19 +311,7 @@ var itemInfo = {
 				}(),
 				accessible: function() {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.coneriaLocked.accessible }
-					else { return true }
-				}(),
-				consumable: function() {
-					if (vm.flags.shuffleFetchItems) { return true }
-					else { return false }
-				}(),
-				usable: function() {
-					if (vm.flags.entranceShuffle) { return true }
-					else { return vm.mapAccess.dwarves } 
-				}(),
-				display: function() {
-					if (vm.flags.shuffleFetchItems || !vm.itemData.canal.tracked) { return true }
-					else { return false }
+					else { return true; }
 				}(),
 			}
 			items.canal = {
@@ -417,18 +328,13 @@ var itemInfo = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.mapAccess.dwarves }
-					else { return true }
-				}(),
-				display: function() {
-					if (vm.flags.shuffleFetchItems || vm.itemData.canal.tracked) { return true }
-					else { return false }
+					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.locations.coneriaLocked.accessible }
+					else { return true; }
 				}(),
 			}
 			items.ruby = {
 				img: function() {
-					if (!vm.itemData.ruby.used) { return 'icons/ruby.png' }
-					else { return 'icons/titan.png' }
+					return 'icons/titan.png'
 				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'earth' }
@@ -440,12 +346,8 @@ var itemInfo = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (!vm.flags.shuffleTreasures) { return vm.locations.earth.accessible }
+					if (!vm.flags.entranceShuffle && !vm.flags.shuffleFetchItems) { return vm.locations.earth.accessible }
 					else { return true; }
-				}(),
-				usable: function() {
-					if (vm.flags.entranceShuffle) { return true }
-					else { return vm.mapAccess.melmond } 
 				}(),
 			}
 			items.rod = {
@@ -485,10 +387,6 @@ var itemInfo = {
 					if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.iceCave.accessible }
 					else { return true; }
 				}(),
-				display: function() {
-					if (vm.flags.freeAirship || !vm.itemData.airship.tracked) { return true }
-					else { return false }
-				}(),
 			}
 			items.airship = {
 				prev: function() {
@@ -498,33 +396,28 @@ var itemInfo = {
 				accessible: function() {
 					return true;
 				}(),
-				locked: function() {
-					return vm.flags.freeAirship
-				}(),
-				display: function() {
-					if (vm.flags.freeAirship || vm.itemData.airship.tracked) { return true }
-					else { return false }
-				}(),
 			}
 			items.tail = {
+				img: function() {
+					return 'icons/tail.png'
+					// 'icons/class.png',
+				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'ordeals' }
 					else { return false }
 				}(),
 				accessible: function() {
-					if (!vm.itemData.tail.tracked) { 
-						if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.ordeals.accessible }
-						else { return true; }
-					}
-					else {
-						if (!vm.flags.entranceShuffle) { return vm.itemData.airship.tracked }
-						else { return true }
-					}
+					if (!vm.flags.entranceShuffle && !vm.flags.shuffleTreasures) { return vm.locations.ordeals.accessible }
+					else { return true; }
 				}(),
 			}
 			items.bottle = {
+				img: function() {
+					return 'icons/bottle.png'
+					// 'icons/class.png',
+				}(),
 				linked: function() {
-					if (!vm.flags.shuffleNPCItems) { return 'shopItem' }
+					if (!vm.flags.shuffleFetch) { return 'shopItem' }
 					else { return false }
 				}(),
 				incentive: function() {
@@ -539,11 +432,6 @@ var itemInfo = {
 					if (!vm.flags.shuffleShops && !vm.flags.shuffleNPCItems) { return vm.locations.shopItem.accessible }
 					else { return true }
 				}(),
-				usable: true,
-				display: function() {
-					if (vm.flags.shuffleFetchItems || !vm.itemData.oxyale.tracked) { return true }
-					else { return false }
-				}(),
 			}
 			items.oxyale = {
 				prev: function() {
@@ -551,15 +439,14 @@ var itemInfo = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (vm.flags.townShuffle || vm.flags.shuffleFetchItems) { return true }
-					else { return vm.itemData.airship.tracked }
-				}(),
-				display: function() {
-					if (vm.flags.shuffleFetchItems || vm.itemData.oxyale.tracked) { return true }
-					else { return false }
+					return true;
 				}(),
 			}
 			items.slab = {
+				img: function() {
+					return 'icons/slab.png'
+					// 'icons/slab-unne.png',
+				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'shrine' }
 					else { return false }
@@ -573,28 +460,12 @@ var itemInfo = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (!vm.itemData.slab.tracked) {
-						if (vm.flags.shuffleTreasures) { return true }
-						if (!vm.itemData.oxyale.tracked) { return false }
-						else { return vm.mapAccess.onrac }
-					}
-					else {
-						if (vm.flags.townShuffle) { return true }
-						else { return vm.mapAccess.melmond }
-					}
-				}(),
-				usable: function() {
-					if (vm.flags.entranceShuffle || vm.flags.townShuffle) { return true }
-					else { return vm.mapAccess.melmond }
-				}(),
-				display: function() {
-					if (vm.flags.shuffleFetchItems || !vm.itemData.chime.tracked) { return true }
-					else { return false }
+					return true;
 				}(),
 			}
 			items.chime = {
 				linked: function() {
-					if (!vm.flags.shuffleFetchItems) { return 'lefein' }
+					if (!vm.flags.shuffleTreasures) { return 'lefein' }
 					else { return false }
 				}(),
 				prev: function() {
@@ -602,14 +473,7 @@ var itemInfo = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (vm.flags.shuffleFetchItems) { return true }
-					if (!vm.itemData.slab.used) { return false }
-					if (vm.flags.townShuffle) { return true }
-					else { return vm.itemData.airship.tracked }
-				}(),
-				display: function() {
-					if (vm.flags.shuffleFetchItems || vm.itemData.chime.tracked) { return true }
-					else { return false }
+					return true;
 				}(),
 			}
 			items.cube = {
@@ -618,8 +482,7 @@ var itemInfo = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (vm.flags.entranceShuffle || vm.flags.shuffleNPCItems) { return true }
-					else { return vm.locations.waterfall.accessible }
+					return true;
 				}(),
 			}
 			items.adamant = {
@@ -632,21 +495,7 @@ var itemInfo = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (vm.flags.entranceShuffle || vm.flags.shuffleTreasures) { return true }
-					if (!vm.itemData.chime.tracked) { return false }
-					else { return vm.mapAccess.mirage }
-				}(),
-				consumable: function() {
-					if (vm.flags.shuffleFetchItems) { return true }
-					else { return false; }
-				}(),
-				usable: function() {
-					if (vm.flags.entranceShuffle) { return true }
-					else { return vm.mapAccess.dwarves }
-				}(),
-				display: function() {
-					if (vm.flags.shuffleFetchItems || !vm.itemData.xcalbur.tracked) { return true }
-					else { return false }
+					return true;
 				}(),
 			}
 			items.xcalbur = {
@@ -659,19 +508,15 @@ var itemInfo = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (vm.flags.shuffleFetchItems) { return true }
-					else { return vm.mapAccess.dwarves }
-				}(),
-				display: function() {
-					if (vm.flags.shuffleFetchItems || vm.itemData.xcalbur.tracked) { return true }
-					else { return false }
+					return true;
 				}(),
 			}
-			for (i = 0; i < Object.keys(vm.itemData).length; i++) {
-				var name = Object.keys(vm.itemData)[i]
-				items[name] = Object.assign({}, vm.itemData[name], items[name])
+			
+			for (i = 0; i > Object.keys(this.itemData); i++) {
+				var name = Object.keys(this.itemData)[i]
+				Object.assign(this.items[name], this.itemdata[name])
 			}
-			return items
-		},
-	}
+			return items; 
+		}
+    }
 }
