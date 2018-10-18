@@ -65,8 +65,8 @@ var flagInfo = {
 				{
 					1: { name: 'incentiveFreeNPCs', type: 'bool' },
 					2: { name: 'incentiveFetchNPCs', type: 'bool' },
-					4: { name: 'incentiveTail', type: 'bool' },
-					8: { name: 'incentiveFetchItems', type: 'bool' },
+					4: { name: 'incentiveTail', type: 'bool', },
+					8: { name: 'incentiveFetchItems', type: 'bool', },
 				},
 				// INCENTIVES_CHESTS1 = 8;
 				{
@@ -187,37 +187,41 @@ var flagInfo = {
 		}(),
 	}},
 	computed: {
-		flags: function() { 
-			var flags = {}, encoded = this.flagset
+		flags: function() {
+			var flags = {}, encoded = this.flagset, vm = this
+			flags.incentives = {}
+			flags.incentives.items = {}
 			for (i = 0; i < this.flagRules.length; i++) {
-				var flagChar = encoded.charAt(i)
-				var count = this.base64String.indexOf(flagChar)
+				var count = this.base64String.indexOf(encoded.charAt(i))
 				var flagGroup = Object.keys(this.flagRules[i]).sort(function(a, b) { return b - a });
 				for (j = 0; j < flagGroup.length; j++) {
 					var bit = flagGroup[j], flag = this.flagRules[i][bit]
-                    if (flag.type == 'bool') {
-                        if (bit > count) { flags[flag.name] = false }
-                        else {
-                            count = (count - bit)
-                            flags[flag.name] = true
-                        }
-                    }
-                    else if (flag.type == 'int') {
-                        flags[flag.name] = (count * flag.multiplier)
-                    }
-                    else if (flag.type == 'progScale') {
-                        var arr = [
-                            false,
-                            { 'type': 'total', 'bonus': 1.5, 'count': 12 },
-                            { 'type': 'total', 'bonus': 1.5, 'count': 15 },
-                            { 'type': 'total', 'bonus': 2.0, 'count': 12 },
-                            { 'type': 'total', 'bonus': 2.0, 'count': 15 },
-                            { 'type': 'progressive', 'bonus': 0.05 },
-                            { 'type': 'progressive', 'bonus': 0.10 },
-                            { 'type': 'progressive', 'bonus': 0.20 }
+					// There has to be a nicer way to do this.
+					var flagTypes = {
+						'bool': function() {
+							var value = (bit <= count)
+							flags[flag.name] = value
+							if (flags[flag.name] == true) { count = (count - bit) }
+						},
+						'int': function() {
+							flags[flag.name] = (count * flag.multiplier)
+						},
+						'progScale': function() {
+							var arr = [
+								false,
+								{ 'type': 'total', 'bonus': 1.5, 'count': 12 },
+								{ 'type': 'total', 'bonus': 1.5, 'count': 15 },
+								{ 'type': 'total', 'bonus': 2.0, 'count': 12 },
+								{ 'type': 'total', 'bonus': 2.0, 'count': 15 },
+								{ 'type': 'progressive', 'bonus': 0.05 },
+								{ 'type': 'progressive', 'bonus': 0.10 },
+								{ 'type': 'progressive', 'bonus': 0.20 }
                             ]
-                        flags[flag.name] = arr[count]
-                    }
+							flags[flag.name] = arr[count]
+						},
+					}
+					// blughhhh
+					if (flagTypes[flag.type]) { flagTypes[flag.type]() }
 				}
 			}
 			return flags;

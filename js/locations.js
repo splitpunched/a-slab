@@ -407,6 +407,9 @@ var locationInfo = {
 					if (!vm.flags.shuffleShops) { return vm.mapAccess.onrac }
 					else { return true }
 				}(),
+				incentive: function() {
+					return vm.flags.incentiveFreeNPCs
+				}(),
 			}
 			locations.shrine = {
 				accessible: function() {
