@@ -133,6 +133,8 @@ var itemInfo = {
 				tracked: false,
 				used: false,
 				display: true,
+				img: 'icons/tail.png',
+				usedImg: 'icons/class.png',
 			}
 			items.bottle = {
 				id: 10,
@@ -142,6 +144,8 @@ var itemInfo = {
 				keyItem: true,
 				tracked: false,
 				used: false,
+				img: 'icons/bottle.png',
+				usedImg: 'icons/bottle-empty.png',
 			}
 			items.oxyale = {
 				id: 10.1,
@@ -160,6 +164,8 @@ var itemInfo = {
 				keyItem: true,
 				tracked: false,
 				used: false,
+				img: 'icons/slab.png',
+				usedImg: 'icons/slab-unne.png',
 			}
 			items.chime = {
 				id: 11.1,
@@ -201,67 +207,60 @@ var itemInfo = {
 		}(),
 	}},
     methods: {
-
+		accessible_npcFreeItems: function(npc) {
+			if (npc == 'bikke' && this.flags.townShuffle) { return true }
+			if ((npc == 'king' || npc == 'sara') && this.flags.entranceShuffle) { return true }
+			if (!this.flags.shuffleNPCItems) { return this.locations[npc].accessible }
+			else { return true }
+		},
+		linked_npcFreeItems: function(npc) {
+			if (!this.flags.shuffleNPCItems) { return npc }
+			else { return false }
+		},
+		linked_shuffleTreasures: function(chest) {
+			if (!this.flags.shuffleTreasures) { return chest }
+			else { return false }
+		},
     },
 	computed: {
 		items: function() {
 			var vm = this, items = {}
 			items.bridge = {
-				linked: function() {
-					if (!vm.flags.shuffleNPCItems) { return 'king' }
-					else { return false }
-				}(),
-				locked: function() {
-					if (vm.flags.freeBridge) { return true }
-					else { return false }
-				}(),
-				accessible: function() {
-                    if (!vm.flags.entranceShuffle && !vm.flags.shuffleNPCItems) { return vm.locations.king.accessible }
-                    else { return true }
-				}(),
+				linked: function() { return vm.linked_npcFreeItems('king') }(),
+				locked: function() { return vm.flags.freeBridge }(),
+				accessible: function() { return vm.accessible_npcFreeItems('king') }(),
 				tracked: function() {
 					if (vm.flags.freeBridge) { return true }
 					else { return vm.itemData.bridge.tracked }
 				}(),
 			}
 			items.lute = {
-				linked: function() {
-					if (!vm.flags.shuffleNPCItems) { return 'sara' }
-					else { return false }
+				linked: function() { 
+					return vm.linked_npcFreeItems('sara') 
 				}(),
-				incentive: function() {
-					return !vm.flags.shortTemple
-				}(),
-				accessible: function() {
-					if (!vm.flags.entranceShuffle && !vm.flags.shuffleNPCItems) { return vm.locations.sara.accessible }
-					return true
-				}(),
-				locked: function() {
-					return vm.flags.shortTemple
+				// Lute is always incentivized, unless the short temple flag is on,
+				// In which case
+				incentive: function() { return !vm.flags.shortTemple }(),
+				accessible: function() { return vm.accessible_npcFreeItems('sara') }(),
+				locked: function() { return vm.flags.shortTemple }(),
+				tracked: function() {
+					if (vm.flags.shortTemple) { return true }
+					else { return vm.itemData.lute.tracked }
 				}(),
 			}
 			items.ship = {
-				linked: function() {
-					if (!vm.flags.shuffleNPCItems) { return 'bikke' }
-					else { return false }
-				}(),
+				linked: function() { return vm.linked_npcFreeItems('bikke') }(),
 				incentive: function() {
-					if (!vm.flags.mapOpenProgression || vm.flags.incentiveFetchItems) { return true }
-					else { return false }
+					if (!vm.flags.mapOpenProgression) { return true }
+					else { return vm.flags.incentiveFetchItems }
 				}(),
-				accessible: function() {
-					if (!vm.flags.townShuffle && !vm.flags.shuffleNPCItems) { return vm.locations.bikke.accessible }
-					else { return true }
-				}(),
+				accessible: function() { return vm.accessible_npcFreeItems('bikke') }(),
 			}
 			items.crown = {
-				linked: function() {
-					if (vm.flags.shuffleTreasures) { return 'marshLocked' }
-					else { return false }
-				}(),
+				linked: function() { return vm.linked_shuffleTreasures('marshLocked') }(),
 				incentive: function() {
-					if (!vm.flags.shuffleFetchItems || vm.flags.incentiveFetchItems) { return true }
-					else { return false }
+					if (!vm.flags.shuffleFetchItems) { return true }
+					else { return vm.flags.incentiveFetchItems }
 				}(),
 				next: function() {
 					if (!vm.flags.shuffleFetchItems) { return 'crystal' }
@@ -508,10 +507,6 @@ var itemInfo = {
 				}(),
 			}
 			items.tail = {
-				img: function() {
-					if (!vm.itemData.tail.used) { return 'icons/tail.png' }
-					else { return 'icons/class.png' }
-				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'ordeals' }
 					else { return false }
@@ -528,10 +523,6 @@ var itemInfo = {
 				}(),
 			}
 			items.bottle = {
-				img: function() {
-					if (!vm.itemData.bottle.used) { return 'icons/bottle.png' }
-					else { return 'icons/bottle-empty.png' }
-				}(),
 				linked: function() {
 					if (!vm.flags.shuffleNPCItems) { return 'shopItem' }
 					else { return false }
@@ -560,7 +551,7 @@ var itemInfo = {
 					else { return false }
 				}(),
 				accessible: function() {
-					if (vm.flags.entranceShuffle || vm.flags.townShuffle) { return true }
+					if (vm.flags.townShuffle || vm.flags.shuffleFetchItems) { return true }
 					else { return vm.itemData.airship.tracked }
 				}(),
 				display: function() {
@@ -569,10 +560,6 @@ var itemInfo = {
 				}(),
 			}
 			items.slab = {
-				img: function() {
-					if (!vm.itemData.slab.used) { return 'icons/slab.png' }
-					else { return 'icons/slab-unne.png' }
-				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'shrine' }
 					else { return false }
@@ -615,8 +602,9 @@ var itemInfo = {
 					else { return false }
 				}(),
 				accessible: function() {
+					if (vm.flags.shuffleFetchItems) { return true }
 					if (!vm.itemData.slab.used) { return false }
-					if (vm.flags.entranceShuffle || vm.flags.townShuffle) { return true }
+					if (vm.flags.townShuffle) { return true }
 					else { return vm.itemData.airship.tracked }
 				}(),
 				display: function() {

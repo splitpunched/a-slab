@@ -1,9 +1,23 @@
 Vue.component('Tracker', {
 	props: [ 'orbs', 'items', 'locations', 'flags' ],
+	computed: {
+		incentives: function() {
+			var incentives = {}
+			incentives.items = Object.keys(vm.items).filter(function(item) {
+				return (vm.items[item].incentive == true && vm.items[item].linked == false)
+			})
+			incentives.locations = Object.keys(vm.locations).filter(function(loc) {
+				return vm.locations[loc].incentive == true
+			})
+			return incentives
+		},
+	},
 	template: `
 	<div id="tracker-app" class="panel">
 		<GameStateInfo :orbs="orbs" :flags="flags" :items="items" :locations="locations" />
+		<div class="divider" />
 		<ItemInfo :items="items" :flags="flags" />
+		<div class="divider" />
 		<LocationInfo :locations="locations" :flags="flags" />
 	</div>
 	`,
@@ -34,12 +48,28 @@ Vue.component('GameStateInfo', {
             if (scale.type == 'progressive') {
                 multiplier = (vm.flags.expMultiplier * (1 + (this.keyItemCount * scale.bonus)))
                 flat = (vm.flags.expBonus * (1 + (this.keyItemCount * scale.bonus)))
-            } else if (scale.type == 'total') {
-                // it's not progressive
+            } else if (scale.type == 'total') { // it's not progressive, just count items
+				if (this.keyItemCount >= scale.count) {
+					multiplier = (vm.flags.expMultiplier * scale.bonus)
+					flat = (vm.flags.expBonus * scale.bonus)
+				}
             }
             if (flat == 0) { return `${multiplier.toFixed(2)}x` }
-            else { return `${multiplier.toFixed(3)}x + ${flat}` }
+            else { return `${multiplier.toFixed(2)}x + ${flat}` }
         }
+	},
+	methods: {
+		trackOrb: function(orb) {
+			console.log(orb)
+			this.$root.orbData[orb.name].tracked = true
+		},
+		detrackOrb: function(orb) {
+			this.$root.orbData[orb.name].tracked = false
+		},
+	},
+	mounted: function() {
+		this.$root.$on('track-orb', this.trackOrb);
+		this.$root.$on('detrack-orb', this.detrackOrb);
 	},
 	template: `
 	<div id="orbTracker">
@@ -47,8 +77,8 @@ Vue.component('GameStateInfo', {
 			<Orb class="item" v-for="orb in orbs"  :orb="orb" :key="orb.name" />
 		</div>
 		<div id="scaleArea">
-            {{expDisplay}}<br>
-			{{keyItemDisplay}}
+			<div class="subscale"><a>{{expDisplay}}</a></div>
+			<div class="subscale"><a>{{keyItemDisplay}}</a></div>
 		</div>
 	</div>
 	`,
@@ -56,8 +86,20 @@ Vue.component('GameStateInfo', {
 
 Vue.component('Orb', {
 	props: [ 'orb' ],
+	methods: {
+		lightOrb: function() {
+			var self = this.orb
+			if (!self.accessible || self.tracked) { return }
+			else { this.$root.$emit('track-orb', self) }
+		},
+		dimOrb: function() {
+			var self = this.orb
+			if (!self.tracked) { return }
+			else { this.$root.$emit('detrack-orb', self) }
+		},
+	},
 	template: `
-	<div class="noselect" @click="" @contextmenu.prevent="">
+	<div class="noselect" @click="lightOrb" @contextmenu.prevent="dimOrb">
 		<div class="iconContainer">
 			<img class="icon" :src="orb.img" :class="{ dim: !this.orb.tracked, dark: !this.orb.accessible }">
 		</div>
@@ -126,7 +168,12 @@ Vue.component('Item', {
 		noAccess: function() {
 			if (!this.item.tracked && !this.item.accessible) { return true }
 			else { return false }
-		}
+		},
+		image: function() {
+			var self = this.item
+			if (self.used && self.usedImg) { return self.usedImg }
+			else { return self.img }
+		},
 	},
 	methods: {
 		triggerItem: function() {
@@ -183,7 +230,7 @@ Vue.component('Item', {
 	template: `
 	<div class="noselect" @click="triggerItem" @contextmenu.prevent="cancelItem">
 		<div class="iconContainer">
-			<img class="icon" :src="item.img" :class="{ dim: !this.haveItem, dark: noAccess }">
+			<img class="icon" :src="image" :class="{ dim: !this.haveItem, dark: noAccess }">
 			<div class="iconOverlay">
 				<img class="overlay" src="icons/status/arrow.png" v-if="canGetNext">
 				<img class="overlay" src="icons/status/flagLocked.png" v-if="item.locked">
@@ -291,102 +338,32 @@ Vue.component('Location', {
 	}
 })
 
-// Info section
-// Contains information for scaling and orb count
-/*
-Vue.component('Info-Section', {
-	props: [ 'orbs', 'tracker', 'items', 'locations' ],
-	template: `			
-	<div id="orbTracker">
-		<div id="orb-area">
-			<Orb class="item" v-for="orb in orbs"  :orb="orb" :key="orb.name" :status="tracker.orbs[orb.name]" />
-		</div>
-		<div id="scaleArea">
-		</div>
-	</div>
-	`,
-})
-
-Vue.component('Orb', {
-	props: [ 'orb', 'status' ],
-	template: `
-	<div class="noselect" @click="" @contextmenu.prevent="">
-		<div class="iconContainer">
-			<img class="icon" :src="orb.img" :class="{ dim: !this.status.tracked }">
-		</div>
-		<div class="itemLabel">
-			{{orb.label}}
-		</div>
-	</div>
-	`,
-})
-
-
-Vue.component('Key-Item-Section', {
-	props: [ 'items', 'itemDisplay', 'tracker' ],
-	template: `
-	<div id="itemTracker">
-		<Item class="item" v-for="item in itemList" :item="item" :key="item.name" :status="tracker.items[item.name]" />
-	</div>
-	`,
-  computed: {
-		itemList: function() { 
-			var arr = [];
-			for (i = 0; i < this.itemDisplay.length; i++) {
-				arr.push(this.items[this.itemDisplay[i]])
-			}
-			return arr;
-		},
-	},
-})
-
-Vue.component('Item', {
-	props: [ 'item', 'status' ],
-	template: `
-	<div class="noselect" @click="" @contextmenu.prevent="">
-		<div class="iconContainer">
-			<img class="icon" :src="item.img" :class="{ dim: !this.status.tracked }">
-		</div>
-		<div class="itemLabel">
-			{{item.label}}
-		</div>
-	</div>
-	`,
-})
-
-Vue.component('Location-Section', {
-    props: [ 'locations', 'locationDisplay', 'tracker' ],
-    template: `
-    <div id="locationTracker">
-        <Location class="item" v-for="place in locationList" :place="place" :key="place.name" :status="tracker.locations[place.name]" />
-    </div>
-    `,
-	computed: {
-		locationList: function() { 
-			var arr = [];
-			for (i = 0; i < this.locationDisplay.length; i++) {
-				arr.push(this.locations[this.locationDisplay[i]])
-			}
-			return arr;
-		},
-	},
-})
-
-Vue.component('Location', {
-	props: [ 'place', 'status' ],
-	template: `
-	<div class="noselect" @click="" @contextmenu.prevent="">
-		<div class="iconContainer">
-			<img class="icon" :src="place.img" :class="{ dim: !this.status.tracked }">
-		</div>
-		<div class="itemLabel">
-			{{place.label}}
-		</div>
-	</div>
-	`,
+Vue.component('Options', {
+	props: [ 'flagtext' ],
 	methods: {
+		resetFlags: function() {
+			var vm = this.$root
+			if (this.flagtext.length !== 27) { return }
+			vm.flagset = this.flagtext
+			for (i = 0; i < Object.keys(vm.itemData).length; i++) {
+				var item = Object.keys(vm.itemData)[i]
+				vm.itemData[item].tracked = false
+				vm.itemData[item].used = false
+			}
+			for (i = 0; i < Object.keys(vm.locationData).length; i++) {
+				var place = Object.keys(vm.locationData)[i]
+				vm.locationData[place].tracked = false
+			}
+			for (i = 0; i < Object.keys(vm.orbData).length; i++) {
+				var orb = Object.keys(vm.orbData)[i]
+				vm.orbData[orb].tracked = false
+			}
+		},
 	},
-	computed: {
-	}
+	template: `
+	<div id="options">
+		<input type="text" v-model="flagtext">
+		<button type="button" v-on:click="resetFlags">Reset</button>
+	</div>
+	`
 })
-*/

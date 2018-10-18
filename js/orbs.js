@@ -4,24 +4,28 @@ var orbInfo = {
 			var orbs = {}
 			orbs.earth = { 
 				id: 0, 
+				name: "earth",
 				label: "Earth", 
 				img: 'icons/earthOrb.png', 
 				tracked: false,
 			}
 			orbs.fire = { 
 				id: 1, 
+				name: "fire",
 				label: "Fire", 
 				img: 'icons/fireOrb.png', 
 				tracked: false,
 			}
 			orbs.water = { 
 				id: 2, 
+				name: "water",
 				label: "Water", 
 				img: 'icons/waterOrb.png', 
 				tracked: false,
 			}
 			orbs.air = { 
 				id: 3, 
+				name: "air",
 				label: "Air", 
 				img: 'icons/airOrb.png', 
 				tracked: false,

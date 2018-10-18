@@ -13,11 +13,11 @@ body {
 	display: flex;
 }
 
-#options select, #options button {
+#options input, #options button {
 	margin: 1px;
 }
 
-#options select {
+#options input {
 	flex: 1 1 auto;
 }
 
@@ -39,14 +39,21 @@ body {
 #scaleArea {
 	width: 260px;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: flex-start;
-	align-items: center;
+	align-items: flex-start;
 	flex-wrap: wrap;
 	flex: 1 1 auto;
 	font-family: 'Press Start 2P', cursive;
 	color: white;
 	text-shadow: 2px 2px #000000, 1px 1px #000000;
+}
+
+.subscale {
+	display: flex;
+	flex: 1 1 auto;
+	align-items: center;
+	justify-content: center;
 }
 
 #scaling {
