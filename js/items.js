@@ -174,7 +174,8 @@ var itemInfo = {
 				tracked: false,
 				used: false,
 				img: 'icons/slab.png',
-				usedImg: 'icons/slab-unne.png',
+                usedImg: 'icons/slab-unne.png',
+                target: 'unne',
 			}
 			items.chime = {
 				id: 11.1,

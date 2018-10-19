@@ -7,6 +7,7 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 
 ### Added
 - The Fairy NPC actually exists (thank you MoistMogwai!)
+- Dr. Unne actually exists (thank you leggystarscream!)
 
 ### Fixed
 - Floater actually checks logic to make sure you can use it.

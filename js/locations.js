@@ -96,7 +96,14 @@ var locationInfo = {
 				img: 'icons/vampire.png',
 				tracked: false,
 				type: 'chest',
-			}
+            }
+            locations.unne = {
+                id: 13,
+                name: "unne",
+                label: "Unne",
+                img: 'icons/unne.png',
+                tracked: false,
+            }
 			locations.sarda = {
 				id: 14,
 				name: "sarda",
@@ -340,7 +347,19 @@ var locationInfo = {
 					if (vm.flags.incentiveEarth || !vm.flags.shuffleTreasures) { return true }
 					else { return false }
 				}(),
-			}
+            }
+            locations.unne = {
+                accessible: function () {
+                    if (vm.flags.entranceShuffle) { return true }
+                    return vm.mapAccess.melmond
+                }(),
+                incentive: function () {
+                    return false
+                }(),
+                display: function () {
+                    return true
+                }(),
+            }
 			locations.sarda = {
 				accessible: function() {
 					if (!vm.flags.earlySarda && !vm.locationData.earth.tracked) { return false }
