@@ -174,7 +174,8 @@ var itemInfo = {
 				tracked: false,
 				used: false,
 				img: 'icons/slab.png',
-				usedImg: 'icons/slab-unne.png',
+                usedImg: 'icons/slab-unne.png',
+                target: 'unne',
 			}
 			items.chime = {
 				id: 11.1,
@@ -214,12 +215,28 @@ var itemInfo = {
 				incentive: false,
 				tracked: false,
             }
-            items.ribbon = {
+            items.masmune = {
                 id: 14,
+                name: "masmune",
+                label: "M.Mune",
+                img: 'icons/masmune.png',
+                keyItem: false,
+                tracked: false,
+            }
+            items.ribbon = {
+                id: 15,
                 name: "ribbon",
                 label: "Ribbon",
                 img: 'icons/ribbon.png',
                 multiple: true,
+                keyItem: false,
+                tracked: false,
+            }
+            items.opalBracelet = {
+                id: 14,
+                name: "opalBracelet",
+                label: "Opal B.",
+                img: 'icons/opalBracelet.png',
                 keyItem: false,
                 tracked: false,
             }
@@ -704,6 +721,32 @@ var itemInfo = {
                 }(),
                 display: function () {
                     return (vm.flags.incentiveRibbon || vm.flags.incentiveRibbon2)
+                }(),
+            }
+            items.masmune = {
+                linked: function () {
+                    if (!vm.flags.shuffleTreasures) { return false } // I mean technically I guess I could add that one chest in TOFR but fuck you, seriously
+                    else { return false }
+                }(),
+                accessible: function () {
+                    if (!vm.flags.shuffleTreasures) { return true } // This should be go mode permissions
+                    else { return true }
+                }(),
+                display: function () {
+                    return vm.flags.incentiveMasamune
+                }(),
+            }
+            items.opalBracelet = {
+                linked: function () {
+                    if (!vm.flags.shuffleTreasures) { return false } // shit I don't know
+                    else { return false }
+                }(),
+                accessible: function () {
+                    if (!vm.flags.shuffleTreasures) { return true } // shit idk
+                    else { return true }
+                }(),
+                display: function () {
+                    return vm.flags.incentiveOpalBracelet
                 }(),
             }
 			for (i = 0; i < Object.keys(vm.itemData).length; i++) {

@@ -3,10 +3,19 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 
 # Changelog
 
+## Unreleased
+
+### Added
+- White Shirt, Power Gauntlet, Defense Sword, Thor Hammer
+- Shard Hunt mode should actually work eventually...
+- Incentive chest counter!
+
 ## [0.2.3] - 10/19/2018
 
 ### Added
 - The Fairy NPC actually exists (thank you MoistMogwai!)
+- Dr. Unne actually exists (thank you leggystarscream!)
+- Masmune is a trackable item.
 
 ### Fixed
 - Floater actually checks logic to make sure you can use it.
