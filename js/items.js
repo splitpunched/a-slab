@@ -517,7 +517,7 @@ var itemInfo = {
 				}(),
                 accessible: function () {
                     if (vm.flags.extendedMapProgression) { return ((vm.itemData.ship.tracked && vm.itemData.canal.tracked) || vm.itemData.canoe.tracked) }
-                    if (vm.flags.mapOPenProgression) { return vm.itemData.canoe.tracked }
+                    else if (vm.flags.mapOpenProgression) { return vm.itemData.canoe.tracked }
                     else { return (vm.itemData.ship.tracked && vm.itemData.canal.tracked && vm.itemData.canoe.tracked) }
                 }(),
 				locked: function() {
