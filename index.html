@@ -21,13 +21,12 @@ var vm = new Vue({
 	el: '#vue-app',
 	mixins: [logicInfo, itemInfo, locationInfo, orbInfo, flagInfo],
 	data: {
-		flagset: "HACfH0hFYAAAHJ!fPASoYAeAFeS",
-		flagtext: "HACfH0hFYAAAHJ!fPASoYAeAFeS",
+        flagset: "HACPHUBNmEEAHJ!fPAOUZKYBFeU",
 	},
 	template: `
 	<div>
 		<Tracker :orbs="orbs" :flags="flags" :items="items" :locations="locations"/>
-		<Options :flagtext="flagtext" />
+		<Options />
 	</div>
 	`,
 })

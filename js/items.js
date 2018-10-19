@@ -202,7 +202,16 @@ var itemInfo = {
 				keyItem: false,
 				incentive: false,
 				tracked: false,
-			}
+            }
+            items.ribbon = {
+                id: 14,
+                name: "ribbon",
+                label: "Ribbon",
+                img: 'icons/ribbon.png',
+                multiple: true,
+                keyItem: false,
+                tracked: false,
+            }
 			return items
 		}(),
 	}},
@@ -666,7 +675,20 @@ var itemInfo = {
 					if (vm.flags.shuffleFetchItems || vm.itemData.xcalbur.tracked) { return true }
 					else { return false }
 				}(),
-			}
+            }
+            items.ribbon = {
+                linked: function () {
+                    if (!vm.flags.shuffleTreasures) { return false } // No it's not but holy shit am I too lazy to check where the original three are
+                    else { return false }
+                }(),
+                accessible: function () {
+                    if (!vm.flags.shuffleTreasures) { return true } // No it's not but holy shit am I too lazy to check where the original three are
+                    else { return true }
+                }(),
+                display: function () {
+                    return (vm.flags.incentiveRibbon || vm.flags.incentiveRibbon2)
+                }(),
+            }
 			for (i = 0; i < Object.keys(vm.itemData).length; i++) {
 				var name = Object.keys(vm.itemData)[i]
 				items[name] = Object.assign({}, vm.itemData[name], items[name])

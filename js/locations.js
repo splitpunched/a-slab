@@ -453,7 +453,12 @@ var locationInfo = {
 			locations.sky = {
 				incentive: function() {
 					return vm.flags.incentiveSkyPalace
-				}(),
+                }(),
+                accessible: function () {
+                    if (vm.flags.floorShuffle) { return true }
+                    if (!vm.itemData.chime || !vm.itemData.cube) { return false }
+                    else { return vm.itemData.airship.tracked }
+                }(),
 				display: function() {
 					if (vm.flags.incentiveSkyPalace || !vm.flags.shuffleTreasures) { return true }
 					else { return false }

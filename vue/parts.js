@@ -32,7 +32,7 @@ Vue.component('GameStateInfo', {
 		keyItemCount: function() {
 			var vm = this;
 			return Object.keys(this.items).filter(function(item) {
-				return (vm.items[item].tracked || vm.items[item].locked)
+				return ((vm.items[item].tracked || vm.items[item].locked) && vm.items[item].keyItem)
 			}).length
 		},
 		keyItemDisplay: function() {
@@ -55,7 +55,7 @@ Vue.component('GameStateInfo', {
 				}
             }
             if (flat == 0) { return `${multiplier.toFixed(2)}x` }
-            else { return `${multiplier.toFixed(2)}x + ${flat}` }
+            else { return `${multiplier.toFixed(2)}x + ${Math.round(flat)}` }
         }
 	},
 	methods: {
@@ -77,7 +77,7 @@ Vue.component('GameStateInfo', {
 			<Orb class="item" v-for="orb in orbs"  :orb="orb" :key="orb.name" />
 		</div>
 		<div id="scaleArea">
-			<div class="subscale"><a>{{expDisplay}}</a></div>
+			<div class="subscale"><a style="word-spacing: -6pt">{{expDisplay}}</a></div>
 			<div class="subscale"><a>{{keyItemDisplay}}</a></div>
 		</div>
 	</div>
@@ -339,7 +339,14 @@ Vue.component('Location', {
 })
 
 Vue.component('Options', {
-	props: [ 'flagtext' ],
+    data: function () {
+        return {
+            flagtext: "",
+        }
+    },
+    mounted: function () {
+        this.flagtext = this.$root.flagset
+    },
 	methods: {
 		resetFlags: function() {
 			var vm = this.$root
