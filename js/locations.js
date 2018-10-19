@@ -52,7 +52,7 @@ var locationInfo = {
 				name: "astos",
 				label: "Astos",
 				img: 'icons/astos.png',
-				tracked: false,
+                tracked: false,
 			}
 			locations.matoya = {
 				id: 7,
@@ -140,30 +140,37 @@ var locationInfo = {
 				img: 'icons/shop.png',
 				display: true,
 				tracked: false,
-			}
+            }
+            locations.fairy = {
+                id: 20,
+                name: "fairy",
+                label: "Fairy",
+                img: 'icons/fairy.png',
+                tracked: false,
+            }
 			locations.shrine = {
-				id: 20,
+				id: 21,
 				name: "shrine",
 				label: "Shrine",
 				img: 'icons/mermaid.png',
 				tracked: false,
 			}
 			locations.waterfall = {
-				id: 21,
+				id: 22,
 				name: "waterfall",
 				label: "Robot",
 				img: 'icons/robot.png',
 				tracked: false,
 			}
 			locations.lefein = {
-				id: 22,
+				id: 23,
 				name: "lefein",
 				label: "Lefein",
 				img: 'icons/lupa.png',
 				tracked: false,
 			}
 			locations.sky = {
-				id: 23,
+				id: 24,
 				name: "sky",
 				label: "Sky",
 				img: 'icons/sky.png',
@@ -410,7 +417,21 @@ var locationInfo = {
 				incentive: function() {
 					return vm.flags.incentiveFreeNPCs
 				}(),
-			}
+            }
+            locations.fairy = {
+                incentive: function () {
+                    return vm.flags.incentiveFetchNPCs
+                }(),
+                accessible: function () {
+                    if (!vm.itemData.bottle.used) { return false }
+                    if (vm.flags.townShuffle) { return true }
+                    else { return vm.itemData.airship.tracked }
+                }(),
+                display: function () {
+                    if (vm.flags.incentiveFetchNPCs || !vm.flags.shuffleNPCFetchItems) { return true }
+                    else { return false }
+                }(),
+            }
 			locations.shrine = {
 				accessible: function() {
 					if (!vm.flags.entranceShuffle && !vm.itemData.oxyale.tracked) { return false }
@@ -442,7 +463,8 @@ var locationInfo = {
 					return vm.flags.incentiveFetchNPCs
 				}(),
 				accessible: function() {
-					if (!vm.itemData.slab.used) { return false }
+                    if (!vm.itemData.slab.used) { return false }
+                    if (vm.flags.townShuffle) { return true }
 					else { return vm.itemData.airship.tracked }
 				}(),
 				display: function() {

@@ -36,7 +36,9 @@ var itemInfo = {
 				label: "Crown",
 				img: 'icons/crown.png',
 				keyItem: true,
-				tracked: false,
+                tracked: false,
+                used: false,
+                target: 'astos',
 			}
 			items.crystal = {
 				id: 3.1,
@@ -44,7 +46,9 @@ var itemInfo = {
 				label: "Crystal",
 				img: 'icons/crystal.png',
 				keyItem: true,
-				tracked: false,
+                tracked: false,
+                used: false,
+                target: 'matoya',
 			}
 			items.herb = {
 				id: 3.2,
@@ -52,7 +56,9 @@ var itemInfo = {
 				label: "Herb",
 				img: 'icons/herb.png',
 				keyItem: true,
-				tracked: false,
+                tracked: false,
+                used: false,
+                target: 'prince',
 			}
 			items.key = {
 				id: 3.3,
@@ -60,7 +66,8 @@ var itemInfo = {
 				label: "Key",
 				img: 'icons/key.png',
 				keyItem: true,
-				tracked: false,
+                tracked: false,
+                used: false,
 			}
 			items.tnt = {
 				id: 4,
@@ -68,7 +75,9 @@ var itemInfo = {
 				label: "TNT",
 				img: 'icons/tnt.png',
 				keyItem: true,
-				tracked: false,
+                tracked: false,
+                used: false,
+                target: 'nerrick',
 			}
 			items.canal = {
 				id: 4.1,
@@ -192,7 +201,9 @@ var itemInfo = {
 				label: "Adamant",
 				img: 'icons/adamant.png',
 				keyItem: true,
-				tracked: false,
+                tracked: false,
+                used: false,
+                target: 'smith',
 			}
 			items.xcalbur = {
 				id: 13.1,
@@ -497,16 +508,18 @@ var itemInfo = {
 				display: function() {
 					if (vm.flags.freeAirship || !vm.itemData.airship.tracked) { return true }
 					else { return false }
-				}(),
+                }(),
 			}
 			items.airship = {
 				prev: function() {
 					if (vm.flags.freeAirship) { return false }
 					else { return 'floater' }
 				}(),
-				accessible: function() {
-					return true;
-				}(),
+                accessible: function () {
+                    if (vm.flags.extendedMapProgression) { return ((vm.itemData.ship.tracked && vm.itemData.canal.tracked) || vm.itemData.canoe.tracked) }
+                    if (vm.flags.mapOPenProgression) { return vm.itemData.canoe.tracked }
+                    else { return (vm.itemData.ship.tracked && vm.itemData.canal.tracked && vm.itemData.canoe.tracked) }
+                }(),
 				locked: function() {
 					return vm.flags.freeAirship
 				}(),
@@ -554,7 +567,11 @@ var itemInfo = {
 					else { return false }
 				}(),
 			}
-			items.oxyale = {
+            items.oxyale = {
+                linked: function () {
+                    if (!vm.flags.shuffleFetchItems) { return 'fairy' }
+                    else { return false }
+                }(),
 				prev: function() {
 					if (!vm.flags.shuffleFetchItems) { return 'bottle' }
 					else { return false }

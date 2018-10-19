@@ -207,7 +207,11 @@ Vue.component('Item', {
 		},
 		triggerItemUse: function() {
 			var self = this.item
-			this.$root.$emit('use-item', self)
+            this.$root.$emit('use-item', self)
+            if (self.target) {
+                var targetLocation = this.$root.locations[self.target]
+                this.$root.$emit('track-location', targetLocation)
+            }
 		},
 		cancelItem: function() {
 			var self = this.item
@@ -215,7 +219,11 @@ Vue.component('Item', {
 				return;
 			}
 			if (self.consumable && self.used) {
-				this.$root.$emit('unuse-item', self)
+                this.$root.$emit('unuse-item', self)
+                if (self.target) {
+                    var targetLocation = this.$root.locations[self.target]
+                    this.$root.$emit('detrack-location', targetLocation)
+                }
 				return
 			}
 			else {
@@ -309,13 +317,17 @@ Vue.component('Location', {
 		cancelLocation: function() {
 			var self = this.location
 			if (!this.linkedItem) { 
-				this.$root.$emit('detrack-location', self)
+                this.$root.$emit('detrack-location', self)
+                if (this.targetedItem) {
+                    var targeted = this.$root.items[this.targetedItem]
+                    this.$root.$emit('unuse-item', targeted)
+                }
 				return
 			}
 			if (!this.noToggle) {
 				var linked = this.$root.items[this.linkedItem]
-				this.$root.$emit('detrack-location', self)
-				this.$root.$emit('detrack-item', linked)
+                this.$root.$emit('detrack-location', self)
+                this.$root.$emit('detrack-item', linked)
 				return
 			}
 		}
@@ -334,7 +346,15 @@ Vue.component('Location', {
 			var linked = this.$root.items[this.linkedItem]
 			if (!this.$root.itemData[linked.next]) { return false }
 			return this.$root.itemData[linked.next].tracked
-		}
+        },
+        targetedItem: function () {
+            var self = this.location, vm = this
+            var arr = Object.keys(this.$root.items).filter(function (item) {
+                return vm.$root.items[item].target == self.name
+            })
+            if (arr.length == 0) { return false }
+            else { return arr[0] }
+        },
 	}
 })
 
