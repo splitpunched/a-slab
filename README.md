@@ -15,11 +15,12 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 ### Added
 - The Fairy NPC actually exists (thank you MoistMogwai!)
 - Dr. Unne actually exists (thank you leggystarscream!)
-- Masmune is a trackable item.
+- Masmune and Opal Bracelet are trackable items.
 
 ### Fixed
 - Floater actually checks logic to make sure you can use it.
 - Floater logic checks itself correctly to take into account map edits (thank you leggystarscream!)
+- You actually need to be able to feed the Titan to feed the Titan.
 
 ## [0.2.2] - 10/19/2018
 ### Added

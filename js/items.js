@@ -476,10 +476,16 @@ var itemInfo = {
 					else if (!vm.flags.earlySage && !vm.flags.shuffleNPCItems) { return true }
 					else { return false }
 				}(),
-				accessible: function() {
-					if (!vm.flags.shuffleTreasures) { return vm.locations.earth.accessible }
-					else { return true; }
-				}(),
+                accessible: function () {
+                    if (!vm.itemData.ruby.tracked) {
+                        if (vm.flags.shuffleTreasures) { return true }
+                        else { return vm.mapAccess.melmond }
+                    }
+                    else {
+                        if (vm.flags.entranceShuffle) { return true }
+                        else { return vm.mapAccess.melmond }
+                    }
+                }(),
 				usable: function() {
 					if (vm.flags.entranceShuffle) { return true }
 					else { return vm.mapAccess.melmond } 
