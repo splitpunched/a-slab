@@ -235,8 +235,40 @@ var itemInfo = {
             items.opalBracelet = {
                 id: 14,
                 name: "opalBracelet",
-                label: "Opal B.",
+                label: "Opal",
                 img: 'icons/opalBracelet.png',
+                keyItem: false,
+                tracked: false,
+            }
+            items.whiteShirt = {
+                id: 15,
+                name: "whiteShirt",
+                label: "White",
+                img: 'icons/whiteShirt.png',
+                keyItem: false,
+                tracked: false,
+            }
+            items.powerGauntlet = {
+                id: 16,
+                name: "powerGauntlet",
+                label: "Power",
+                img: 'icons/powerGauntlet.png',
+                keyItem: false,
+                tracked: false,
+            }
+            items.defense = {
+                id: 17,
+                name: "defense",
+                label: "Defense",
+                img: 'icons/defense.png',
+                keyItem: false,
+                tracked: false,
+            }
+            items.thorHammer = {
+                id: 18,
+                name: "thorHammer",
+                label: "Thor",
+                img: 'icons/Thor.png',
                 keyItem: false,
                 tracked: false,
             }
@@ -712,8 +744,8 @@ var itemInfo = {
 					else { return vm.mapAccess.dwarves }
 				}(),
 				display: function() {
-					if (vm.flags.shuffleFetchItems || vm.itemData.xcalbur.tracked) { return true }
-					else { return false }
+					if (vm.flags.shuffleFetchItems) { return false }
+                    else { return vm.itemData.xcalbur.tracked }
 				}(),
             }
             items.ribbon = {
@@ -753,6 +785,58 @@ var itemInfo = {
                 }(),
                 display: function () {
                     return vm.flags.incentiveOpalBracelet
+                }(),
+            }
+            items.whiteShirt = {
+                linked: function () {
+                    if (!vm.flags.shuffleTreasures) { return false } // I mean technically I guess I could add that one chest in TOFR but fuck you, seriously
+                    else { return false }
+                }(),
+                accessible: function () {
+                    if (!vm.flags.shuffleTreasures) { return true } // This should be go mode permissions
+                    else { return true }
+                }(),
+                display: function () {
+                    return vm.flags.incentiveDefCastArmor
+                }(),
+            }
+            items.powerGauntlet = {
+                linked: function () {
+                    if (!vm.flags.shuffleTreasures) { return false } // I mean technically I guess I could add that one chest in TOFR but fuck you, seriously
+                    else { return false }
+                }(),
+                accessible: function () {
+                    if (!vm.flags.shuffleTreasures) { return true } // This should be go mode permissions
+                    else { return true }
+                }(),
+                display: function () {
+                    return vm.flags.incentiveOtherCastArmor
+                }(),
+            }
+            items.defense = {
+                linked: function () {
+                    if (!vm.flags.shuffleTreasures) { return false } // I mean technically I guess I could add that one chest in TOFR but fuck you, seriously
+                    else { return false }
+                }(),
+                accessible: function () {
+                    if (!vm.flags.shuffleTreasures) { return true } // This should be go mode permissions
+                    else { return true }
+                }(),
+                display: function () {
+                    return vm.flags.incentiveDefCastWeapon
+                }(),
+            }
+            items.thorHammer = {
+                linked: function () {
+                    if (!vm.flags.shuffleTreasures) { return false } // I mean technically I guess I could add that one chest in TOFR but fuck you, seriously
+                    else { return false }
+                }(),
+                accessible: function () {
+                    if (!vm.flags.shuffleTreasures) { return true } // This should be go mode permissions
+                    else { return true }
+                }(),
+                display: function () {
+                    return vm.flags.incentiveOffCastWeapon
                 }(),
             }
 			for (i = 0; i < Object.keys(vm.itemData).length; i++) {

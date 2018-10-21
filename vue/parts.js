@@ -44,7 +44,7 @@ Vue.component('GameStateInfo', {
 			return `${this.keyItemCount} ${keyText}`
         },
         expDisplay: function () {
-            var vm = this, scale = vm.flags.progressiveScale, multiplier = vm.flags.expMultipler, flat = vm.flags.expBonus
+            var vm = this, scale = vm.flags.progressiveScale, multiplier = vm.flags.expMultiplier, flat = vm.flags.expBonus
             if (scale.type == 'progressive') {
                 multiplier = (vm.flags.expMultiplier * (1 + (this.keyItemCount * scale.bonus)))
                 flat = (vm.flags.expBonus * (1 + (this.keyItemCount * scale.bonus)))
@@ -200,7 +200,7 @@ Vue.component('Item', {
 						}
 						return;
 					} else {
-						console.log(`${self.next} can't be accessed yet.`)
+                        return;
 					}
 				}
 			}

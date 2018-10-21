@@ -197,7 +197,7 @@ var locationInfo = {
 			}
 			locations.king = {
 				incentive: function() {
-					return vm.flags.incentiveFreeNPCs
+					return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
 				}(),
 				display: function() {
 					if (vm.flags.incentiveFreeNPCs || !vm.flags.shuffleNPCItems) { return true }
@@ -205,9 +205,9 @@ var locationInfo = {
 				}(),
 			}
 			locations.sara = {
-				incentive: function() {
-					return vm.flags.incentiveFreeNPCs
-				}(),
+                incentive: function () {
+                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                }(),
 				accessible: function() {
 					if (!vm.locationData.garland.tracked) { return false }
 					else { return true }
@@ -218,9 +218,9 @@ var locationInfo = {
 				}(),
 			}
 			locations.bikke = {
-				incentive: function() {
-					return vm.flags.incentiveFreeNPCs
-				}(),
+                incentive: function () {
+                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                }(),
 				accessible: function() {
 					return vm.mapAccess.pravoka
 				}(),
@@ -367,9 +367,9 @@ var locationInfo = {
 					if ((vm.itemData.ship.tracked && vm.itemData.canal.tracked && vm.itemData.ruby.tracked) || vm.itemData.airship.tracked) { return true }
 					else { return false }
 				}(),
-				incentive: function() {
-					return vm.flags.incentiveFreeNPCs
-				}(),
+                incentive: function () {
+                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                }(),
 				display: function() {
 					if (vm.flags.incentiveFreeNPCs || !vm.flags.shuffleNPCItems) { return true }
 					else { return false }
@@ -381,9 +381,9 @@ var locationInfo = {
 					if (vm.flags.entranceShuffle) { return true }
 					return vm.mapAccess.crescent
 				}(),
-				incentive: function() {
-					return vm.flags.incentiveFreeNPCs
-				}(),
+                incentive: function () {
+                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                }(),
 				display: function() {
 					if (vm.flags.incentiveFreeNPCs || !vm.flags.shuffleNPCItems) { return true }
 					else { return false }
@@ -433,9 +433,9 @@ var locationInfo = {
 					if (!vm.flags.shuffleShops) { return vm.mapAccess.onrac }
 					else { return true }
 				}(),
-				incentive: function() {
-					return vm.flags.incentiveFreeNPCs
-				}(),
+                incentive: function () {
+                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                }(),
             }
             locations.fairy = {
                 incentive: function () {
@@ -469,9 +469,9 @@ var locationInfo = {
 					if (!vm.flags.entranceShuffle && !vm.itemData.canoe.tracked) { return false }
 					else { return vm.mapAccess.onrac }
 				}(),
-				incentive: function() {
-					return vm.flags.incentiveFreeNPCs
-				}(),
+                incentive: function () {
+                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                }(),
 				display: function() {
 					if (vm.flags.incentiveFreeNPCs || !vm.flags.shuffleNPCItems) { return true }
 					else { return false }
