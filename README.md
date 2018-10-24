@@ -29,6 +29,8 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 ### Changed
 - Orbs that aren't lit use the generic unlit orb icon, instead of a dimmed version of that orb's icon
 - Much more obvious now when items with no used icon are used (i.e. during fetch quest shuffle)
+- You can actually trigger the airship in extended open progression with just the ship and canal (thanks Demerine!)
+- Dr. Unne can't be triggered if you don't have the slab (thanks Demerine!)
 
 
 ***

@@ -350,6 +350,7 @@ var locationInfo = {
             }
             locations.unne = {
                 accessible: function () {
+					if (!vm.itemData.slab.tracked) { return false }
                     if (vm.flags.entranceShuffle) { return true }
                     return vm.mapAccess.melmond
                 }(),
