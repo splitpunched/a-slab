@@ -27,9 +27,10 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 ### Fixed
 - (?) May or may not work with beta or alpha flags; an attempt will be made
 - You can actually trigger the airship in extended open progression with just the ship and canal (thanks Demerine!)
-- You can't sail into the ice cave no matter how hard you try (thanks Demerine)
+- You can't sail into the ice cave no matter how hard you try (thanks Demerine!)
 - Dr. Unne can't be triggered if you don't have the slab (thanks Demerine!)
 - The tail incentive flag actually does something (thanks Demerine!)
+- Cube is required to get the Air Orb (thanks Demerine!)
 
 ### Changed
 - Orbs that aren't lit use the generic unlit orb icon, instead of a dimmed version of that orb's icon

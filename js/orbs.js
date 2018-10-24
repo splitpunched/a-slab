@@ -59,7 +59,7 @@ var orbInfo = {
 			orbs.air = {
 				accessible: function() {
 					if (vm.flags.entranceShuffle || vm.flags.floorShuffle) { return true }
-					if (!vm.itemData.chime.tracked) { return false }
+					if (!vm.itemData.chime.tracked || !vm.itemData.cube.tracked) { return false }
 					return vm.mapAccess.mirage
 				}()
 			}
