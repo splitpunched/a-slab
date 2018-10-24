@@ -96,8 +96,6 @@ var itemInfo = {
 				tracked: false,
 				used: false,
 				display: true,
-				img: 'icons/ruby.png',
-				usedImg: 'icons/titan.png',
 			},
 			items.rod = {
 				id: 6,
@@ -270,7 +268,7 @@ var itemInfo = {
                 id: 18,
                 name: "thorHammer",
                 label: "Thor",
-                img: 'icons/thorHammer.png',
+                img: 'icons/Thor.png',
                 keyItem: false,
                 tracked: false,
             }
@@ -406,7 +404,7 @@ var itemInfo = {
 				}(),
 				display: function() {
 					if (vm.flags.shuffleFetchItems) { return true }
-					else { return vm.itemData.key.tracked }
+					else { vm.itemData.key.tracked }
 				}(),
 			}
 			items.tnt = {
@@ -416,7 +414,7 @@ var itemInfo = {
 				}(),
 				incentive: function() {
 					if (vm.flags.incentiveFetchItems) { return true }
-					else if (!vm.flags.shuffleFetchItems && !vm.flags.shuffleNPCItems) { return true }
+					else if (!vm.flags.shuffleFetchItems || shuffleNPCItems) { return true }
 					else { return false }
 				}(),
 				next: function() {
@@ -457,6 +455,10 @@ var itemInfo = {
 				display: function() { return vm.display_shuffleFetchOrTracked('canal') }(),
 			}
 			items.ruby = {
+				img: function() {
+					if (!vm.itemData.ruby.used) { return 'icons/ruby.png' }
+					else { return 'icons/titan.png' }
+				}(),
 				linked: function() {
 					if (!vm.flags.shuffleTreasures) { return 'earth' }
 					else { return false }

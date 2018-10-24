@@ -11,14 +11,24 @@ Vue.component('Tracker', {
 			})
 			return incentives
 		},
+		junkCount: function() {
+			if (this.incentives.locations.length - this.incentives.items.length < 0) { return 0 }
+			else { return (this.incentives.locations.length - this.incentives.items.length) }
+		},
+		extraItems: function() {
+			var obj = {}, diff = (this.incentives.items.length - this.incentives.locations.length)
+			obj.min = Math.max(diff, 0)
+			obj.max = Math.max(diff+2, 0)
+			return obj
+		}
 	},
 	template: `
 	<div id="tracker-app" class="panel">
 		<GameStateInfo :orbs="orbs" :flags="flags" :items="items" :locations="locations" />
 		<div class="divider" />
-		<ItemInfo :items="items" :flags="flags" />
+		<ItemInfo :items="items" :flags="flags" :junk="junkCount"/>
 		<div class="divider" />
-		<LocationInfo :locations="locations" :flags="flags" />
+		<LocationInfo :locations="locations" :flags="flags" :extra="extraItems" />
 	</div>
 	`,
 })
@@ -60,7 +70,6 @@ Vue.component('GameStateInfo', {
 	},
 	methods: {
 		trackOrb: function(orb) {
-			console.log(orb)
 			this.$root.orbData[orb.name].tracked = true
 		},
 		detrackOrb: function(orb) {
@@ -98,10 +107,17 @@ Vue.component('Orb', {
 			else { this.$root.$emit('detrack-orb', self) }
 		},
 	},
+	computed: {
+		image: function() {
+			var self = this.orb
+			if (!self.tracked) { return 'icons/orbUnlit.png' }
+			else { return self.img }
+		},
+	},
 	template: `
 	<div class="noselect" @click="lightOrb" @contextmenu.prevent="dimOrb">
 		<div class="iconContainer">
-			<img class="icon" :src="orb.img" :class="{ dim: !this.orb.tracked, dark: !this.orb.accessible }">
+			<img class="icon" :src="image" :class="{ dim: !this.orb.tracked, dark: !this.orb.accessible }">
 		</div>
 		<div class="itemLabel">
 			{{orb.label}}
@@ -111,7 +127,7 @@ Vue.component('Orb', {
 })
 
 Vue.component('ItemInfo', {
-	props: [ 'items', 'flags' ],
+	props: [ 'items', 'flags', 'junk' ],
 	computed: {
 		displayList: function() {
 			var vm = this, arr = []
@@ -147,6 +163,7 @@ Vue.component('ItemInfo', {
 	template: `
 	<div id="itemTracker">
 		<Item class="item" v-for="item in displayList" :item="item" :key="item.name" />
+		<Junk class="item" v-if="junk > 0" :junk="junk"/>
 	</div>
 	`,
 })
@@ -174,6 +191,11 @@ Vue.component('Item', {
 			if (self.used && self.usedImg) { return self.usedImg }
 			else { return self.img }
 		},
+		checkItem: function() {
+			var self = this.item
+			if (self.usedImg) { return false }
+			else { return self.used && !self.canGetNext }
+		}
 	},
 	methods: {
 		triggerItem: function() {
@@ -238,10 +260,11 @@ Vue.component('Item', {
 	template: `
 	<div class="noselect" @click="triggerItem" @contextmenu.prevent="cancelItem">
 		<div class="iconContainer">
-			<img class="icon" :src="image" :class="{ dim: !this.haveItem, dark: noAccess }">
+			<img class="icon" :src="image" :class="{ dim: !this.haveItem, dark: noAccess, check: checkItem }">
 			<div class="iconOverlay">
 				<img class="overlay" src="icons/status/arrow.png" v-if="canGetNext">
 				<img class="overlay" src="icons/status/flagLocked.png" v-if="item.locked">
+				<img class="overlay check" src="icons/status/checked.png" v-if="checkItem">
 			</div>
 		</div>
 		<div class="itemLabel">
@@ -254,10 +277,44 @@ Vue.component('Item', {
 	`,
 })
 
-//
+Vue.component('Junk', {
+	props: [ 'junk' ],
+	data: function() { 
+		return { 
+			count: 0,
+		}
+	},
+	methods: {
+		increment: function() {
+			if (this.count < this.junk) { this.count++ }
+		},
+		decrement: function() {
+			if (this.count > 0) { this.count-- }
+		},
+		resetCount: function() { this.count = 0 }
+		},
+	mounted: function() {
+		this.$root.$on('reset', this.resetCount);
+	},
+	template: `
+	<div class="noselect" @click="increment" @contextmenu.prevent="decrement">
+		<div class="iconContainer">
+			<img class="icon" src="icons/junk.png" :class="{ dim: (this.count == 0), moderate: (this.count < this.junk && this.count > 0) }">
+			<div class="iconOverlay">
+				<div class="overlay" :class="{ required: (this.junk == this.count) }">{{count}}/{{junk}}</div>
+			</div>
+		</div>
+		<div class="itemLabel">
+			<div class="labelContainer">
+				<a>Stuff</a>
+			</div>
+		</div>
+	</div>
+	`,
+})
 
 Vue.component('LocationInfo', {
-	props: [ 'locations', 'flags' ],
+	props: [ 'locations', 'flags', 'extra' ],
 	computed: {
 		displayList: function() {
 			var vm = this, arr = []
@@ -285,6 +342,7 @@ Vue.component('LocationInfo', {
 	template: `
 	<div id="locationTracker">
         <Location class="item" v-for="location in displayList" :location="location" :key="location.name" />
+		<Extra class="item" v-if="extra.max > 0" :extra="extra" />
     </div>
 	`,
 })
@@ -358,6 +416,56 @@ Vue.component('Location', {
 	}
 })
 
+Vue.component('Extra', {
+	props: [ 'extra' ],
+	data: function() { 
+		return { 
+			count: 0,
+		}
+	},
+	computed: {
+		display: function() {
+			if (this.extra.min > 0 && this.count <= this.extra.min) { return this.count + "/" + this.extra.min }
+			if (this.extra.min > 0 && this.count > this.extra.min) { return this.count + "/" + this.extra.max }
+			return this.count
+		},
+		overlayClasses: function() {
+			return {
+				required: (this.count == this.extra.min && this.count < this.extra.max),
+				over: (this.count > this.extra.min && this.count < this.extra.max),
+				maxed: (this.count == this.extra.max),
+			}
+		},
+	},
+	methods: {
+		increment: function() {
+			if (this.count < this.extra.max) { this.count++ }
+		},
+		decrement: function() {
+			if (this.count > 0) { this.count-- }
+		},
+		resetCount: function() { this.count = 0 }
+	},
+	mounted: function() {
+		this.$root.$on('reset', this.resetCount);
+	},
+	template: `
+	<div class="noselect" @click="increment" @contextmenu.prevent="decrement">
+		<div class="iconContainer">
+			<img class="icon" src="icons/extra.png" :class="{ dim: (this.count < this.extra.min), moderate: (this.count < this.extra.min && this.count > 0) }">
+			<div class="iconOverlay">
+				<div class="overlay" :class="overlayClasses">{{display}}</div>
+			</div>
+		</div>
+		<div class="itemLabel">
+			<div class="labelContainer">
+				<a>Extra</a>
+			</div>
+		</div>
+	</div>
+	`,
+})
+
 Vue.component('Options', {
     data: function () {
         return {
@@ -370,7 +478,7 @@ Vue.component('Options', {
 	methods: {
 		resetFlags: function() {
 			var vm = this.$root
-			if (this.flagtext.length !== 27) { return }
+			if (this.flagtext.length < 27) { return }
 			vm.flagset = this.flagtext
 			for (i = 0; i < Object.keys(vm.itemData).length; i++) {
 				var item = Object.keys(vm.itemData)[i]
@@ -385,6 +493,7 @@ Vue.component('Options', {
 				var orb = Object.keys(vm.orbData)[i]
 				vm.orbData[orb].tracked = false
 			}
+			this.$root.$emit('reset')
 		},
 	},
 	template: `

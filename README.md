@@ -1,16 +1,37 @@
 # A SLAB!!
 FFR tracker using Vue.js. It mostly works and is a very serious work in progress. The changelog gets its own thing when... I feel like it.
 
+***
+
 # Changelog
 
 ## Unreleased
-
 ### Added
-- Shard Hunt mode should actually work eventually...
-- Incentive chest counter!
+- Shard Hunt mode support
+
+### Fixed
+- Reset window actually checking to confirm flagset is a possible flagset/sanity checking input
 
 ### Changed
 - Update sprites for crystal, canal, crown, Marsh, Marsh Locked, Coneria
+
+***
+
+## [0.2.5] - 10/24/2018
+
+### Added
+- Incentive chest counter (which can go up to the theoretical maximum, but normally displays minimum loose items)
+- "Junk" item counter (which counts how many incentive locations will have nothing)
+
+### Fixed
+- (?) May or may not work with beta or alpha flags; an attempt will be made
+
+### Changed
+- Orbs that aren't lit use the generic unlit orb icon, instead of a dimmed version of that orb's icon
+- Much more obvious now when items with no used icon are used (i.e. during fetch quest shuffle)
+
+
+***
 
 ## [0.2.4] - 10/20/2018
 ### Added

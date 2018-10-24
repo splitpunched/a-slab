@@ -113,11 +113,43 @@ body {
 	position: absolute;
 }
 
-.overlay {
+img.overlay {
 	position: absolute;
 	bottom: 0px;
 	right: -2px;
 	filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.15)) drop-shadow(-2px 2px 0px rgba(0, 0, 0, 0.15)) drop-shadow(-2px -2px 0px rgba(0, 0, 0, 0.15)) drop-shadow(2px -2px 0px rgba(0, 0, 0, 0.15))
+}
+
+img.overlay.check {
+	bottom: 1px;
+	right: 1px;
+	filter: none;
+}
+
+div.overlay {
+	background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.66), rgba(0, 0, 0, 0.75));
+	text-align: right;
+	width: 100%;
+	position: absolute;
+	bottom: 2px;
+	right: 0px;
+	font-family: 'Press Start 2P', cursive;
+	padding: 1px 1px;
+	font-size: 8px;
+	color: white;
+	text-shadow: 2px 2px #000000, 1px 1px #000000;
+}
+
+div.overlay.required {
+	color: #90e0e8;
+}
+
+div.overlay.over {
+	color: #e8d888;
+}
+
+div.overlay.maxed {
+	color: #f87068;
 }
 
 .itemLabel {
@@ -142,14 +174,24 @@ body {
 	opacity: 0.75;
 }
 
+.icon.check {
+	filter: sepia(100%) brightness(75%);
+	opacity: 1.0;
+}
+
 .strike {
 	position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
 	top: 50%;
-	width: 125%;
+	width: calc(100% + 4px);
 	height: 2px;
 	background-color: white;
+}
+
+.icon.moderate {
+	filter: grayscale(50%) brightness(90%);
+	opacity: 0.90;
 }
 
 .icon.dark {

@@ -197,7 +197,7 @@ var locationInfo = {
 			}
 			locations.king = {
 				incentive: function() {
-					return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+					return (vm.flags.incentiveFreeNPCs && vm.flags.shuffleNPCItems)
 				}(),
 				display: function() {
 					if (vm.flags.incentiveFreeNPCs || !vm.flags.shuffleNPCItems) { return true }
@@ -206,7 +206,7 @@ var locationInfo = {
 			}
 			locations.sara = {
                 incentive: function () {
-                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                    return (vm.flags.incentiveFreeNPCs && vm.flags.shuffleNPCItems)
                 }(),
 				accessible: function() {
 					if (!vm.locationData.garland.tracked) { return false }
@@ -219,7 +219,7 @@ var locationInfo = {
 			}
 			locations.bikke = {
                 incentive: function () {
-                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                    return (vm.flags.incentiveFreeNPCs && vm.flags.shuffleNPCItems)
                 }(),
 				accessible: function() {
 					return vm.mapAccess.pravoka
@@ -368,7 +368,7 @@ var locationInfo = {
 					else { return false }
 				}(),
                 incentive: function () {
-                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                    return (vm.flags.incentiveFreeNPCs && vm.flags.shuffleNPCItems)
                 }(),
 				display: function() {
 					if (vm.flags.incentiveFreeNPCs || !vm.flags.shuffleNPCItems) { return true }
@@ -382,7 +382,7 @@ var locationInfo = {
 					return vm.mapAccess.crescent
 				}(),
                 incentive: function () {
-                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                    return (vm.flags.incentiveFreeNPCs && vm.flags.shuffleNPCItems)
                 }(),
 				display: function() {
 					if (vm.flags.incentiveFreeNPCs || !vm.flags.shuffleNPCItems) { return true }
@@ -470,7 +470,7 @@ var locationInfo = {
 					else { return vm.mapAccess.onrac }
 				}(),
                 incentive: function () {
-                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                    return (vm.flags.incentiveFreeNPCs && vm.flags.shuffleNPCItems)
                 }(),
 				display: function() {
 					if (vm.flags.incentiveFreeNPCs || !vm.flags.shuffleNPCItems) { return true }
