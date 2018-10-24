@@ -466,16 +466,16 @@ var itemInfo = {
 					else if (!vm.flags.earlySage && !vm.flags.shuffleNPCItems) { return true }
 					else { return false }
 				}(),
-                accessible: function () {
-                    if (!vm.itemData.ruby.tracked) {
-                        if (vm.flags.shuffleTreasures) { return true }
-                        else { return vm.mapAccess.melmond }
-                    }
-                    else {
-                        if (vm.flags.entranceShuffle) { return true }
-                        else { return vm.mapAccess.melmond }
-                    }
-                }(),
+				accessible: function () {
+				    if (!vm.itemData.ruby.tracked) {
+					if (vm.flags.shuffleTreasures) { return true }
+					else { return vm.mapAccess.melmond }
+				    }
+				    else {
+					if (vm.flags.entranceShuffle) { return true }
+					else { return vm.mapAccess.melmond }
+				    }
+				}(),
 				usable: function() {
 					if (vm.flags.entranceShuffle) { return true }
 					else { return vm.mapAccess.melmond } 
@@ -528,11 +528,11 @@ var itemInfo = {
 					if (vm.flags.freeAirship) { return false }
 					else { return 'floater' }
 				}(),
-                accessible: function () {
-                    if (vm.flags.extendedMapProgression) { return ((vm.itemData.ship.tracked && vm.itemData.canal.tracked) || vm.itemData.canoe.tracked) }
-                    else if (vm.flags.mapOpenProgression) { return vm.itemData.canoe.tracked }
-                    else { return (vm.itemData.ship.tracked && vm.itemData.canal.tracked && vm.itemData.canoe.tracked) }
-                }(),
+				accessible: function () {
+				    if (vm.flags.extendedOpenProgression) { return ((vm.itemData.ship.tracked && vm.itemData.canal.tracked) || vm.itemData.canoe.tracked) }
+				    else if (vm.flags.mapOpenProgression) { return vm.itemData.canoe.tracked }
+				    else { return (vm.itemData.ship.tracked && vm.itemData.canal.tracked && vm.itemData.canoe.tracked) }
+				}(),
 				locked: function() {
 					return vm.flags.freeAirship
 				}(),
@@ -577,11 +577,11 @@ var itemInfo = {
 					else { return false }
 				}(),
 			}
-            items.oxyale = {
-                linked: function () {
-                    if (!vm.flags.shuffleFetchItems) { return 'fairy' }
-                    else { return false }
-                }(),
+			items.oxyale = {
+				linked: function () {
+				    if (!vm.flags.shuffleFetchItems) { return 'fairy' }
+				    else { return false }
+				}(),
 				prev: function() {
 					if (!vm.flags.shuffleFetchItems) { return 'bottle' }
 					else { return false }
