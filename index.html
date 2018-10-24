@@ -1,5 +1,6 @@
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 	<script src="js/items.js"></script>
 	<script src="js/locations.js"></script>
 	<script src="js/orbs.js"></script>
@@ -18,12 +19,26 @@
 </body>
 
 <script>
+const router = new VueRouter({
+	mode: 'history',
+	routes: []
+})
+
 var vm = new Vue({ 
 	el: '#vue-app',
+	router,
 	mixins: [logicInfo, itemInfo, locationInfo, orbInfo, flagInfo],
 	data: {
         flagset: "HACfH1hFGBAAEJ!fPAUoYAeAFeU",
 	},
+	mounted: function() {
+		queryFlagset = this.$route.query.flags
+		if (!queryFlagset) { router.push({ query: { flags: this.flagset }}) }
+		else { 
+			this.flagset = queryFlagset 
+			this.$root.$emit('query-flagset', queryFlagset)
+		}
+    },
 	template: `
 	<div>
 		<Tracker :orbs="orbs" :flags="flags" :items="items" :locations="locations"/>

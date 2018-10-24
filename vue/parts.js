@@ -474,13 +474,15 @@ Vue.component('Options', {
         }
     },
     mounted: function () {
-        this.flagtext = this.$root.flagset
+        this.updateFlagset()
+		this.$root.$on('query-flagset', this.updateFlagset);
     },
 	methods: {
-		resetFlags: function() {
+		resetFlags: function(string) {
 			var vm = this.$root
-			if (this.flagtext.length < 27) { return }
-			vm.flagset = this.flagtext
+			if (string.length < 27) { return }
+			vm.flagset = string
+			router.push({ query: { flags: vm.flagset }})
 			for (i = 0; i < Object.keys(vm.itemData).length; i++) {
 				var item = Object.keys(vm.itemData)[i]
 				vm.itemData[item].tracked = false
@@ -496,11 +498,14 @@ Vue.component('Options', {
 			}
 			this.$root.$emit('reset')
 		},
+		updateFlagset: function() {
+			this.flagtext = this.$root.flagset
+		}
 	},
 	template: `
 	<div id="options">
 		<input type="text" v-model="flagtext">
-		<button type="button" v-on:click="resetFlags">Reset</button>
+		<button type="button" v-on:click="resetFlags(flagtext)">Reset</button>
 	</div>
 	`
 })

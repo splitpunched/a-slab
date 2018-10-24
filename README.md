@@ -17,11 +17,12 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 
 ***
 
-## [0.2.5] - 10/24/2018
+## [0.3.0] - 10/24/2018
 
 ### Added
 - Incentive chest counter (which can go up to the theoretical maximum, but normally displays minimum loose items)
 - "Junk" item counter (which counts how many incentive locations will have nothing)
+- You can link flagsets with a URL query! Holy shit!
 
 ### Fixed
 - (?) May or may not work with beta or alpha flags; an attempt will be made
