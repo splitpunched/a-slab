@@ -31,6 +31,7 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 - Much more obvious now when items with no used icon are used (i.e. during fetch quest shuffle)
 - You can actually trigger the airship in extended open progression with just the ship and canal (thanks Demerine!)
 - Dr. Unne can't be triggered if you don't have the slab (thanks Demerine!)
+- You can't sail into the ice cave no matter how hard you try (thanks Demerine)
 
 
 ***

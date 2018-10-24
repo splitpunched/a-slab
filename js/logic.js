@@ -47,7 +47,7 @@ var logicInfo = {
 				return (canSailOcean || canFly)
 			}()
 			access.volcano = function() {
-				if (vm.flags.mapOpenProgression) { return (canRow || canSailOcean || canFly) }
+				if (vm.flags.mapOpenProgression) { return (canRow || canFly) }
 				return ((canSailOcean && canRow) || canFly)
 			}()
 			access.ordeals = function() {
