@@ -18,7 +18,8 @@ Vue.component('Tracker', {
 		extraItems: function() {
 			var obj = {}, diff = (this.incentives.items.length - this.incentives.locations.length)
 			obj.min = Math.max(diff, 0)
-			obj.max = Math.max(diff+2, 0)
+			if (!this.flags.mapOpenProgression || this.flags.incentiveFetchItems) { obj.max = Math.max(diff+1, 0) }
+			else { obj.max = Math.max(diff+2, 0) }
 			return obj
 		}
 	},
