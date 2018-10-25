@@ -435,7 +435,7 @@ var locationInfo = {
 					else { return true }
 				}(),
                 incentive: function () {
-                    return (vm.flags.incentiveFreeNPCs && !vm.flags.shuffleNPCItems)
+                    return vm.flags.incentiveFreeNPCs
                 }(),
             }
             locations.fairy = {
