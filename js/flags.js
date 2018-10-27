@@ -217,6 +217,7 @@ var flagInfo = {
 								{ 'type': 'progressive', 'bonus': 0.10 },
 								{ 'type': 'progressive', 'bonus': 0.20 }
                             ]
+                            for (count; count > 8;) { count = (count - 8) } // the tiny fairy memorial loop to make this work with beta flags
 							flags[flag.name] = arr[count]
 						},
 					}

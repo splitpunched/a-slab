@@ -714,9 +714,8 @@ var itemInfo = {
                     if (!vm.flags.shuffleTreasures) { return true } // No it's not but holy shit am I too lazy to check where the original three are
                     else { return true }
                 }(),
-                display: function () {
-                    return (vm.flags.incentiveRibbon || vm.flags.incentiveRibbon2)
-                }(),
+                display: function () { return (vm.flags.incentiveRibbon || vm.flags.incentiveRibbon2) }(),
+                incentive: function() { return (vm.flags.incentiveRibbon || vm.flags.incentiveRibbon2) }(),
             }
             items.masmune = {
                 linked: function () {
@@ -727,9 +726,8 @@ var itemInfo = {
                     if (!vm.flags.shuffleTreasures) { return true } // This should be go mode permissions
                     else { return true }
                 }(),
-                display: function () {
-                    return vm.flags.incentiveMasamune
-                }(),
+                display: function () { return vm.flags.incentiveMasamune }(),
+                incentive: function () { return vm.flags.incentiveMasamune }(),
             }
             items.opalBracelet = {
                 linked: function () {
@@ -741,6 +739,7 @@ var itemInfo = {
                     else { return true }
                 }(),
                 display: function () { return vm.flags.incentiveOpalBracelet }(),
+                incentive: function () { return vm.flags.incentiveOpalBracelet }(),
             }
             items.whiteShirt = {
                 linked: function () {
@@ -751,9 +750,8 @@ var itemInfo = {
                     if (!vm.flags.shuffleTreasures) { return true } // This should be go mode permissions
                     else { return true }
                 }(),
-                display: function () {
-                    return vm.flags.incentiveDefCastArmor
-                }(),
+                display: function () { return vm.flags.incentiveDefCastArmor }(),
+                incentive: function () { return vm.flags.incentiveDefCastArmor }(),
             }
             items.powerGauntlet = {
                 linked: function () {
@@ -764,9 +762,8 @@ var itemInfo = {
                     if (!vm.flags.shuffleTreasures) { return true } // This should be go mode permissions
                     else { return true }
                 }(),
-                display: function () {
-                    return vm.flags.incentiveOtherCastArmor
-                }(),
+                display: function () { return vm.flags.incentiveOtherCastArmor }(),
+                incentive: function () { return vm.flags.incentiveOtherCastArmor }(),
             }
             items.defense = {
                 linked: function () {
@@ -777,9 +774,8 @@ var itemInfo = {
                     if (!vm.flags.shuffleTreasures) { return true } // This should be go mode permissions
                     else { return true }
                 }(),
-                display: function () {
-                    return vm.flags.incentiveDefCastWeapon
-                }(),
+                display: function () { return vm.flags.incentiveDefCastWeapon }(),
+                incentive: function () { return vm.flags.incentiveDefCastWeapon }(),
             }
             items.thorHammer = {
                 linked: function () {
@@ -790,9 +786,7 @@ var itemInfo = {
                     if (!vm.flags.shuffleTreasures) { return true } // This should be go mode permissions
                     else { return true }
                 }(),
-                display: function () {
-                    return vm.flags.incentiveOffCastWeapon
-                }(),
+                display: function () { return vm.flags.incentiveOffCastWeapon }(),
             }
 			for (i = 0; i < Object.keys(vm.itemData).length; i++) {
 				var name = Object.keys(vm.itemData)[i]

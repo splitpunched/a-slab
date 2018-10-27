@@ -17,6 +17,13 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 
 ***
 
+## [0.3.1] - 10/27/2018
+### Fixed
+- Incentive equipment is actually incentivized (thanks a tiny fairy!)
+- Key item/EXP tracker probably won't break horribly on beta flags (thanks a tiny fairy and Linkshot!)
+
+***
+
 ## [0.3.0] - 10/24/2018
 
 ### Added
