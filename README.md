@@ -17,6 +17,12 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 
 ***
 
+## [0.3.2] - 10/28/2018
+### Fixed
+- Adamant is incentivized when fetch quest shuffle is on
+
+***
+
 ## [0.3.1] - 10/27/2018
 ### Fixed
 - Incentive equipment is actually incentivized (thanks a tiny fairy!)

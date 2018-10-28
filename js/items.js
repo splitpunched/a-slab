@@ -677,7 +677,10 @@ var itemInfo = {
 				consumable: function() {
 					if (vm.flags.shuffleFetchItems) { return true }
 					else { return false; }
-				}(),
+                }(),
+                incentive: function() {
+                    return vm.flags.shuffleFetchItems
+                }(),
 				usable: function() {
 					if (vm.flags.entranceShuffle) { return true }
 					else { return vm.mapAccess.dwarves }
