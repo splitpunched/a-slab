@@ -51,7 +51,7 @@ var logicInfo = {
 				return ((canSailOcean && canRow) || canFly)
 			}()
 			access.ordeals = function() {
-                return (canRow && (canSailOcean || canFly))
+				return ((canSailOcean && canRow) || canFly)
 			}()
 			access.onrac = function() {
 				if (vm.flags.mapOpenProgression) { return (canSailOcean || (canRow && canFly)) }

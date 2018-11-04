@@ -1,6 +1,4 @@
-body {
-	background-color: #a0d8f8;
-}
+body { background-color: #380050; }
 
 #tracker-app {
 	background-color: #0830E0;
@@ -88,7 +86,7 @@ body {
 	align-content: flex-start;
 }
 
-.item {
+.entity {
 	box-sizing: border-box;
 	min-height: 56px;
 	min-width: 45px;
@@ -169,8 +167,13 @@ div.overlay.maxed {
 	position: relative;
 }
 
-.icon.dim {
+.icon.untracked {
 	filter: grayscale(100%) brightness(90%);
+	opacity: 0.75;
+}
+
+.icon.impossible{
+	filter: grayscale(100%) brightness(10%);
 	opacity: 0.75;
 }
 
@@ -192,11 +195,6 @@ div.overlay.maxed {
 .icon.moderate {
 	filter: grayscale(50%) brightness(90%);
 	opacity: 0.90;
-}
-
-.icon.dark {
-	filter: grayscale(100%) brightness(10%);
-	opacity: 0.75;
 }
 
 .icon.used {
