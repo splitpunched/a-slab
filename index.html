@@ -1,18 +1,25 @@
 <head>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
-<script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"/></script>
-<script src="data/items.vuex.js"></script>
-<script src="data/locations.vuex.js"></script>
-<script src="data/settings.vuex.js"></script>
-<script src="data/flags.vuex.js"></script>
-<script src="data/logic.vuex.js"></script>
-<script src="vue/parts.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/cave-story" type="text/css"/>
-<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<title>A slab!!</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js" /></script>
+
+    <script src="data/items.vuex.js"></script>
+    <script src="data/locations.vuex.js"></script>
+    <script src="data/settings.vuex.js"></script>
+    <script src="data/flags.vuex.js"></script>
+    <script src="data/logic.vuex.js"></script>
+    <script src="data/orbs.vuex.js"></script>
+
+    <script src="vue/parts.js"></script>
+    <script src="vue/items.js"></script>
+    <script src="vue/locations.js"></script>
+    <script src="vue/orbs.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/cave-story" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <title>A slab!!</title>
 </head>
 
 <body>
@@ -25,13 +32,14 @@ const router = new VueRouter({
 })
 
 const store = new Vuex.Store({
-	modules: {
-		items: items,
-		flags: flags,
-		locations: locations,
-		settings: settings,
-		logic: logic,
-	}
+    modules: {
+        items: items,
+        flags: flags,
+        locations: locations,
+        settings: settings,
+        logic: logic,
+        orbs: orbs,
+    },
 })
 
 var vm = new Vue({ 
@@ -39,27 +47,43 @@ var vm = new Vue({
 	router,
 	store,
 	data: {},
-	computed: {
+    computed: {
+        flagset: function () { return this.$store.state.flags.string },
 		items: function() { return this.$store.state.items },
-		locations: function() { return this.$store.state.locations },
+        locations: function () { return this.$store.state.locations },
+        orbs: function () { return this.$store.state.orbs },
 		settings: function() { return this.$store.state.settings },
 		displayItems: function() {
 			var vm = this, arr = []
 			var list = Object.keys(this.items).filter(function(item) { return vm.$store.getters[`items/${item}/canDisplay`] == true })
 			for (i = 0; i < list.length; i++) { arr.push(vm.$store.state.items[list[i]]) }
 			return arr
-		}
+        },
+        displayLocations: function () {
+            var vm = this, arr = []
+            var list = Object.keys(this.locations).filter(function (loc) { return vm.$store.getters[`locations/${loc}/canDisplay`] == true })
+            for (i = 0; i < list.length; i++) { arr.push(vm.$store.state.locations[list[i]]) }
+            return arr
+        }
 	},
 	mounted: function() {},
-	template: `
-	<div>
+    template: `
+    <div>
+	<div id="tracker-app">
+        <div id="orbTracker">
+            <div id="orb-area">
+                <Orb v-for="orb in orbs" :key="orb.name" :settings="settings" v-bind="orb" />
+            </div>
+        </div>
 		<div id="itemTracker">
 			<Item v-for="item in displayItems" :key="item.name" :settings="settings" v-bind="item" />
 		</div>
 		<div id="locationTracker">
-			<Location v-for="location in locations" :key="location.name" :settings="settings" v-bind="location" />
+			<Location v-for="location in displayLocations" :key="location.name" :settings="settings" v-bind="location" />
 		</div>
 	</div>
+    <FlagsetInput :string="flagset" />
+    </div>
 	`,
 })
 </script>

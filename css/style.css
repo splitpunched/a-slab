@@ -28,8 +28,8 @@ body { background-color: #380050; }
 #orb-area {
 	width: 100px;
 	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
 	align-items: center;
 	flex-wrap: wrap;
 }

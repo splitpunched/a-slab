@@ -403,7 +403,8 @@ const items = {
 				image: { default: 'slab.png', used: 'slab-used.png', },
 				keyItem: true,
 				placement: false,
-				tracked: false,
+                tracked: false,
+                translated: false,
 				used: false,
 				questChain: [ 'slab', 'chime' ]
 			},
@@ -509,5 +510,10 @@ const items = {
 				isAccessible: () => { return true },
 			},
 		},
-	}
+    },
+    mutations: {
+        trackItem(state, payload) {
+            state[payload.name].tracked = true
+        }
+    },
 }

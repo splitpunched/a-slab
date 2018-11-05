@@ -17,7 +17,11 @@ const logic = {
 					var flagset = rootGetters.flagset
 					if (flagset.mapOpenProgression && rootGetters['access/canRow']) { return true }
 					else { return (rootGetters['access/canSailSea'] || rootGetters['access/canCross'] || rootGetters['access/canFly']) }
-				},
+                },
+                dwarves: (state, getters, rootState, rootGetters) => {
+                    var flagset = rootGetters.flagset
+                    return (rootGetters['access/canSailSea'] || rootGetters['access/canFly'] || flagset.mapOpenProgression)
+                },
 				elfland: (state, getters, rootState, rootGetters) => { 
 					var flagset = rootGetters.flagset
 					if (flagset.extendedOpenProgression) { return true }
@@ -27,7 +31,11 @@ const logic = {
 				melmond: (state, getters, rootState, rootGetters) => { 
 					var flagset = rootGetters.flagset
 					return (rootGetters['access/canSailSea'] || rootGetters['access/canFly'])
-				},
+                },
+                sarda: (state, getters, rootState, rootGetters) => {
+                    var flagset = rootGetters.flagset
+                    return ((rootGetters['access/canSailSea'] && rootState.items.ruby.tracked) || rootGetters['access/canFly'])
+                },
 				crescent: (state, getters, rootState, rootGetters) => { 
 					var flagset = rootGetters.flagset
 					if (flagset.mapOpenProgression && rootGetters['access/canRow']) { return true }
@@ -54,6 +62,18 @@ const logic = {
 					else { return rootGetters['access/canFly'] }
 				}
 			},
-		},
+        },
+        display: {
+            namespaced: true,
+            getters: {
+                freeNPCs: (state, getters, rootState, rootGetters) => { return (rootGetters.flagset.incentiveFreeNPCs || !rootGetters.flagset.shuffleNPCItems) },
+            },
+        },
+        incentive: {
+            namespaced: true,
+            getters: {
+                freeNPCs: (state, getters, rootState, rootGetters) => { return (rootGetters.flagset.incentiveFreeNPCs && rootGetters.flagset.shuffleNPCItems) },
+            },
+        }
 	},
 }
