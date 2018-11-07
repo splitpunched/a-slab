@@ -497,7 +497,7 @@ var locationInfo = {
 					return vm.flags.incentiveSkyPalace
                 }(),
                 accessible: function () {
-                    return { (vm.flags.floorShuffle || vm.itemData.cube && (vm.flags.entranceShuffle || (vm.itemData.chime && vm.mapAccess.onrac))) }
+                    return (vm.flags.floorShuffle || vm.itemData.cube && (vm.flags.entranceShuffle || (vm.itemData.chime && vm.mapAccess.onrac)))
                 }(),
 				display: function() {
 					if (vm.flags.incentiveSkyPalace || !vm.flags.shuffleTreasures) { return true }
