@@ -58,27 +58,14 @@ Vue.component('Item', {
 			if (this.status == 'tracked' || this.status == 'activated') {
 				if (!this.usable && !this.canActivate) { return }
 				if (this.canActivate) { 
-					console.log(`${this.name}: activating`)
 					store.commit('items/activate', { name: this.name })
 					if (this.activator) { store.commit('locations/track', { name: this.activator }) }
-					// At some point we need the 'trigger Dr. Unne' thing here.
 					return;
 				}
 				else { 
-					if (this.nextItem) {
-						console.log(`${this.name}: tracking next item in chain, ${this.nextItem}`)
-						store.commit('items/track', { name: this.nextItem }) 
-						console.log(`${this.nextItem}: tracking`)
-					}
-					else { 
-						store.commit('items/use', { name: this.name }) 
-						console.log(`${this.name}: using`)
-					}
-					if (this.target) {
-						console.log(`${this.name}: handed in item to ${this.target.name}`)
-						console.log(`${this.target.name}: tracking`)
-						store.commit('locations/track', { name: this.target.name }) 
-					}
+					if (this.nextItem) {store.commit('items/track', { name: this.nextItem }) }
+					else { store.commit('items/use', { name: this.name }) }
+					if (this.target) {store.commit('locations/track', { name: this.target.name }) }
 				}
 			}
         },

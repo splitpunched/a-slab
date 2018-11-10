@@ -40,6 +40,24 @@ const store = new Vuex.Store({
         logic: logic,
         orbs: orbs,
     },
+    mutations: {
+        reset(state) {
+            for (i = 0; i < Object.keys(state.items).length; i++) {
+                var item = Object.keys(state.items)[i]
+                state.items[item].tracked = false
+                state.items[item].activated = false
+                state.items[item].used = false
+            }
+            for (i = 0; i < Object.keys(state.locations).length; i++) {
+                var location = Object.keys(state.locations)[i]
+                state.locations[location].tracked = false
+            }
+            for (i = 0; i < Object.keys(state.orbs).length; i++) {
+                var orb = Object.keys(state.orbs)[i]
+                state.orbs[orb].tracked = false
+            }
+        },
+    }
 })
 
 var vm = new Vue({ 
@@ -78,7 +96,7 @@ var vm = new Vue({
 		<ItemTracker />
 		<LocationTracker :locations="locations" :settings="settings" />
 	</div>
-    <FlagsetInput :string="flagset" />
+    <FlagsetInput />
     </div>
 	`,
 })

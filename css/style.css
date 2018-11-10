@@ -256,3 +256,8 @@ div.overlay.maxed {
 #adamant a, #garland a, #ordeals a, #nerrick a{
 	letter-spacing: -0.03em;
 }
+
+img.glyph {
+    margin-top: -2px;
+    filter: drop-shadow(2px 2px 0px #000000);
+}

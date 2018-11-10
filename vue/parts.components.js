@@ -38,7 +38,7 @@ Vue.component('InformationBox', {
 	template: `
 	<div id="scaleArea">
 		<div class="subscale"><a style="word-spacing: -6pt">{{expDisplay}}</a></div>
-		<div class="subscale"><a>{{keyItemDisplay}}</a></div>
+		<div class="subscale"><a>{{keyItemCount}}</a><img class="glyph" src="glyphs/key.png"></div>
 	</div>
 	`,
 })
@@ -54,7 +54,8 @@ Vue.component('FlagsetInput', {
 	},
 	methods: {
 		reset: function() {
-			store.commit('set', this.flagset)
+            store.commit('set', this.flagset)
+            store.commit('reset')
 		}
 	},
     template: `
