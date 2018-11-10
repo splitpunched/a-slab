@@ -228,7 +228,7 @@ const locations = {
                 name: "unne",
                 label: "Unne",
                 image: { default: 'unne.png' },
-                // placement: "Do I insert the translated slab as a seperate item? I think I do, because then you can properly 'use' it in quest shuffle."
+				activates: 'slab',
                 tracked: false,
             },
             getters: {
@@ -245,7 +245,7 @@ const locations = {
                 name: "sarda",
                 label: "Sarda",
                 image: { default: 'sarda.png' },
-                placement: { type: 'freeNPC', item: 'rod' },
+                placement: { type: 'freeNPC', name: 'rod' },
                 tracked: false,
             },
             getters: {
@@ -262,12 +262,12 @@ const locations = {
                 name: "sage",
                 label: "Sage",
                 image: { default: 'sage.png' },
-                placement: { type: 'freeNPC', item: 'canoe' },
+                placement: { type: 'freeNPC', name: 'canoe' },
                 tracked: false,
             },
             getters: {
                 isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveFreeNPCs && rootGetters.flagset.shuffleNPCItems },
-                isAccessible: (state, getters, rootState, rootGetters) => { return ((rootGetters.flagset.earlySage || rootState.locations.earth.tracked) && rootGetters['map/crescent']) }, // Orbs don't actually exist yet so I can't code this. Yet.
+                isAccessible: (state, getters, rootState, rootGetters) => { return ((rootGetters.flagset.earlySage || rootState.orbs.earth.tracked) && rootGetters['map/crescent']) },
                 isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleNPCItems) },
                 canDisplay: (state, getters) => { return getters.isLinked || getters.isIncentivized },
             },
@@ -295,7 +295,7 @@ const locations = {
                 name: "iceCave",
                 label: "Ice",
                 image: { default: 'iceCave.png' },
-                placement: { type: 'treasure', item: 'floater' },
+                placement: { type: 'treasure', name: 'floater' },
                 tracked: false,
             },
             getters: {
@@ -312,7 +312,7 @@ const locations = {
                 name: "ordeals",
                 label: "Ordeals",
                 image: { default: 'ordeals.png' },
-                placement: { type: 'treasure', item: 'floater' },
+                placement: { type: 'treasure', name: 'tail' },
                 tracked: false,
             },
             getters: {
@@ -329,7 +329,7 @@ const locations = {
                 name: "shopItem",
                 label: "Shop",
                 image: { default: 'shopItem.png' },
-                placement: { type: 'shop', item: 'bottle' },
+                placement: { type: 'shop', name: 'bottle' },
                 tracked: false,
             },
             getters: {
@@ -346,12 +346,12 @@ const locations = {
                 name: "fairy",
                 label: "Fairy",
                 image: { default: 'fairy.png' },
-                placement: { type: 'fetchNPC', item: 'oxyale' },
+                placement: { type: 'fetchNPC', name: 'oxyale' },
                 tracked: false,
             },
             getters: {
                 isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveFetchNPCs },
-                isAccessible: (state, getters, rootState, rootGetters) => { return (rootState.items.bottle.used && (rootGetters.flagset.townShuffle || rootGetters['access/canFly'])) },
+                isAccessible: (state, getters, rootState, rootGetters) => { return (rootState.items.bottle.activated && (rootGetters.flagset.townShuffle || rootGetters['access/canFly'])) },
                 isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleFetchItems) },
                 canDisplay: (state, getters) => { return getters.isLinked || getters.isIncentivized },
             },
@@ -402,8 +402,8 @@ const locations = {
             },
             getters: {
                 isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveFetchNPCs },
-                isAccessible: (state, getters, rootState, rootGetters) => { return true }, // Holy shit I have to figure out what I'm doing with the slab first!!!
-                isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleTreasures) },
+                isAccessible: (state, getters, rootState, rootGetters) => { return rootState.items.slab.activated && rootGetters[`access/canFly`] }, // Holy shit I have to figure out what I'm doing with the slab first!!!
+                isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleFetchItems) },
                 canDisplay: (state, getters) => { return getters.isLinked || getters.isIncentivized },
             },
         },
@@ -424,5 +424,13 @@ const locations = {
                 canDisplay: (state, getters) => { return getters.isLinked || getters.isIncentivized },
             },
         },
-	}
+	},
+	mutations: {
+        track(state, payload) {
+            state[payload.name].tracked = true
+        },
+		untrack(state, payload) {
+            state[payload.name].tracked = false
+        },
+    },
 }

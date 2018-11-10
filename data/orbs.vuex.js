@@ -53,5 +53,10 @@ const orbs = {
                 isAccessible: (state, getters, rootState, rootGetters) => { return (rootGetters.flagset.floorShuffle || (rootState.items.cube.tracked && (rootGetters.flagset.entranceShuffle || (rootState.items.chime.tracked && rootGetters['map/mirage'])))) }
             }
         },
-    }
+    },
+	mutations: {
+        track(state, payload) {
+            state[payload.name].tracked = true
+        },
+    },
 }

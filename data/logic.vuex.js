@@ -30,11 +30,11 @@ const logic = {
 				},
 				melmond: (state, getters, rootState, rootGetters) => { 
 					var flagset = rootGetters.flagset
-					return (rootGetters['access/canSailSea'] || rootGetters['access/canFly'])
+					return (rootGetters['access/canSailOcean'] || rootGetters['access/canFly'])
                 },
                 sarda: (state, getters, rootState, rootGetters) => {
                     var flagset = rootGetters.flagset
-                    return ((rootGetters['access/canSailSea'] && rootState.items.ruby.tracked) || rootGetters['access/canFly'])
+                    return ((rootGetters['access/canSailSea'] && rootState.items.ruby.used) || rootGetters['access/canFly'])
                 },
 				crescent: (state, getters, rootState, rootGetters) => { 
 					var flagset = rootGetters.flagset
@@ -54,7 +54,7 @@ const logic = {
 				onrac: (state, getters, rootState, rootGetters) => { 
 					var flagset = rootGetters.flagset
 					if (flagset.mapOpenProgression && rootGetters['access/canSailOcean']) { return true }
-					else { return (rootGetters['access/canRow'] || rootGetters['access/canFly']) }
+					else { return (rootGetters['access/canRow'] && rootGetters['access/canFly']) }
 				},
 				mirage: (state, getters, rootState, rootGetters) => { 
 					var flagset = rootGetters.flagset

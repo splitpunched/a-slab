@@ -222,59 +222,10 @@ const flags = {
 			}
 			return flags;
 		},
-		/*
-		flagset: (state, getters) => {
-			const raw = getters.rawFlagset
-			var flags = {}
-			flags.incentive = {
-				access: {
-					earlySarda: raw.earlySarda,
-					earlySage: raw.earlySage,
-					freeBridge: raw.freeBridge,
-					freeAirship: raw.freeAirship,
-					freeOrbs: raw.freeOrbs,
-					crownlessOrdeals: raw.crownlessOrdeals,
-				},
-				scaling: {
-					enemy: raw.enemyScaleFactor,
-					price: raw.priceScaleFactor,
-					expMultiplier: raw.expMultiplier,
-					expFlat: raw.expFlat,
-				},
-				shuffle: {
-					itemShops: raw.shuffleShops,
-					magicShops: raw.magicShops,
-					treasures: raw.shuffleTreasures,
-					npcItems: raw.shuffleNPCItems,
-					fetchItems: raw.shuffleFetchItems,
-				},
-				items: { 
-					fetchItems: raw.incentiveFetchItems,
-					tail: raw.incentiveTail,
-					masamune: raw.incentiveMasamune,
-					opalBracelet: raw.incentiveOpalBracelet,
-					ribbon: raw.incentiveRibbon,
-					ribbon2: raw.incentiveRibbon2,
-					bigMoney: raw.incentive65k,
-					junk: raw.incentiveBad,
-					whiteShirt: raw.incentiveDefCastArmor,
-					powerGauntlet: raw.incentiveOtherCastArmor,
-					defense: raw.incentiveDefCastWeapon,
-					thorHammer: raw.incentiveOffCastWeapon,
-				},
-				locations: { 
-					marsh: raw.incentiveMarsh,
-					earth: raw.incentiveEarth,
-					volcano: raw.incentiveVolcano,
-					iceCave: raw.incentiveIceCave,
-					seaShrine: raw.incentiveSeaShrine,
-					coneria: raw.incentiveConeria,
-					marshLocked: raw.incentiveMarshLocked,
-					skyPalace: raw.incentiveSkyPalace,
-				}
-			}
-			return flags
-		}
-		*/
 	},
+	mutations: {
+		set(state, flagset) {
+            state.string = flagset
+        },
+	}
 }
