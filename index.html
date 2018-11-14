@@ -1,48 +1,93 @@
 <head>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-<script src="js/items.js"></script>
-<script src="js/locations.js"></script>
-<script src="js/orbs.js"></script>
-<script src="js/flags.js"></script>
-<script src="js/logic.js"></script>
-<script src="vue/parts.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/cave-story" type="text/css"/>
-<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<title>A slab!!</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js" /></script>
+
+    <script src="data/items.vuex.js"></script>
+    <script src="data/locations.vuex.js"></script>
+    <script src="data/settings.vuex.js"></script>
+    <script src="data/flags.vuex.js"></script>
+    <script src="data/logic.vuex.js"></script>
+    <script src="data/orbs.vuex.js"></script>
+
+    <script src="vue/parts.components.js"></script>
+    <script src="vue/items.components.js"></script>
+    <script src="vue/locations.components.js"></script>
+    <script src="vue/orbs.components.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P">
+    <link rel="stylesheet" href="css/style.css" >
+    <title>A slab!!</title>
 </head>
 
 <body>
 <div id="vue-app" />
-	
+
 <script>
 const router = new VueRouter({
 	mode: 'history',
 	routes: []
 })
 
+const store = new Vuex.Store({
+    modules: {
+        items: items,
+        flags: flags,
+        locations: locations,
+        settings: settings,
+        logic: logic,
+        orbs: orbs,
+    },
+})
+
 var vm = new Vue({ 
 	el: '#vue-app',
 	router,
-	mixins: [logicInfo, itemInfo, locationInfo, orbInfo, flagInfo],
-	data: {
-        flagset: "PAC!H1hPYAAAHJ!fPAUoYAeAFeU",
+	store,
+	data: {},
+    computed: {
+		...Vuex.mapState([ 'locations', 'orbs', 'settings', 'items' ]),
+		...Vuex.mapState({ 
+			flagset: state => state.flags.string
+		}),
+        flagset: function () { return this.$store.state.flags.string },
+		displayItems: function() {
+			var arr = []
+			var list = Object.keys(this.items).filter(function(item) { return vm.$store.getters[`items/${item}/canDisplay`] == true })
+			for (i = 0; i < list.length; i++) { 
+				arr.push(vm.$store.state.items[list[i]]) 
+			}
+			return arr
+        },
+        displayLocations: function () {
+            var arr = []
+            var list = Object.keys(this.locations).filter(function (loc) { return vm.$store.getters[`locations/${loc}/canDisplay`] == true })
+            for (i = 0; i < list.length; i++) { 
+				arr.push(vm.$store.state.locations[list[i]]) 
+			}
+            return arr
+        }
 	},
 	mounted: function() {
-		queryFlagset = this.$route.query.flags
+	queryFlagset = this.$route.query.flags
 		if (!queryFlagset) { router.push({ query: { flags: this.flagset }}) }
 		else { 
 			this.flagset = queryFlagset 
-			this.$root.$emit('query-flagset', queryFlagset)
+			this.$store.commit('set', queryFlagset)
 		}
     },
-	template: `
-	<div>
-		<Tracker :orbs="orbs" :flags="flags" :items="items" :locations="locations"/>
-		<Options />
+    template: `
+    <div>
+	<div id="tracker-app">
+        <InfoTracker />
+		<div class="divider" />
+		<ItemTracker />
+		<div class="divider" />
+		<LocationTracker />
 	</div>
+    <FlagsetInput :string="flagset" />
+    </div>
 	`,
 })
 </script>
