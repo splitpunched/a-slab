@@ -46,54 +46,6 @@ const locations = {
 				tracked: false,
 			},
 			getters: {
-                isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters['incentive/freeNPCs'] },const locations = {
-	namespaced: true,
-	modules: {
-		garland: {
-			namespaced: true,
-			state: {
-				unid: 0,
-				name: "garland",
-				label: "Garland",
-				image: { default: 'garland.png', alternate: 'garland-alt.png' },
-				tracked: false,
-			},
-			getters: {
-				isIncentivized: () => { return false },
-				isAccessible: () => { return true },
-				isLinked: () => { return false },
-				canDisplay: () => { return true },
-				useAlternateImage: (state, getters, rootState, rootGetters) => { return rootState.locations.garland.tracked },
-			},
-		},
-		king: {
-			namespaced: true,
-			state: {
-				unid: 1,
-				name: "king",
-				label: "King",
-                image: { default: 'king.png' },
-                placement: { type: 'freeNPC', name: 'bridge', },
-				tracked: false,
-			},
-			getters: {
-                isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters['incentive/freeNPCs'] },
-				isAccessible: () => { return true },
-                isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleNPCItems && !rootGetters.flagset.freeBridge) },
-                canDisplay: (state, getters) => { return getters.isLinked || getters.isIncentivized },
-			},
-		},
-		sara: {
-			namespaced: true,
-			state: {
-				unid: 2,
-				name: "sara",
-				label: "Sara",
-                image: { default: 'sara.png' },
-                placement: { type: 'freeNPC', name: 'lute', },
-				tracked: false,
-			},
-			getters: {
                 isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters['incentive/freeNPCs'] },
 				isAccessible: (state, getters, rootState, rootGetters) => { return rootState.locations.garland.tracked },
 				isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleNPCItems) },
