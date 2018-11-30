@@ -6,9 +6,6 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 # Changelog
 
 ## Unreleased
-### Added
-- Shard Hunt mode support
-
 ### Fixed
 - Reset window actually checking to confirm flagset is a possible flagset/sanity checking input
 
@@ -16,6 +13,15 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 - Update sprites for crystal, canal, crown, Marsh, Marsh Locked, Coneria
 
 ***
+
+## [0.4.0] - 11/17/2018
+### Added
+- Shard Hunt mode support
+
+### Changed
+- Using Vuex now, hopefully the logic is working but this will make it easier to update stuff on the back end
+- Fixed width/height of the tracker so it shouldn't mess with people's layouts anymore
+- Layout now directly shows progressive scaling
 
 ## [0.3.2] - 10/28/2018
 ### Fixed

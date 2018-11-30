@@ -181,7 +181,7 @@ const locations = {
                 tracked: false,
             },
             getters: {
-                isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveConeria },
+                isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveFetchNPCs },
                 isAccessible: (state, getters, rootState, rootGetters) => { return rootState.items.tnt.tracked && rootGetters['map/dwarves'] },
                 isLinked: (state, getters, rootState, rootGetters) => { return !rootGetters.flagset.shuffleFetchItems },
                 canDisplay: (state, getters) => { return getters.isLinked || getters.isIncentivized },
@@ -300,7 +300,7 @@ const locations = {
                 tracked: false,
             },
             getters: {
-                isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveIceCave || rootGetters.flagset.shuffleTreasures },
+                isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveIceCave },
                 isAccessible: (state, getters, rootState, rootGetters) => { return (rootGetters.flagset.entranceShuffle || rootGetters.flagset.floorShuffle || rootGetters['map/volcano']) },
                 isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleTreasures) },
                 canDisplay: (state, getters) => { return getters.isLinked || getters.isIncentivized },
@@ -317,9 +317,9 @@ const locations = {
                 tracked: false,
             },
             getters: {
-                isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveOrdeals || rootGetters.flagset.shuffleTreasures },
+                isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveOrdeals },
                 isAccessible: (state, getters, rootState, rootGetters) => { return ((rootGetters.flagset.crownlessOrdeals || rootState.items.crown.tracked) && rootGetters['map/ordeals']) },
-                isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleNPCItems) },
+                isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleTreasures) },
                 canDisplay: (state, getters) => { return getters.isLinked || getters.isIncentivized },
             },
         },
@@ -368,7 +368,7 @@ const locations = {
                 tracked: false,
             },
             getters: {
-                isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveFetchNPCs },
+                isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveSeaShrine },
                 isAccessible: (state, getters, rootState, rootGetters) => { return ((rootGetters.flagset.entranceShuffle || rootGetters.flagset.floorShuffle) ||(rootState.items.oxyale.tracked && rootGetters['map/onrac'])) },
                 isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleTreasures) },
                 canDisplay: (state, getters) => { return getters.isLinked || getters.isIncentivized },
