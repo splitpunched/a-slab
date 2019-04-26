@@ -184,7 +184,7 @@ const items = {
 				canDisplay: (state, getters, rootState, rootGetters) => { return (rootGetters.flagset.shuffleFetchItems || !rootState.items.canal.tracked) },
 				isConsumable: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.shuffleFetchItems || rootGetters.flagset.freeCanal },
 				isUsable: (state, getters, rootState, rootGetters) => { return (state.tracked && rootGetters[`locations/${state.target.name}/isAccessible`]) },
-				isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleTreasures || !rootGetters.flagset.freeCanal) },
+				isLinked: (state, getters, rootState, rootGetters) => { return !rootGetters.flagset.shuffleTreasures },
 				isLocked: () => { return false },
 				isAccessible: (state, getters, rootState, rootGetters) => { return (rootGetters[`locations/${state.placement.name}/isAccessible`] || !getters.isLinked) }
 			},
