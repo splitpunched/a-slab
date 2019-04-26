@@ -42,7 +42,7 @@ Vue.component('Item', {
             return this.questChain.default || null
 		},
 		nextItem: function () { 
-			if (!this.linked || !this.itemChain) { return false }
+			if (!this.itemChain) { return false }
 			else { return this.itemChain[this.itemChain.indexOf(this.name)+1] || null }
 		},
 		linked: function () { 
