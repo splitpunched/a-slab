@@ -267,7 +267,7 @@ const locations = {
             },
             getters: {
                 isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveFreeNPCs && rootGetters.flagset.shuffleNPCItems },
-                isAccessible: (state, getters, rootState, rootGetters) => { return ((rootGetters.flagset.earlySage || rootState.orbs.earth.tracked) && (rootGetters['map/crescent'] || rootGetters.flagset.townShuffle) },
+                isAccessible: (state, getters, rootState, rootGetters) => { return ((rootGetters.flagset.earlySage || rootState.orbs.earth.tracked) && (rootGetters['map/crescent'] || rootGetters.flagset.townShuffle)) },
                 isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleNPCItems) },
                 canDisplay: (state, getters) => { return getters.isLinked || getters.isIncentivized },
 				useAlternateImage: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.confusedOldMen },
