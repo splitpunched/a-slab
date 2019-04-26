@@ -16,8 +16,9 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 
 ## [0.5.0] - 04/26/2019
 ### Fixed
-- Free Canal works? I think?
+- Free Canal works? I think? (thanks telthos!)
 - More logic things that I'm going to regret not detailing here
+- Unne, Bikke, and the Sage now respect town shuffle (thanks Linkshot and DoogieMacGuyver!)
 
 ## [0.4.0] - 11/17/2018
 ### Added

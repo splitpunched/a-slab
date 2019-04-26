@@ -233,7 +233,7 @@ const locations = {
             },
             getters: {
                 isIncentivized: () => { return false },
-                isAccessible: (state, getters, rootState, rootGetters) => { return rootState.items.slab.tracked && rootGetters['map/melmond'] },
+                isAccessible: (state, getters, rootState, rootGetters) => { return rootState.items.slab.tracked && (rootGetters['map/melmond'] || rootGetters.flagset.townShuffle) },
                 isLinked: () => { return false },
                 canDisplay: () => { return true },
             },
@@ -267,7 +267,7 @@ const locations = {
             },
             getters: {
                 isIncentivized: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.incentiveFreeNPCs && rootGetters.flagset.shuffleNPCItems },
-                isAccessible: (state, getters, rootState, rootGetters) => { return ((rootGetters.flagset.earlySage || rootState.orbs.earth.tracked) && rootGetters['map/crescent']) },
+                isAccessible: (state, getters, rootState, rootGetters) => { return ((rootGetters.flagset.earlySage || rootState.orbs.earth.tracked) && (rootGetters['map/crescent'] || rootGetters.flagset.townShuffle) },
                 isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleNPCItems) },
                 canDisplay: (state, getters) => { return getters.isLinked || getters.isIncentivized },
 				useAlternateImage: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.confusedOldMen },
