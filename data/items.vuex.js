@@ -177,14 +177,14 @@ const items = {
 				target: { type: 'fetchNPC', name: 'nerrick' },
 				tracked: false,
 				used: false,
-				questChain: { default: [ 'tnt', 'canal' ], shuffleFetchItems: null }
+				questChain: { default: [ 'tnt', 'canal' ], shuffleFetchItems: null, freeCanal: null }
 			},
 			getters: {
 				isIncentivized: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleNPCItems && !rootGetters.flagset.shuffleFetchItems) || rootGetters.flagset.incentiveFetchItems },
 				canDisplay: (state, getters, rootState, rootGetters) => { return (rootGetters.flagset.shuffleFetchItems || !rootState.items.canal.tracked) },
-				isConsumable: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.shuffleFetchItems },
+				isConsumable: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.shuffleFetchItems || rootGetters.flagset.freeCanal },
 				isUsable: (state, getters, rootState, rootGetters) => { return (state.tracked && rootGetters[`locations/${state.target.name}/isAccessible`]) },
-				isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleTreasures) },
+				isLinked: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleTreasures || !rootGetters.flagset.freeCanal) },
 				isLocked: () => { return false },
 				isAccessible: (state, getters, rootState, rootGetters) => { return (rootGetters[`locations/${state.placement.name}/isAccessible`] || !getters.isLinked) }
 			},
@@ -204,11 +204,11 @@ const items = {
 			},
 			getters: {
 				isIncentivized: (state, getters, rootState, rootGetters) => { return (!rootGetters.flagset.shuffleNPCItems || rootGetters.flagset.incentiveFetchItems) },
-				canDisplay: (state, getters, rootState, rootGetters) => { return (rootGetters.flagset.shuffleFetchItems || rootState.items.canal.tracked) },
+				canDisplay: (state, getters, rootState, rootGetters) => { return (rootGetters.flagset.shuffleFetchItems || rootState.items.canal.tracked || rootGetters.flagset.freeCanal) },
 				isConsumable: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.shuffleFetchItems },
 				isUsable: () => { return false },
 				isLinked: (state, getters, rootState, rootGetters) => { return !rootGetters.flagset.shuffleFetchItems },
-				isLocked: () => { return false },
+                isLocked: (state, getters, rootState, rootGetters) => { return rootGetters.flagset.freeCanal },
 				isAccessible: (state, getters, rootState, rootGetters) => { return (rootGetters[`locations/${state.placement.name}/isAccessible`] || !getters.isLinked) }
 			},
 		},

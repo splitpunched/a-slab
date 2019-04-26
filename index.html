@@ -70,12 +70,10 @@ var vm = new Vue({
         }
 	},
 	mounted: function() {
-	queryFlagset = this.$route.query.flags
+        queryFlagset = this.$route.query.flags
+        //console.log(queryFlagset)
 		if (!queryFlagset) { router.push({ query: { flags: this.flagset }}) }
-		else { 
-			this.flagset = queryFlagset 
-			this.$store.commit('set', queryFlagset)
-		}
+		else { this.$store.commit('set', queryFlagset) }
     },
     template: `
     <div>

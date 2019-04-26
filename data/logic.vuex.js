@@ -7,7 +7,7 @@ const logic = {
 				canRow: (state, getters, rootState, rootGetters) => { return rootState.items.canoe.tracked },
 				canCross: (state, getters, rootState, rootGetters) => { return rootState.items.bridge.tracked || rootGetters.flagset.freeBridge },
 				canSailSea: (state, getters, rootState, rootGetters) => { return rootState.items.ship.tracked },
-				canSailOcean: (state, getters, rootState, rootGetters) => { return rootState.items.ship.tracked && rootState.items.canal.tracked },
+				canSailOcean: (state, getters, rootState, rootGetters) => { return rootState.items.ship.tracked && (rootState.items.canal.tracked || rootGetters.flagset.freeCanal) },
 			}
 		},
 		map: {

@@ -27,12 +27,19 @@ Vue.component('Item', {
         accessible: function () { return this.$store.getters[`items/${this.name}/isAccessible`] },
 		canActivate: function() { return (this.name == "slab" || this.name == "bottle") && this.tracked && !this.activated && this.$store.getters[`items/${this.name}/canActivate`] },
 		itemChain: function() { 
-			if (!this.questChain) { return null }
-			else if (this.$store.getters.flagset.shuffleFetchItems && this.questChain.hasOwnProperty('shuffleFetchItems')) 
-			{ 
-				return (this.questChain.shuffleFetchItems) 
-			}
-			else { return this.questChain.default || null }
+            if (!this.questChain) { return null }
+            if (Object.keys(this.questChain).length > 1) {
+                var keys = Object.keys(this.questChain).filter(function (val) {
+                    return val !== "default"
+                })
+                for (var i = 0; i < keys.length; i++) {
+                    let logic = keys[i]
+                    if (this.$store.getters.flagset[logic] && this.questChain.hasOwnProperty(logic)) {
+                        return this.questChain[logic]
+                    }
+                }
+            }
+            return this.questChain.default || null
 		},
 		nextItem: function () { 
 			if (!this.linked && !this.itemChain) { return false }

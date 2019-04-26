@@ -64,21 +64,31 @@ Vue.component('InformationBox', {
 Vue.component('FlagsetInput', {
     data: function () {
         return {
-            flagset: '',
+            userInput: '',
         }
     },
+    computed: {
+        ...Vuex.mapState({
+            flagset: state => state.flags.string
+        }),
+    },
+    watch: {
+        flagset: function (val) {
+            this.userInput = this.flagset
+        },
+    },
 	mounted: function() {
-		this.flagset = this.$store.state.flags.string
+        this.userInput = this.flagset;
 	},
 	methods: {
 		reset: function() {
-			store.commit('set', this.flagset)
+			store.commit('set', this.userInput)
 			this.$root.$emit('reset')
 		}
 	},
     template: `
 	<div id="options">
-		<input type="text" v-model="flagset">
+		<input type="text" v-model="userInput">
 		<button type="button" v-on:click="reset">Reset</button>
 	</div>
 	`

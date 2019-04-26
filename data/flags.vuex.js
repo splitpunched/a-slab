@@ -118,7 +118,8 @@ const flags = {
 					1: { name: 'freeBridge', type: 'bool' },
 					2: { name: 'freeAirship', type: 'bool' },
 					4: { name: 'freeOrbs', type: 'bool' },
-					8: { name: 'enableCritDisplay', type: 'bool' },
+                    8: { name: 'enableCritDisplay', type: 'bool' },
+                    16: { name: 'freeCanal', type: 'bool' },
 					32: { name: 'easyMode', type: 'bool' },
 				},
 				// CONVENIENCES = 14;

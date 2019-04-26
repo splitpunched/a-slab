@@ -14,6 +14,11 @@ FFR tracker using Vue.js. It mostly works and is a very serious work in progress
 
 ***
 
+## [0.5.0] - 04/26/2019
+### Fixed
+- Free Canal works? I think?
+- More logic things that I'm going to regret not detailing here
+
 ## [0.4.0] - 11/17/2018
 ### Added
 - Shard Hunt mode support
