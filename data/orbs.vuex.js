@@ -58,5 +58,8 @@ const orbs = {
         track(state, payload) {
             state[payload.name].tracked = true
         },
+        untrack(state, payload) {
+            state[payload.name].tracked = false
+        },
     },
 }

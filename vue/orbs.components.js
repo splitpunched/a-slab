@@ -69,15 +69,22 @@ Vue.component('Orb', {
             else if (this.accessible) { return 'untracked' }
             else { return 'impossible' }
         },
+        letter: function () {
+            return this.name.charAt(0).toUpperCase()
+        }
     },
 	methods: {
         click: function () {
             var self = this;
             if (this.status == 'untracked') { store.commit('orbs/track', { name: this.name }) }
         },
+        rclick: function () {
+            var self = this;
+            if (this.status == 'tracked') { store.commit('orbs/untrack', { name: this.name }) }
+        }
     },
     template: `
-	<div :id="name" class="noselect entity orb" @click="click" @contextmenu.prevent="">
+	<div :id="name" class="noselect entity orb" @click="click" @contextmenu.prevent="rclick">
 		<div class="iconContainer">
 			<img class="icon" :src="imgPath + '/orbs/' + icon" :class="status">
 			<div class="iconOverlay">
